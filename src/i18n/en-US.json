@@ -1,7 +1,9 @@
 {
   "navigation": {
-    "search": {
-      "placeholder": "Search..."
-    }
+    "profile": "User Profile",
+    "searchPlaceholder": "Search...",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "welcome": "Welcome, {name}!"
   }
 }
