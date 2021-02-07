@@ -1,53 +1,46 @@
 <template>
   <div>
     <h1 v-t="'signUp.title'" />
-    <div class="alert alert-danger" v-t="'genericError'" v-if="error === true" />
-    <div class="alert alert-success" v-if="success">
+    <div v-if="error === true" class="alert alert-danger" v-t="'genericError'" />
+    <div v-if="success" class="alert alert-success">
       {{ $t('signUp.success') }}
       <br />
       <router-link :to="{ name: 'SignIn' }" v-t="'navigation.signIn'" />
     </div>
-    <form @submit.prevent="submit" v-else>
-      <div>
-        <label for="email" v-t="'signUp.email'" />
-        <input
-          type="email"
-          id="email"
-          v-model="user.email"
-          :placeholder="$t('signUp.emailPlaceholder')"
-        />
-      </div>
-      <div>
-        <label for="name" v-t="'signUp.name'" />
-        <input
-          type="text"
-          id="name"
-          v-model="user.name"
-          :placeholder="$t('signUp.namePlaceholder')"
-        />
-      </div>
-      <div>
-        <label for="password" v-t="'signUp.password'" />
-        <input
-          type="password"
-          id="password"
-          ref="password"
-          v-model="user.password"
-          :placeholder="$t('signUp.passwordPlaceholder')"
-        />
-      </div>
-      <icon-submit icon="user" text="signUp.submit" :disabled="!isValid" />
-    </form>
+    <u-form
+      v-else
+      :canSubmit="isValid"
+      submitIcon="user"
+      submitText="signUp.submit"
+      @submit="submit"
+    >
+      <form-field
+        type="email"
+        label="signUp.email"
+        placeholder="signUp.emailPlaceholder"
+        v-model="user.email"
+      />
+      <form-field label="signUp.name" placeholder="signUp.namePlaceholder" v-model="user.name" />
+      <form-field
+        type="password"
+        ref="password"
+        label="signUp.password"
+        placeholder="signUp.passwordPlaceholder"
+        v-model="user.password"
+      />
+    </u-form>
   </div>
 </template>
 
 <script>
-import IconSubmit from '@/components/shared/IconSubmit.vue'
+import FormField from '@/components/shared/FormField.vue'
+import UForm from '@/components/shared/UForm.vue'
 import { post } from '@/api'
 
 export default {
   components: {
-    IconSubmit
+    FormField,
+    UForm
   },
   data() {
     return {
@@ -62,7 +55,7 @@ export default {
   },
   computed: {
     isValid() {
-      return this.user.email && this.user.name && this.user.password
+      return Boolean(this.user.email && this.user.name && this.user.password)
     }
   },
   methods: {
