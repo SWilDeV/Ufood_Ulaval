@@ -47,7 +47,7 @@
     </div>
 
     <div>
-      <a href="/">HOME PAGE</a>
+       <router-link :to="{ name: 'Home' }">HOME PAGE</router-link>
     </div>
 
   </div>
