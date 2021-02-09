@@ -6,6 +6,9 @@
       <li>
         <router-link to="/restaurant">Restaurant</router-link>
       </li>
+      <li>
+        <router-link to="/user">UserPage</router-link>
+      </li>
     </ul>
   </div>
 </template>
