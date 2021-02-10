@@ -1,39 +1,38 @@
 <template>
   <div>
-    <h1 v-t="'signUp.title'" />
+    <h1 v-t="'signIn.title'" />
     <alert v-if="error === true" type="danger" text="genericError" :dismiss="clearError" />
-    <alert v-if="success" type="success" text="signUp.success">
-      <template v-slot:after>
-        <br />
-        <router-link :to="{ name: 'SignIn' }" v-t="'navigation.signIn'" />
-      </template>
-    </alert>
+    <alert
+      v-if="error === 401"
+      type="warning"
+      text="signIn.invalidCredentials"
+      :dismiss="clearError"
+    />
     <u-form
-      v-else
       :canSubmit="isValid"
-      submitIcon="user"
-      submitText="signUp.submit"
+      submitIcon="sign-in-alt"
+      submitText="signIn.submit"
       @submit="submit"
     >
       <form-field
         type="email"
-        label="signUp.email"
-        placeholder="signUp.emailPlaceholder"
+        label="signIn.email"
+        placeholder="signIn.emailPlaceholder"
         v-model="user.email"
-      />
-      <form-field label="signUp.name" placeholder="signUp.namePlaceholder" v-model="user.name" />
+      ></form-field>
       <form-field
         type="password"
         ref="password"
-        label="signUp.password"
-        placeholder="signUp.passwordPlaceholder"
+        label="signIn.password"
+        placeholder="signIn.passwordPlaceholder"
         v-model="user.password"
-      />
+      ></form-field>
     </u-form>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Alert from '@/components/shared/Alert.vue'
 import FormField from '@/components/shared/FormField.vue'
 import UForm from '@/components/shared/UForm.vue'
@@ -48,37 +47,38 @@ export default {
   data() {
     return {
       error: false,
-      success: false,
       user: {
         email: '',
-        name: '',
         password: ''
       }
     }
   },
   computed: {
     isValid() {
-      return Boolean(this.user.email && this.user.name && this.user.password)
+      return Boolean(this.user.email && this.user.password)
     }
   },
   methods: {
+    ...mapActions(['login']),
     clearError() {
       this.error = null
     },
-    onError(error) {
+    onError(error, status) {
       console.error(error)
-      this.error = true
+      this.error = status || true
       this.user.password = ''
       this.$refs.password.focus()
     },
     async submit() {
       this.error = false
       try {
-        const response = await post('/signup', new URLSearchParams(this.user))
+        const response = await post('/login', new URLSearchParams(this.user))
         if (response.ok) {
-          this.success = true
+          const data = await response.json()
+          this.login(data)
+          this.$router.push({ name: 'User' })
         } else {
-          this.onError(response)
+          this.onError(response, response.status === 401 ? response.status : null)
         }
       } catch (e) {
         this.onError(e)
