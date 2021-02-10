@@ -10,7 +10,8 @@
       <icon-link icon="sign-out-alt" name="Home" text="navigation.signOut" />
     </div>
     <div v-else>
-      <icon-link icon="sign-in-alt" name="User" text="navigation.signIn" />
+      <icon-link icon="sign-in-alt" name="SignIn" text="navigation.signIn" />
+      <icon-link icon="user" name="SignUp" text="navigation.signUp" />
     </div>
   </nav>
 </template>

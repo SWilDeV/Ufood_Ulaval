@@ -1,9 +1,22 @@
 {
+  "genericError": "An unexpected error occurred, please try again later.",
   "navigation": {
     "profile": "User Profile",
     "searchPlaceholder": "Search...",
     "signIn": "Sign in",
     "signOut": "Sign out",
+    "signUp": "Sign up",
     "welcome": "Welcome, {name}!"
+  },
+  "signUp": {
+    "email": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "success": "Your account has been created. You can now sign in using your email and password by clicking on the link below:",
+    "submit": "Sign up",
+    "title": "Sign up"
   }
 }

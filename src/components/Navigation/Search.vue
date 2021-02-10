@@ -1,18 +1,17 @@
 <template>
   <div>
-    <form @submit.prevent="search">
-      <input type="text" v-model="searchText" :placeholder="$t('navigation.searchPlaceholder')" />
-      <icon-button icon="search" type="submit" :disabled="!searchText" />
-    </form>
+    <u-form :canSubmit="Boolean(searchText)" submitIcon="search" @submit="search">
+      <input type="text" :placeholder="$t('navigation.searchPlaceholder')" v-model="searchText" />
+    </u-form>
   </div>
 </template>
 
 <script>
-import IconButton from '@/components/shared/IconButton.vue'
+import UForm from '@/components/shared/UForm.vue'
 
 export default {
   components: {
-    IconButton
+    UForm
   },
   data() {
     return {
