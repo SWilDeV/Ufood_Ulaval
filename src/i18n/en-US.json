@@ -8,6 +8,15 @@
     "signUp": "Sign up",
     "welcome": "Welcome, {name}!"
   },
+  "signIn": {
+    "email": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "invalidCredentials": "The specified email and/or password did not match.",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign in",
+    "title": "Sign in"
+  },
   "signUp": {
     "email": "Email address",
     "emailPlaceholder": "Enter your email address",

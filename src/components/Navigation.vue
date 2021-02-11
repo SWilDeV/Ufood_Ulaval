@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">
+    <router-link :to="{ name: 'Home' }">
       <Brand />
     </router-link>
     <Search />
