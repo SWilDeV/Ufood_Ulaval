@@ -7,7 +7,7 @@
     <div v-if="user">
       <span>{{ $t('navigation.welcome', { name: user.name }) }}</span>
       <icon-link icon="user" name="User" text="navigation.profile" />
-      <icon-link icon="sign-out-alt" name="Home" text="navigation.signOut" />
+      <icon-link icon="sign-out-alt" name="SignOut" text="navigation.signOut" />
     </div>
     <div v-else>
       <icon-link icon="sign-in-alt" name="SignIn" text="navigation.signIn" />

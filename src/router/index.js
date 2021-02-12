@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Restaurant from '@/components/Restaurant'
 import SignIn from '@/components/SignIn'
+import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
 import User from '@/components/User'
 import '@/config/fontAwesome'
@@ -26,6 +27,11 @@ export default new Router({
       path: '/signin',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: '/signout',
+      name: 'SignOut',
+      component: SignOut
     },
     {
       path: '/signup',
