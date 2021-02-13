@@ -165,7 +165,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .liste-restaurants {
   color: black;
   list-style-type: none;

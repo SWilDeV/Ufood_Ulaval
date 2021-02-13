@@ -6,7 +6,6 @@ import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
 import User from '@/components/User'
-import '@/config/fontAwesome'
 
 Vue.use(Router)
 
