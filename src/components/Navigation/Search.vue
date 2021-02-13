@@ -1,5 +1,5 @@
 <template>
-  <form class="form-inline mr-auto" @submit.prevent="submit">
+  <form class="form-inline" @submit.prevent="submit">
     <div class="input-group">
       <input
         type="text"
