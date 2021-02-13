@@ -1,26 +1,40 @@
 <template>
-  <div>
-    <u-form :canSubmit="Boolean(searchText)" submitIcon="search" @submit="search">
-      <input type="text" :placeholder="$t('navigation.searchPlaceholder')" v-model="searchText" />
-    </u-form>
-  </div>
+  <form class="form-inline mr-auto" @submit.prevent="submit">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        :placeholder="$t('navigation.searchPlaceholder')"
+        v-model="search"
+      />
+      <div class="input-group-append">
+        <icon-button
+          type="submit"
+          icon="search"
+          class="btn btn-success"
+          :disabled="!Boolean(search)"
+        />
+      </div>
+    </div>
+  </form>
 </template>
 
 <script>
-import UForm from '@/components/shared/UForm.vue'
+import IconButton from '@/components/shared/IconButton.vue'
 
 export default {
   components: {
-    UForm
+    IconButton
   },
   data() {
     return {
-      searchText: ''
+      search: ''
     }
   },
   methods: {
-    search() {
-      alert(this.searchText)
+    submit() {
+      alert(this.search)
+      this.search = ''
     }
   }
 }
