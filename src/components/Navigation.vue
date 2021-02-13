@@ -6,12 +6,12 @@
     </b-navbar-brand>
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
-      <Search />
-      <span v-if="user" class="navbar-text">
-        {{ $t('navigation.welcome', { name: user.name }) }}
-      </span>
-      <ul class="navbar-nav">
+      <Search v-if="$route.name !== 'Home'" />
+      <ul class="navbar-nav ml-auto">
         <template v-if="user">
+          <li class="navbar-text">
+            {{ $t('navigation.welcome', { name: user.name }) }}
+          </li>
           <li class="nav-item">
             <icon-link icon="user" name="User" text="navigation.profile" class="nav-link" />
           </li>
