@@ -6,11 +6,11 @@
         src="@/assets/restaurant-normandin.jpg"
         alt="Normandin Restaurant"
       />
-      <h1 id="restaurantName" class="text-center">Restaurant Normandin Neufchatel</h1>
+      <h1 id="restaurantName" class="text-center">Normandin Neufchatel</h1>
       <h5 id="restaurantAdress">
-        2355 Boulevard Bastien, Quebec City, Qc, G2B 1B3
+        2355 Bastien blvd, Quebec City, Qc, G2B 1B3
       </h5>
-      telephone : <a href="tel:+14188426601">(418)842-6601</a>
+      Phone : <a href="tel:+14188426601">(418)842-6601</a>
     </div>
     <br />
     <div class="row">
@@ -35,12 +35,10 @@
       </div>
     </div>
 
-    <div class="typeRange">Food type : Family meal</div>
-
-    <div class="typeRange">Price range : <i>$</i></div>
-
-    <div>
-      <div class="font-weight-bold">Rating : 3.5/5</div>
+    <div class="row typeRange">
+      <span class="col-sm-3">Food type : Family meal</span>
+      <span class="col-sm-3">Price range : <i>$</i></span>
+      <span class="col-sm-3 font-weight-bold">Rating : 3.5/5</span>
     </div>
   </div>
 </template>
