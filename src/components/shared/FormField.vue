@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="form-group">
     <label v-if="label" :for="id" v-text="getDisplayText(label)" />
     <input
       ref="input"
+      class="form-control"
       :id="id"
       :placeholder="getDisplayText(placeholder)"
       :type="type"

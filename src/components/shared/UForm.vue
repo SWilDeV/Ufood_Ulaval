@@ -1,7 +1,13 @@
 <template>
   <form @submit.prevent="$emit('submit')">
     <slot />
-    <icon-button type="submit" :icon="submitIcon" :text="submitText" :disabled="!canSubmit" />
+    <icon-button
+      type="submit"
+      :icon="submitIcon"
+      :text="submitText"
+      :disabled="!canSubmit"
+      class="btn btn-primary"
+    />
   </form>
 </template>
 

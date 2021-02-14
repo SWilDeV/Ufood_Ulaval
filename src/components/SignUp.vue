@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1 v-t="'signUp.title'" />
     <alert v-if="error === true" type="danger" text="genericError" :dismiss="clearError" />
     <alert v-if="success" type="success" text="signUp.success">

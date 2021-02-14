@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1 v-t="'signIn.title'" />
     <alert v-if="error === true" type="danger" text="genericError" :dismiss="clearError" />
     <alert
