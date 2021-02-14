@@ -74,7 +74,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .container {
   width: 100%;
 }
@@ -89,7 +89,7 @@
 }
 
 .btn {
-  width: 120px;
+  width: 150px;
 }
 
 .recently-visited {
