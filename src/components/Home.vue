@@ -1,238 +1,287 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <h1>Welcome to UFood!</h1>
-    <ul>
-      <li>
-        <router-link to="/restaurant">Restaurant</router-link>
-      </li>
-      <li>
-        <router-link to="/user">UserPage</router-link>
-      </li>
-    </ul>
 
-    <div class="acceuil-restaurants">
-      <h2>Available restaurants:</h2>
-
-      <div class="filers-restaurant-section">
-        <h3>Filter restaurants by:</h3>
+    <div class="testFlex">
+      <div class="search-area">
+        <h3>Price range:</h3>
         <select class="restaurants-dropdown">
-          <option value="me" selected="selected">For me</option>
-          <option value="popularity">Popularity</option>
-          <option value="price">Price</option>
-          <option value="offers">Special offer</option>
-          <option value="delevery">Delevery time</option>
+          <option value="all" selected="selected">All prices</option>
+          <option value="10">0-10$</option>
+          <option value="15">10-15$</option>
+          <option value="20">15-20$</option>
+          <option value="25">20-25$</option>
+          <option value="30">25-30$</option>
+          <option value="30">35-40$</option>
+          <option value="30">40-45$</option>
         </select>
       </div>
-      <div class="types-restaurant-section">
-        <h3>Special types of restaurants:</h3>
+
+      <div class="search-area">
+        <h3>Genres:</h3>
         <select class="restaurants-dropdown">
-          <option value="all" selected="selected">All types</option>
-          <option value="fast-food">Fast-food</option>
-          <option value="asian">Asia</option>
-          <option value="italan">Italy</option>
-          <option value="quebec">Quebec</option>
-          <option value="mexico">Mexico</option>
+          <option value="all" selected="selected">All genres</option>
+          <option value="fast-food">Casual</option>
+          <option value="desert">Desert</option>
+          <option value="asian">Asian</option>
+          <option value="italan">Italian</option>
+          <option value="quebec">American</option>
+          <option value="mexico">Mexican</option>
           <option value="mediterranean">Mediterranean</option>
         </select>
       </div>
 
-      <ul class="liste-restaurants">
-        <li>
-          <h4>Normandin (20-30$)</h4>
-          <div>
+      <div class="search-area">
+        <input class="form-control mr-sm-2 searchBar" type="text" placeholder="Search ..." />
+        <button class="btn btn-success search-button" type="submit">Search</button>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row restaurants-row">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://emplois.isarta.com/images-members2/normandin/normandin_image3.gif"
               alt="Normandin"
             />
+            <div class="card-body">
+              <h4 class="card-title">Normandin</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <button class="order-restaurant">Order here</button>
-        </li>
-        <li>
-          <h4>McDonald (10-20$)</h4>
-          <div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://www.shlr.org/wp/wp-content/uploads/2016/02/McDonald.png"
               alt="McDonald"
             />
+            <div class="card-body">
+              <h4 class="card-title">McDonald</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <button class="order-restaurant">Order here</button>
-        </li>
-        <li>
-          <h4>Harveys (12-22$)</h4>
-          <div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://restozone.ca/uploads/harveys/gatineau/logo_mobile.png"
               alt="Harveys"
             />
+            <div class="card-body">
+              <h4 class="card-title">Harveys</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <button class="order-restaurant">Order here</button>
-        </li>
-        <li>
-          <h4>Subway (10-20$)</h4>
-          <div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://cdn.1min30.com/wp-content/uploads/2017/04/Subway-logo-1.jpg"
               alt="Subway"
             />
+            <div class="card-body">
+              <h4 class="card-title">Subway</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <button class="order-restaurant">Order here</button>
-        </li>
-        <li>
-          <h4>La belle province (10-20$)</h4>
-          <div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://img.circulaire-en-ligne.ca/wp-content/uploads/La-Belle-Province.jpg"
               alt="Belle Province"
             />
+            <div class="card-body">
+              <h4 class="card-title">Belle Province</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <button class="order-restaurant">Order here</button>
-        </li>
-        <li>
-          <h4>Mikes (20-35$)</h4>
-          <div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <div class="card cell-restaurant">
             <img
-              class="logo-restaurants"
+              class="img-fluid rounded mx-auto d-block"
               src="https://cdn.worldvectorlogo.com/logos/mikes-pizza.svg"
               alt="Mikes"
             />
+            <div class="card-body">
+              <h4 class="card-title">Mikes</h4>
+              <p class="card-text">
+                Adress: <br />
+                Price range: <br />
+                Delevery time: <br />
+                Food genres:
+              </p>
+              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            </div>
           </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-4">
+        <div class="card cell-restaurant">
+          <img
+            class="img-fluid rounded mx-auto d-block"
+            src="https://pbs.twimg.com/profile_images/1146038033948577793/MgJzJHPA_400x400.png"
+            alt="Mucho Burrito"
+          />
+          <div class="card-body">
+            <h4 class="card-title">Mucho Burrito</h4>
+            <p class="card-text">
+              Adress: <br />
+              Price range: <br />
+              Delevery time: <br />
+              Food genres:
+            </p>
+            <a href="#" class="btn btn-primary order-Button ">Order Here</a>
           </div>
-          <div>
-            <button class="order-restaurant">Order here</button>
-          </div>
-        </li>
-        <li>
-          <h4>Mucho Burrito (10-25$)</h4>
-          <div>
-            <img
-              class="logo-restaurants"
-              src="https://pbs.twimg.com/profile_images/1146038033948577793/MgJzJHPA_400x400.png"
-              alt="Mucho Burrito"
-            />
-          </div>
-          <div class="restautant-information-container">
-            Adress: <br />
-            Price range: <br />
-            Delevery time: <br />
-            Food types:
-          </div>
-          <div>
-            <button class="order-restaurant">Order here</button>
-          </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.liste-restaurants {
+.search-area {
+  display: flex;
+}
+
+.testFlex {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.searchBar {
+  margin: 0em 0.8em 0.8em 0.8em;
+  width: 100%;
+  font-size: 16px;
   color: black;
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 16px 16px;
-  padding: 20px;
-}
-
-.liste-restaurants li {
-  border: solid;
-}
-
-.liste-restaurants img {
-  max-width: 35%;
-  max-height: 25%;
-  float: left;
-  margin-right: 10px;
-}
-
-.restautant-information-container {
-  font-size: 20px;
-  text-align: center;
-  max-height: 75%;
-  margin-left: 35%;
-  margin-right: 10px;
+  line-height: 1.3;
+  padding: 0.3em 0.7em 0.25em 0.4em;
   border: 2px solid black;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 0.5em;
 }
 
-.clear {
-  clear: both;
-}
-
-.order-restaurant {
-  background-color: transparent;
-  border: 2px solid black;
-  font-size: 24px;
-  padding: 24px;
-  color: black;
-  text-transform: uppercase;
-  margin: 2%;
-  text-decoration: none;
+.search-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 0.3em 0.9em 0.25em 0.9em;
+  margin: 0em 0.8em 0.8em 0.8em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  background-color: #05a856;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.restaurants-row {
+  margin: 1px;
+}
+.cell-restaurant {
+  border: 2px solid black;
+  padding-top: 5%;
+  margin-top: 1em;
+  box-shadow: 5px 10px #888888;
+}
+
+.cell-Information {
+  border: 2px solid black;
+  margin: 1em 0.8em 0.8em 0.8em;
+  padding: 5px;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+a.order-Button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.3em 1.2em;
+  margin: 1em 0.8em 0.8em 0.8em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: white;
+  background-color: #2aa8f1;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+a.order-Button:hover {
+  background-color: #4095c6;
+}
+@media all and (max-width: 30em) {
+  a.order-Button {
+    display: block;
+    margin: 0.2em auto;
+  }
 }
 
 /* The container must be positioned relative: */
 .restaurants-dropdown {
   display: block;
+  margin: 0 1.2em 0.8em 1.8em;
   font-size: 16px;
-  font-family: 'Arial';
   font-weight: 700;
   color: black;
   line-height: 1.3;
   padding: 0.6em 1.4em 0.5em 0.8em;
-  width: 20%;
-  max-width: 20%;
-  border: 3px solid black;
+  max-width: 100%;
+  border: 2px solid black;
   box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
   border-radius: 0.5em;
-  appearance: none;
   background-color: white;
 }
 
 h1 {
-  color: #111;
+  color: black;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 64px;
   font-weight: 700;
@@ -256,7 +305,7 @@ h2 {
 }
 
 h3 {
-  color: #111;
+  color: black;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 24px;
   font-weight: 700;
