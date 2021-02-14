@@ -13,7 +13,7 @@
       Phone : <a href="tel:+14188426601">(418)842-6601</a>
     </div>
     <br />
-    <div class="row typeRange">
+    <div class="row">
       <span class="col-sm-3">Food type : Family meal</span>
       <span class="col-sm-3">Price range : <i>$</i></span>
       <span class="col-sm-3 font-weight-bold">Rating : 3.5/5</span>
@@ -63,11 +63,5 @@ export default {
 .row {
   margin-top: 16px;
   margin-bottom: 16px;
-}
-
-.typeRange {
-  font-size: 16px;
-  columns: red;
-  text-decoration: aqua;
 }
 </style>
