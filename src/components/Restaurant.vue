@@ -13,6 +13,11 @@
       Phone : <a href="tel:+14188426601">(418)842-6601</a>
     </div>
     <br />
+    <div class="row typeRange">
+      <span class="col-sm-3">Food type : Family meal</span>
+      <span class="col-sm-3">Price range : <i>$</i></span>
+      <span class="col-sm-3 font-weight-bold">Rating : 3.5/5</span>
+    </div>
     <div class="row">
       <div class="col-sm-12 col-lg-8">
         <iframe
@@ -33,12 +38,6 @@
           <b-table stripped hover :items="opHours"></b-table>
         </div>
       </div>
-    </div>
-
-    <div class="row typeRange">
-      <span class="col-sm-3">Food type : Family meal</span>
-      <span class="col-sm-3">Price range : <i>$</i></span>
-      <span class="col-sm-3 font-weight-bold">Rating : 3.5/5</span>
     </div>
   </div>
 </template>
