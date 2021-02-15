@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <h1>Welcome to UFood!</h1>
 
     <div class="testFlex">
@@ -54,7 +54,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -74,7 +76,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -94,7 +98,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -114,7 +120,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -134,7 +142,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -153,7 +163,9 @@
                 Delevery time: <br />
                 Food genres:
               </p>
-              <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+              <router-link to="/Restaurant" tag="button" class="order-Button"
+                >Order Here</router-link
+              >
             </div>
           </div>
         </div>
@@ -174,7 +186,7 @@
               Delevery time: <br />
               Food genres:
             </p>
-            <a href="#" class="btn btn-primary order-Button ">Order Here</a>
+            <router-link to="/Restaurant" tag="button" class="order-Button">Order Here</router-link>
           </div>
         </div>
       </div>
@@ -238,8 +250,8 @@ img {
   height: 200px;
 }
 
-a.order-Button {
-  display: block;
+.order-Button {
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   padding: 0.3em 1.2em;
@@ -254,7 +266,7 @@ a.order-Button {
   transition: all 0.2s;
 }
 
-a.order-Button:hover {
+.order-Button:hover {
   background-color: #4095c6;
 }
 @media all and (max-width: 30em) {
