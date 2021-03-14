@@ -2,11 +2,9 @@
   <div class="container">
     <template v-if="restaurant">
       <div class="text-center">
-        <img
-          class="rounded img-fluid"
-          src="@/assets/restaurant-normandin.jpg"
-          alt="Normandin Restaurant"
-        />
+        <div class="imageCell">
+          <img class="rounded img-fluid slider" :src="images[currentImage]" />
+        </div>
         <h1 id="restaurantName" class="text-center">{{ restaurant.name }}</h1>
         <h5 id="restaurantAdress">
           {{ restaurant.address }}
@@ -63,16 +61,14 @@ export default {
         }
       ],
 
-      opHours: [
-        //{ day: 'Sunday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Monday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Tuesday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Wednesday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Thursday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Friday', hours: '9.00am to 7.30pm' },
-        //{ day: 'Saturday', hours: '9.00am to 7.30pm' }
-      ]
+      images: [],
+      currentImage: 0,
+      timer: null
     }
+  },
+
+  ready: function () {
+    this.startRotation();
   },
 
   computed: {
@@ -102,12 +98,24 @@ export default {
         }
       }
       return items
+    },
+
+    startRotation: function() {
+      this.timer = setInterval(this.next, 3000);
+    },
+
+    next: function() {
+      this.currentImage === this.images.length - 1
+        ? (this.currentImage = 0)
+        : (this.currentImage += 1)
     }
   },
 
   async created() {
     const response = await get(`/unsecure/restaurants/${this.$route.params.id}`)
     this.restaurant = await response.json()
+    this.images = this.restaurant.pictures
+    this.startRotation()
   }
 }
 </script>
@@ -115,5 +123,16 @@ export default {
 .row {
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+.imageCell {
+  width: auto;
+  height: 300px;
+  justify-content: center;
+}
+
+.slider {
+  max-width: auto;
+  height: 300px;
 }
 </style>
