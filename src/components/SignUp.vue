@@ -74,12 +74,8 @@ export default {
     async submit() {
       this.error = false
       try {
-        const response = await post('/signup', new URLSearchParams(this.user))
-        if (response.ok) {
-          this.success = true
-        } else {
-          this.onError(response)
-        }
+        await post('/signup', new URLSearchParams(this.user))
+        this.success = true
       } catch (e) {
         this.onError(e)
       }
