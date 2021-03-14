@@ -6,6 +6,18 @@ const execute = async (method, url, body) => {
   return await fetch(`${process.env.VUE_APP_API_BASE_URL}${url}`, { body, headers, method })
 }
 
+export function _delete(url) {
+  return execute('DELETE', url)
+}
+
+export function get(url) {
+  return execute('GET', url)
+}
+
 export function post(url, body) {
   return execute('POST', url, body)
+}
+
+export function put(url, body) {
+  return execute('PUT', url, body)
 }
