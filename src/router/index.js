@@ -5,7 +5,7 @@ import Restaurant from '@/components/Restaurant'
 import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
-import User from '@/components/User'
+import User from '@/components/UserPage/User'
 
 Vue.use(Router)
 

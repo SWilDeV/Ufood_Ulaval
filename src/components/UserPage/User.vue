@@ -4,7 +4,9 @@
       <div class="profile-nav col-md-12">
         <div class="panel">
           <div class="user-heading round">
-            <h1>Justin Trudeau</h1>
+            <h1>
+              {{ $t('userPage.hello', { name: user.name }) }}
+            </h1>
             <p>User score: 4.5 / 5</p>
           </div>
         </div>
@@ -73,6 +75,20 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+// IconLink from '@/components/shared/IconLink.vue'
+import { getRestaurants } from '@/api'
+
+export default {
+  computed: {
+    ...mapState(['user'])
+  }
+}
+let test = getRestaurants()
+console.log(test)
+</script>
 
 <style scoped>
 .container {
