@@ -5,24 +5,27 @@
         <div class="imageCell">
           <img class="rounded img-fluid slider" :src="images[currentImage]" />
         </div>
-        <h1 id="restaurantName" class="text-center">{{ restaurant.name }}</h1>
+        <h1 class="text-center">{{ restaurant.name }}</h1>
         <h5 id="restaurantAdress">
           {{ restaurant.address }}
         </h5>
-        Phone : {{ restaurant.tel }}
+        <div>Phone: {{ restaurant.tel }}</div>
       </div>
       <br />
       <div class="row">
         <span class="col-sm-3"
-          >Food type :
+          >Food types:
           <span v-for="(type, index) in restaurant.genres" :key="index">{{ type }}, </span></span
         >
-        <span class="col-sm-3">Price range : {{ restaurant.price_range }}/5</span>
-        <span class="col-sm-3 font-weight-bold">Rating : {{ restaurantRating }}/5</span>
+        <span class="col-sm-3">Price range: {{ restaurant.price_range }}/5</span>
+        <span class="col-sm-3 font-weight-bold">Rating: {{ restaurantRating }}/5</span>
       </div>
       <div class="row">
         <div class="col-sm-12 col-lg-8">
-          <iframe width="100%" height="400px" src="https://www.google.com/maps/dir// " 
+          <iframe
+            width="100%"
+            height="400px"
+            :src="googleMapAddress()"
             frameborder="0"
             style="border:0;"
             allowfullscreen=""
@@ -48,6 +51,7 @@ export default {
   data() {
     return {
       id: '5f31fc6155d7790550c08afe',
+      googleKey: 'AIzaSyBFUveRGozaQvwzxffE5YofybRxNc8PbeU',
       restaurant: null,
       fields: [
         'day',
@@ -105,6 +109,16 @@ export default {
       this.currentImage === this.images.length - 1
         ? (this.currentImage = 0)
         : (this.currentImage += 1)
+    },
+
+    googleMapAddress: function() {
+      return (
+        'https://www.google.com/maps/embed/v1/view?key=' +
+        this.googleKey + '&center=' +
+        this.restaurant.location.coordinates[0] +
+        ',' +
+        this.restaurant.location.coordinates[1] +
+        '&zoom=14')
     }
   },
 
