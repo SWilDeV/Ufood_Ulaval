@@ -5,7 +5,7 @@ import Restaurant from '@/components/Restaurant'
 import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
-import User from '@/components/UserPage/User'
+import userPage from '@/components/UserPage/UserPage'
 
 Vue.use(Router)
 
@@ -38,9 +38,9 @@ export default new Router({
       component: SignUp
     },
     {
-      path: '/user',
-      name: 'User',
-      component: User
+      path: '/UserPage/UserPage',
+      name: 'UserPage',
+      component: userPage
     }
   ]
 })

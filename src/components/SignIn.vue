@@ -76,7 +76,7 @@ export default {
         if (response.ok) {
           const data = await response.json()
           this.login(data)
-          this.$router.push({ name: 'User' })
+          this.$router.push({ name: 'UserPage' })
         } else {
           this.onError(response, response.status === 401 ? response.status : null)
         }

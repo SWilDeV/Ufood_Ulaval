@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <div class="profile-nav col-md-12">
         <div class="panel">
@@ -14,7 +14,7 @@
     </div>
 
     <!-- list of visited restaurants -->
-    <div class="row">
+  <!-- <div class="row">
       <div class="profile-nav col-md-12">
         <div class="panel">
           <div class="recently-visited">
@@ -33,9 +33,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="col-md-12">
+  <!-- <div class="col-md-12">
         <div class="panel">
           <div class="panel-body">
             <div class="bio-desk">
@@ -55,8 +55,8 @@
             </div>
           </div>
         </div>
-      </div>
-
+      </div> -->
+  <!-- 
       <div class="col-md-12">
         <div class="panel">
           <div class="panel-body">
@@ -67,11 +67,28 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="btn-container">
+    </div> -->
+
+  <!-- <div class="btn-container">
       <button type="button" class="btn btn-light">
         <router-link :to="{ name: 'Home' }">HOME PAGE</router-link>
       </button>
+    </div>
+  </div> -->
+
+  <div class="col">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">{{ rName }}, {{ rCity }}</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title weather-card-title">
+          <small class="text-muted"></small>visits: {{ numberOfVisit }}
+        </h1>
+        <button type="button" class="w-100 btn btn-lg btn-outline-primary">
+          More Info
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -79,82 +96,82 @@
 <script>
 import { mapState } from 'vuex'
 // IconLink from '@/components/shared/IconLink.vue'
-import { getRestaurants } from '@/api'
+//import { getRestaurants } from '@/api'
 
 export default {
+  name: 'visitedRestaurants',
+  props: ['r-name', 'r-city', 'number-of-visit'],
   computed: {
     ...mapState(['user'])
   }
 }
-let test = getRestaurants()
-console.log(test)
+
+// .container {
+//   width: 100%;
+// }
+// .profile-nav {
+//   margin-top: 30px;
+// }
+
+// .btn-container {
+//   display: flex;
+//   justify-content: center;
+//   margin-top: 10px;
+// }
+
+// .btn {
+//   width: 150px;
+// }
+
+// .recently-visited {
+//   background: #fbc02d;
+//   color: #fff;
+//   border-radius: 7px;
+//   -webkit-border-radius: 7px;
+//   padding: 15px;
+//   text-align: left;
+// }
+
+// .user-heading {
+//   background: #fbc02d;
+//   color: #fff;
+//   border-radius: 7px;
+//   -webkit-border-radius: 7px;
+//   padding: 30px;
+//   text-align: center;
+// }
+
+// .user-heading h1 {
+//   font-size: 50px;
+//   font-weight: 300;
+//   margin-bottom: 5px;
+//   color: white;
+// }
+
+// .user-heading p {
+//   font-size: 20px;
+// }
+
+// .bio-desk {
+//   float: left;
+//   background-color: grey;
+//   width: 100%;
+//   margin-top: 8px;
+//   padding: 10px;
+//   border-radius: 7px;
+// }
+
+// .bio-desk h4 {
+//   font-size: 20px;
+//   font-weight: 400;
+//   color: white;
+// }
+
+// .bio-desk h6 {
+//   font-size: 16px;
+//   font-weight: 400;
+//   color: white;
+// }
 </script>
 
-<style scoped>
-.container {
-  width: 100%;
-}
-.profile-nav {
-  margin-top: 30px;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.btn {
-  width: 150px;
-}
-
-.recently-visited {
-  background: #fbc02d;
-  color: #fff;
-  border-radius: 7px;
-  -webkit-border-radius: 7px;
-  padding: 15px;
-  text-align: left;
-}
-
-.user-heading {
-  background: #fbc02d;
-  color: #fff;
-  border-radius: 7px;
-  -webkit-border-radius: 7px;
-  padding: 30px;
-  text-align: center;
-}
-
-.user-heading h1 {
-  font-size: 50px;
-  font-weight: 300;
-  margin-bottom: 5px;
-  color: white;
-}
-
-.user-heading p {
-  font-size: 20px;
-}
-
-.bio-desk {
-  float: left;
-  background-color: grey;
-  width: 100%;
-  margin-top: 8px;
-  padding: 10px;
-  border-radius: 7px;
-}
-
-.bio-desk h4 {
-  font-size: 20px;
-  font-weight: 400;
-  color: white;
-}
-
-.bio-desk h6 {
-  font-size: 16px;
-  font-weight: 400;
-  color: white;
-}
-</style>
+<style scoped></style>
