@@ -1,4 +1,13 @@
 {
+  "weekDays": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
+  },
   "genericError": "An unexpected error occurred, please try again later.",
   "navigation": {
     "profile": "User Profile",
