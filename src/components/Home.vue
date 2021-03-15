@@ -52,7 +52,7 @@
                 Adress: <br />
                 Price range: <br />
                 Delevery time: <br />
-                Food genres:
+                Food genrestretertre:
               </p>
               <router-link to="/Restaurant" tag="button" class="order-Button"
                 >Order Here</router-link
