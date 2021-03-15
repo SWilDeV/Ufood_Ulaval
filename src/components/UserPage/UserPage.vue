@@ -1,31 +1,53 @@
 <template>
   <div class="container">
-    <!-- {{ $t('userPage.hello', { name: user.name }) }} -->
     <panel />
-    <visitedRestaurants />
+    <h1>List of favorite restaurants</h1>
+    <favorites v-for="favorite in blocks.items" :key="favorite.id" :rName="favorite.id" />
   </div>
 </template>
 
 <script>
-import visitedRestaurants from './visitedRestaurants'
+import favorites from './favorites'
 import panel from './Panel'
-import { get } from '@/api'
+import { get, post } from '@/api'
 export default {
   name: 'userPage',
   components: {
-    visitedRestaurants,
+    favorites,
     panel
+  },
+  data() {
+    return {
+      blocks: [],
+      test: []
+    }
   },
   beforeMount() {
     this.getRestUser()
   },
+  created() {
+    this.addFavorites()
+  },
   methods: {
     async getRestUser() {
       try {
-        const restaurants = await get('/unsecure/restaurants')
-        console.log(restaurants)
+        this.blocks = await get('/unsecure/favorites')
       } catch (e) {
-        this.onError(e)
+        console.error(e)
+      }
+    },
+    async addFavorites() {
+      try {
+        this.test = await post(
+          '/unsecure/favorites',
+          JSON.stringify({
+            name: 'test1',
+            owner: '123@123.com'
+          })
+        )
+        console.log(this.test)
+      } catch (e) {
+        console.error(e)
       }
     }
   }
@@ -34,11 +56,11 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 100%;
+  max-width: 1500px;
   background-color: royalblue;
 }
 
-.weather-header {
+.favorite-header {
   max-width: 700px;
   font-size: 50px;
   color: white;

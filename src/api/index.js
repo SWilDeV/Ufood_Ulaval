@@ -10,22 +10,15 @@ const execute = async (method, url, data) => {
       body = JSON.stringify(data)
     }
   }
-<<<<<<< HEAD
-  return await fetch(`${process.env.VUE_APP_API_BASE_URL}${url}`, {
-=======
   const response = await fetch(`${process.env.VUE_APP_API_BASE_URL}${url}`, {
->>>>>>> 805a84d295df6a947fa7dc37a3dd8071590ddd83
     body,
     headers,
     method
   })
-<<<<<<< HEAD
-=======
   if (!response.ok) {
     throw response
   }
   return response.json()
->>>>>>> 805a84d295df6a947fa7dc37a3dd8071590ddd83
 }
 
 export function _delete(url) {
@@ -43,10 +36,3 @@ export function post(url, data) {
 export function put(url, data) {
   return execute('PUT', url, data)
 }
-
-// export const getRestaurants = async () => {
-//   const response = await fetch(`${process.env.VUE_APP_API_BASE_URL}/unsecure/restaurants`, {
-//     method: 'GET'
-//   })
-//   return response.json()
-// }

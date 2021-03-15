@@ -72,20 +72,9 @@ export default {
     async submit() {
       this.error = false
       try {
-<<<<<<< HEAD
-        const response = await post('/login', new URLSearchParams(this.user))
-        if (response.ok) {
-          const data = await response.json()
-          this.login(data)
-          this.$router.push({ name: 'UserPage' })
-        } else {
-          this.onError(response, response.status === 401 ? response.status : null)
-        }
-=======
         const data = await post('/login', new URLSearchParams(this.user))
-        this.$router.push({ name: 'User' })
+        this.$router.push({ name: 'UserPage' })
         this.login(data)
->>>>>>> 805a84d295df6a947fa7dc37a3dd8071590ddd83
       } catch (e) {
         this.onError(e, e.status === 401 ? e.status : null)
       }
