@@ -60,12 +60,6 @@ export default {
   computed: {
     googleMapAddress() {
       return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]} `
-      // 'https://www.google.com/maps/embed/v1/view?key=' +
-      // '&center=' +
-      // this.restaurant.location.coordinates[0] +
-      // ',' +
-      // this.restaurant.location.coordinates[1] +
-      // '&zoom=14'
     },
 
     images() {
