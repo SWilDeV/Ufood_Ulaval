@@ -20,15 +20,14 @@
       <div class="row">
         <div class="col-sm-12 col-lg-8">
           <iframe
-            width="100%"
-            height="400px"
-            src="http://www.google.com/maps/place/@46.8179222,-71.2202176,17z"
-            frameborder="0"
-            style="border:0;"
-            allowfullscreen=""
-            aria-hidden="false"
-            tabindex="0"
-          />
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            :src="googleMapAddress"
+          >
+          </iframe>
           <button type="button" class="btn btn-secondary">Directions</button>
         </div>
         <div class="col-sm-12 col-lg-4">
@@ -44,6 +43,9 @@
 
 <script>
 import { get } from '@/api'
+
+const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
+
 export default {
   data() {
     return {
@@ -57,14 +59,13 @@ export default {
 
   computed: {
     googleMapAddress() {
-      return (
-        'https://www.google.com/maps/embed/v1/view?key=' +
-        '&center=' +
-        this.restaurant.location.coordinates[0] +
-        ',' +
-        this.restaurant.location.coordinates[1] +
-        '&zoom=14'
-      )
+      return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]} `
+      // 'https://www.google.com/maps/embed/v1/view?key=' +
+      // '&center=' +
+      // this.restaurant.location.coordinates[0] +
+      // ',' +
+      // this.restaurant.location.coordinates[1] +
+      // '&zoom=14'
     },
 
     images() {
@@ -95,8 +96,7 @@ export default {
 
   async created() {
     try {
-      const response = await get(`/unsecure/restaurants/${this.$route.params.id}`)
-      this.restaurant = await response.json()
+      this.restaurant = await get(`/unsecure/restaurants/${this.$route.params.id}`)
       this.startRotation()
     } catch (e) {
       console.error(e)
