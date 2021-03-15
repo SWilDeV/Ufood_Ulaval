@@ -49,14 +49,7 @@ export default {
     return {
       id: '5f31fc6155d7790550c08afe',
       restaurant: null,
-      fields: [
-        'day',
-        'hours',
-        {
-          key: 'actions',
-          label: ''
-        }
-      ],
+      fields: ['day', 'hours'],
       currentImage: 0,
       timer: null
     }
@@ -84,27 +77,6 @@ export default {
         hours: row[1] || 'Closed'
       }))
     },
-
-    //   let hoursList = []
-    //   hoursList = this.restaurant.opening_hours
-
-    //   let items = [
-    //     { day: 'Sunday', hours: `${hoursList.sunday}` },
-    //     { day: 'Monday', hours: `${hoursList.monday}` },
-    //     { day: 'Tuesday', hours: `${hoursList.tuesday}` },
-    //     { day: 'Wednesday', hours: `${hoursList.wednesday}` },
-    //     { day: 'Thursday', hours: `${hoursList.thursday}` },
-    //     { day: 'Friday', hours: `${hoursList.friday}` },
-    //     { day: 'Saturday', hours: `${hoursList.saturday}` }
-    //   ]
-
-    //   for (let item in items) {
-    //     if (items[item].hours === 'null') {
-    //       items[item].hours = 'Closed'
-    //     }
-    //   }
-    //   return items
-    // },
 
     restaurantRating() {
       return this.restaurant.rating.toFixed(1)
