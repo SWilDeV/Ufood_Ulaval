@@ -31,20 +31,17 @@ export default {
   methods: {
     async getRestUser() {
       try {
-        this.blocks = await get('/unsecure/favorites')
+        this.blocks = await get('/unsecure/favorites?limit=10000')
       } catch (e) {
         console.error(e)
       }
     },
     async addFavorites() {
       try {
-        this.test = await post(
-          '/unsecure/favorites',
-          JSON.stringify({
-            name: 'test1',
-            owner: '123@123.com'
-          })
-        )
+        this.test = await post('/unsecure/favorites', {
+          name: 'test1',
+          owner: '123@123.com'
+        })
         console.log(this.test)
       } catch (e) {
         console.error(e)
