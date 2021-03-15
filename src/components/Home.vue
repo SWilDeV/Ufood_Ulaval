@@ -1,24 +1,21 @@
 <template>
   <div id="home">
-    <homeHeader></homeHeader>
-    <restaurantsList></restaurantsList>
+    <homeForm></homeForm>
   </div>
 </template>
 
 <script>
-import HomeHeader from './shared/HomeHeader.vue'
-import RestaurantsList from './shared/RestaurantsList'
-
+import HomeForm from './shared/HomeForm'
 export default {
   name: 'Home',
   components: {
-    HomeHeader,
-    RestaurantsList
+    HomeForm
   }
 }
 </script>
 
 <style scoped>
+/*
 .restaurants-row {
   margin: 1px;
 }
@@ -75,4 +72,5 @@ h4 {
   text-align: center;
   text-transform: uppercase;
 }
+*/
 </style>
