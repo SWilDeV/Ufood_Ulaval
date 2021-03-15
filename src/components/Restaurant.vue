@@ -1,60 +1,99 @@
 <template>
   <div class="container">
-    <div class="text-center">
-      <img
-        class="rounded img-fluid"
-        src="@/assets/restaurant-normandin.jpg"
-        alt="Normandin Restaurant"
-      />
-      <h1 id="restaurantName" class="text-center">Normandin Neufchatel</h1>
-      <h5 id="restaurantAdress">
-        2355 Bastien blvd, Quebec City, Qc, G2B 1B3
-      </h5>
-      Phone : <a href="tel:+14188426601">(418)842-6601</a>
-    </div>
-    <br />
-    <div class="row">
-      <span class="col-sm-3">Food type : Family meal</span>
-      <span class="col-sm-3">Price range : <i>$</i></span>
-      <span class="col-sm-3 font-weight-bold">Rating : 3.5/5</span>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-lg-8">
-        <iframe
-          width="100%"
-          height="400px"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.452445647169!2d-71.34114555026918!3d46.8567226120164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s87RCVM46%2BV8!5e0!3m2!1sfr!2sca!4v1612643262694!5m2!1sfr!2sca"
-          frameborder="0"
-          style="border:0;"
-          allowfullscreen=""
-          aria-hidden="false"
-          tabindex="0"
-        />
-        <button type="button" class="btn btn-secondary">Directions</button>
+    <template v-if="restaurant">
+      <div class="text-center mt-4">
+        <div class="imageCell">
+          <img class="rounded img-fluid slider" :src="images[currentImage]" />
+        </div>
+        <h1 class="text-center">{{ restaurant.name }}</h1>
+        <h5>
+          {{ restaurant.address }}
+        </h5>
+        <div>Phone: {{ restaurant.tel }}</div>
       </div>
-      <div class="col-sm-12 col-lg-4">
-        <h4>Opening Hours</h4>
-        <div>
-          <b-table stripped hover :items="opHours"></b-table>
+      <br />
+      <div class="row">
+        <span class="col-sm-3">Food types: {{ restaurant.genres.join(', ') }} </span>
+        <span class="col-sm-3">Price range: {{ restaurant.price_range }}/5</span>
+        <span class="col-sm-3 font-weight-bold">Rating: {{ restaurantRating }}/5</span>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-lg-8">
+          <iframe
+            width="600"
+            height="450"
+            style="border:0"
+            loading="lazy"
+            allowfullscreen
+            :src="googleMapAddress"
+          >
+          </iframe>
+          <button type="button" class="btn btn-secondary">Directions</button>
+        </div>
+        <div class="col-sm-12 col-lg-4">
+          <h4>Opening Hours</h4>
+          <div>
+            <b-table striped :items="openingHours" :fields="fields" />
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
+import { get } from '@/api'
+
+const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
+
 export default {
   data() {
     return {
-      opHours: [
-        { day: 'Sunday', hours: '9.00am to 7.30pm' },
-        { day: 'Monday', hours: '9.00am to 7.30pm' },
-        { day: 'Tuesday', hours: '9.00am to 7.30pm' },
-        { day: 'Wednesday', hours: '9.00am to 7.30pm' },
-        { day: 'Thursday', hours: '9.00am to 7.30pm' },
-        { day: 'Friday', hours: '9.00am to 7.30pm' },
-        { day: 'Saturday', hours: '9.00am to 7.30pm' }
-      ]
+      id: '5f31fc6155d7790550c08afe',
+      restaurant: null,
+      fields: ['day', 'hours'],
+      currentImage: 0,
+      timer: null
+    }
+  },
+
+  computed: {
+    googleMapAddress() {
+      return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]} `
+    },
+
+    images() {
+      return this.restaurant.pictures || []
+    },
+
+    openingHours() {
+      return Object.entries(this.restaurant.opening_hours).map(row => ({
+        day: this.$i18n.t(`weekDays.${row[0]}`),
+        hours: row[1] || 'Closed'
+      }))
+    },
+
+    restaurantRating() {
+      return this.restaurant.rating.toFixed(1)
+    }
+  },
+
+  methods: {
+    startRotation() {
+      this.timer = setInterval(this.next, 3000)
+    },
+
+    next() {
+      this.currentImage = this.currentImage === this.images.length - 1 ? 0 : this.currentImage + 1
+    }
+  },
+
+  async created() {
+    try {
+      this.restaurant = await get(`/unsecure/restaurants/${this.$route.params.id}`)
+      this.startRotation()
+    } catch (e) {
+      console.error(e)
     }
   }
 }
@@ -63,5 +102,16 @@ export default {
 .row {
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+.imageCell {
+  width: auto;
+  height: 300px;
+  justify-content: center;
+}
+
+.slider {
+  max-width: auto;
+  height: 300px;
 }
 </style>
