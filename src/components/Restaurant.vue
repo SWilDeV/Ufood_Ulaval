@@ -10,7 +10,6 @@
           {{ restaurant.address }}
         </h5>
         <div>Phone: {{ restaurant.tel }}</div>
-        <div class="preferedButton"><button>Add as prefered</button></div>
       </div>
       <br />
       <div class="row">
@@ -32,9 +31,7 @@
         </div>
         <div class="col-sm-12 col-lg-4">
           <h4>Opening Hours</h4>
-          <div>
-            <b-table striped :items="openingHours" :fields="fields" />
-          </div>
+          <b-table striped :items="openingHours" :fields="fields" />
         </div>
         <div class="directions"></div>
       </div>
@@ -100,13 +97,15 @@ export default {
     },
 
     async getPosition() {
-      const {
-        coords: { latitude, longitude }
-      } = await this.getCurrentPosition()
-
-      this.latitude = latitude
-      this.longitude = longitude
-      console.log(this.latitude, this.longitude)
+      try {
+        const {
+          coords: { latitude, longitude }
+        } = await this.getCurrentPosition()
+        this.latitude = latitude
+        this.longitude = longitude
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
 
