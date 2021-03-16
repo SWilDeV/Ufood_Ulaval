@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <panel />
-    <h1>List of favorite restaurants</h1>
+    <panel class="p-3" />
+    <h1 class="title">List of favorite restaurants</h1>
     <favorites
       v-for="favorite in favorites"
       :key="favorite.id"
@@ -24,19 +24,27 @@ export default {
   data() {
     return {
       blocks: [],
-      favorites: []
+      favorites: [],
+      restaurants: []
     }
   },
   beforeMount() {
-    this.getRestUser()
+    this.getfavoriteRestaurantLists()
   },
   methods: {
-    async getRestUser() {
+    async getfavoriteRestaurantLists() {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
         this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === '123@123.com'
         )
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getRestaurants() {
+      try {
+        this.restaurants = await get('/unsecure/restaurants?limit=200')
       } catch (e) {
         console.error(e)
       }
@@ -55,5 +63,15 @@ export default {
   max-width: 700px;
   font-size: 50px;
   color: white;
+}
+.title {
+  color: blue;
+  text-align: center;
+  background-color: white;
+  margin: 2rem 25rem;
+  border: solid 2px red;
+  border-radius: 30px;
+}
+.panel {
 }
 </style>

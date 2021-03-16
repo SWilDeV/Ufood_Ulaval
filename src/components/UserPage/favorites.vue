@@ -2,11 +2,10 @@
   <div class="col">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 fw-normal">{{ favoriteListName }}</h4>
-
         <div id="title">
-          <div>
-            <input type="text" v-model="name" />
+          <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+          <div class="d-inline">
+            <input type="text" v-model="name" placeholder="Change name" />
             <button
               class="w-10 btn btn-xs btn-outline-primary"
               type="button"
