@@ -45,7 +45,7 @@ export default {
     },
     async addFavorites() {
       try {
-        this.test = await post('/unsecure/favorites', {
+        await post('/unsecure/favorites', {
           name: 'test123',
           owner: '123@123.com'
         })

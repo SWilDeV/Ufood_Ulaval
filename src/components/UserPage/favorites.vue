@@ -3,23 +3,30 @@
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <h4 class="my-0 fw-normal">{{ favoriteListName }}</h4>
-        <div class="titleEdit" ref="jedi">
-          <input type="text" />
-          <button class="w-10 btn btn-xs btn-outline-primary" type="button">
-            OK
+
+        <div id="title">
+          <div>
+            <input type="text" v-model="name" />
+            <button
+              class="w-10 btn btn-xs btn-outline-primary"
+              type="button"
+              v-on:click="editFavoriteListName(favoriteId)"
+            >
+              OK
+            </button>
+          </div>
+          <button
+            class="w-10 btn btn-xs btn-outline-primary float-right"
+            type="button"
+            v-on:click="deleteFavorite(favoriteId)"
+          >
+            Delete
+          </button>
+
+          <button class="w-10 btn btn-xs btn-outline-primary float-right" type="button">
+            Edit
           </button>
         </div>
-
-        <button
-          class="w-10 btn btn-xs btn-outline-primary float-right"
-          type="button"
-          v-on:click="deleteFavorite(favoriteId)"
-        >
-          Delete
-        </button>
-        <button class="w-10 btn btn-xs btn-outline-primary float-right" type="button" @click="keel">
-          Edit
-        </button>
       </div>
       <div class="card-body">
         <h1 class="card-title favorite-card-title">
@@ -34,21 +41,32 @@
 </template>
 
 <script>
-import { _delete } from '@/api'
+import { _delete, put } from '@/api'
 
 export default {
   name: 'visitedRestaurants',
   props: ['favorite-list-name', 'r-city', 'number-of-visit', 'favorite-id'],
   data() {
-    return {}
+    return {
+      name: ''
+    }
   },
   methods: {
-    keel() {
-      this.$refs.jedi.style.display = 'none'
-    },
     deleteFavorite(id) {
       try {
         _delete(`/unsecure/favorites/${id}`)
+        window.location.reload()
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async editFavoriteListName(id) {
+      try {
+        await put(`/unsecure/favorites/${id}`, {
+          name: this.name,
+          owner: '123@123.com'
+        })
+
         window.location.reload()
       } catch (e) {
         console.error(e)
