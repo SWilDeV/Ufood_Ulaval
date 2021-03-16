@@ -1,30 +1,30 @@
 <template>
   <div class="restaurant-grid">
-    <RestaurantCard></RestaurantCard>
+    <RestaurantCard
+      v-for="restaurant in homeForm"
+      v-bind:key="restaurant.id"
+      v-bind:restaurant="restaurant"
+    >
+    </RestaurantCard>
   </div>
 </template>
 
 <script>
 import RestaurantCard from './RestaurantCard'
-import { get } from '@/api'
 
 export default {
   name: 'restaurantList',
   components: {
     RestaurantCard
   },
+  props: ['homeForm'],
 
-  data: () => ({
-    restaurants: []
-  }),
-  async created() {
-    //Prend tout les restaurants sans contrainte
-    const restaurantsResponse = await get(`/unsecure/restaurants?limit=130`)
-    //LA LISTE DE RESTAURANTS UTILISABLES EST restaurantsResponse.items
-    this.restaurants = restaurantsResponse.items
-    var arrayLength = this.restaurants.length
+  created() {
+    
+    var arrayLength = this.homeForm.length
+    console.log('allodd')
     for (var i = 0; i < arrayLength; i++) {
-      console.log(i, this.restaurants[i].name)
+      console.log(i, this.homeForm[i].price_range)
     }
   }
 }
