@@ -28,14 +28,12 @@
             :src="googleMapAddress"
           >
           </iframe>
-          <button type="button" class="btn btn-secondary">Directions</button>
         </div>
         <div class="col-sm-12 col-lg-4">
           <h4>Opening Hours</h4>
-          <div>
-            <b-table striped :items="openingHours" :fields="fields" />
-          </div>
+          <b-table striped :items="openingHours" :fields="fields" />
         </div>
+        <div class="directions"></div>
       </div>
     </template>
   </div>
@@ -53,13 +51,18 @@ export default {
       restaurant: null,
       fields: ['day', 'hours'],
       currentImage: 0,
-      timer: null
+      timer: null,
+      latitude: 0,
+      longitude: 0
     }
   },
 
   computed: {
     googleMapAddress() {
-      return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]} `
+      return `https://www.google.com/maps/embed/v1/directions?key=${googleApiKey}
+        &origin=${this.latitude},${this.longitude}
+        &destination=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]}
+        &language=en `
     },
 
     images() {
@@ -85,6 +88,24 @@ export default {
 
     next() {
       this.currentImage = this.currentImage === this.images.length - 1 ? 0 : this.currentImage + 1
+    },
+
+    getCurrentPosition() {
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      })
+    },
+
+    async getPosition() {
+      try {
+        const {
+          coords: { latitude, longitude }
+        } = await this.getCurrentPosition()
+        this.latitude = latitude
+        this.longitude = longitude
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
 
@@ -92,6 +113,7 @@ export default {
     try {
       this.restaurant = await get(`/unsecure/restaurants/${this.$route.params.id}`)
       this.startRotation()
+      this.getPosition()
     } catch (e) {
       console.error(e)
     }
