@@ -3,7 +3,7 @@
     <panel />
     <h1>List of favorite restaurants</h1>
     <favorites
-      v-for="favorite in blocks"
+      v-for="favorite in favorites"
       :key="favorite.id"
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
@@ -14,7 +14,7 @@
 <script>
 import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
-import { get, post } from '@/api'
+import { get } from '@/api'
 export default {
   name: 'userPage',
   components: {
@@ -23,32 +23,20 @@ export default {
   },
   data() {
     return {
-      blocks: []
+      blocks: [],
+      favorites: []
     }
   },
   beforeMount() {
     this.getRestUser()
   },
-  created() {
-    //this.addFavorites()
-  },
   methods: {
     async getRestUser() {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
-        this.blocks = Object.values(this.blocks)[0].filter(
+        this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === '123@123.com'
         )
-      } catch (e) {
-        console.error(e)
-      }
-    },
-    async addFavorites() {
-      try {
-        await post('/unsecure/favorites', {
-          name: 'test123',
-          owner: '123@123.com'
-        })
       } catch (e) {
         console.error(e)
       }
