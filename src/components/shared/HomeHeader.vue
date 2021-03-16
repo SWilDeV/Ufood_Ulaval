@@ -5,29 +5,21 @@
     <div class="testFlex">
       <div class="search-area">
         <h3>Price range:</h3>
-        <select class="restaurants-dropdown">
-          <option value="all" selected="selected">All prices</option>
-          <option value="10">0-10$</option>
-          <option value="15">10-15$</option>
-          <option value="20">15-20$</option>
-          <option value="25">20-25$</option>
-          <option value="30">25-30$</option>
-          <option value="30">35-40$</option>
-          <option value="30">40-45$</option>
+        <select class="restaurants-dropdown" v-model="selectedPrice">
+          <option value="allPrices">All prices</option>
+          <option v-for="price in allPriceRanges" :value="price" v-bind:key="price">
+            {{ price }}
+          </option>
         </select>
       </div>
 
       <div class="search-area">
         <h3>Genres:</h3>
-        <select class="restaurants-dropdown">
-          <option value="all" selected="selected">All genres</option>
-          <option value="fast-food">Casual</option>
-          <option value="desert">Desert</option>
-          <option value="asian">Asian</option>
-          <option value="italan">Italian</option>
-          <option value="quebec">American</option>
-          <option value="mexico">Mexican</option>
-          <option value="mediterranean">Mediterranean</option>
+        <select class="restaurants-dropdown" v-model="selectedGenre">
+          <option value="allGenres">All genres</option>
+          <option v-for="genre in allGenres" :value="genre" v-bind:key="genre">
+            {{ genre }}
+          </option>
         </select>
       </div>
 
@@ -41,7 +33,13 @@
 
 <script>
 export default {
-  name: 'homeHeader'
+  name: 'homeHeader',
+  props: ['allGenres', 'allPriceRanges'],
+
+  data: () => ({
+    selectedGenre: 'allGenres',
+    selectedPrice: 'allPrices'
+  })
 }
 </script>
 

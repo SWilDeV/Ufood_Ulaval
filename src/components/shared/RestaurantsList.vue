@@ -17,16 +17,7 @@ export default {
   components: {
     RestaurantCard
   },
-  props: ['homeForm'],
-
-  created() {
-    
-    var arrayLength = this.homeForm.length
-    console.log('allodd')
-    for (var i = 0; i < arrayLength; i++) {
-      console.log(i, this.homeForm[i].price_range)
-    }
-  }
+  props: ['homeForm']
 }
 </script>
 
