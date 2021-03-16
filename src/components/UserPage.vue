@@ -2,13 +2,18 @@
   <div class="container">
     <panel />
     <h1>List of favorite restaurants</h1>
-    <favorites v-for="favorite in blocks.items" :key="favorite.id" :rName="favorite.id" />
+    <favorites
+      v-for="favorite in blocks"
+      :key="favorite.id"
+      :favoriteListName="favorite.name"
+      :favoriteId="favorite.id"
+    />
   </div>
 </template>
 
 <script>
-import favorites from './favorites'
-import panel from './Panel'
+import favorites from './UserPage/favorites'
+import panel from './UserPage/Panel'
 import { get, post } from '@/api'
 export default {
   name: 'userPage',
@@ -18,20 +23,22 @@ export default {
   },
   data() {
     return {
-      blocks: [],
-      test: []
+      blocks: []
     }
   },
   beforeMount() {
     this.getRestUser()
   },
   created() {
-    this.addFavorites()
+    //this.addFavorites()
   },
   methods: {
     async getRestUser() {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
+        this.blocks = Object.values(this.blocks)[0].filter(
+          list => list.owner.email === '123@123.com'
+        )
       } catch (e) {
         console.error(e)
       }
@@ -39,10 +46,9 @@ export default {
     async addFavorites() {
       try {
         this.test = await post('/unsecure/favorites', {
-          name: 'test1',
+          name: 'test123',
           owner: '123@123.com'
         })
-        console.log(this.test)
       } catch (e) {
         console.error(e)
       }

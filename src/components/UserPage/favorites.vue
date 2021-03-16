@@ -2,13 +2,23 @@
   <div class="col">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <h4 class="my-0 fw-normal">{{ rName }}</h4>
+        <h4 class="my-0 fw-normal">{{ favoriteListName }}</h4>
+        <div class="titleEdit" ref="jedi">
+          <input type="text" />
+          <button class="w-10 btn btn-xs btn-outline-primary" type="button">
+            OK
+          </button>
+        </div>
+
         <button
           class="w-10 btn btn-xs btn-outline-primary float-right"
           type="button"
-          v-on:click="onDelete(favorite.id)"
+          v-on:click="deleteFavorite(favoriteId)"
         >
-          delete
+          Delete
+        </button>
+        <button class="w-10 btn btn-xs btn-outline-primary float-right" type="button" @click="keel">
+          Edit
         </button>
       </div>
       <div class="card-body">
@@ -24,13 +34,26 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { _delete } from '@/api'
 
 export default {
   name: 'visitedRestaurants',
-  props: ['r-name', 'r-city', 'number-of-visit'],
-  computed: {
-    ...mapState(['user'])
+  props: ['favorite-list-name', 'r-city', 'number-of-visit', 'favorite-id'],
+  data() {
+    return {}
+  },
+  methods: {
+    keel() {
+      this.$refs.jedi.style.display = 'none'
+    },
+    deleteFavorite(id) {
+      try {
+        _delete(`/unsecure/favorites/${id}`)
+        window.location.reload()
+      } catch (e) {
+        console.error(e)
+      }
+    }
   }
 }
 </script>
