@@ -4,6 +4,7 @@
       <div class="card-header">
         <div id="title">
           <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+
           <div class="d-inline">
             <input type="text" v-model="name" placeholder="Change name" />
             <button
@@ -28,12 +29,11 @@
         </div>
       </div>
       <div class="card-body">
-        <h1 class="card-title favorite-card-title">
-          <!-- <small class="text-muted"></small>visits: {{ numberOfVisit }} -->
-        </h1>
-        <button type="button" class="w-10 btn btn-lg btn-outline-primary">
-          More Info
-        </button>
+        <restaurantUserPage
+          v-for="restaurant in favoriteRestaurants"
+          :key="restaurant.id"
+          :restaurantId="restaurant.id"
+        />
       </div>
     </div>
   </div>
@@ -41,14 +41,23 @@
 
 <script>
 import { _delete, put } from '@/api'
-
+import restaurantUserPage from './RestaurantsUserPage'
 export default {
   name: 'visitedRestaurants',
-  props: ['favorite-list-name', 'r-city', 'number-of-visit', 'favorite-id'],
+  props: {
+    favoriteListName: String,
+    favoriteId: String,
+    favoriteRestaurants: Array
+  },
+
   data() {
     return {
-      name: ''
+      name: '',
+      restaurants: []
     }
+  },
+  components: {
+    restaurantUserPage
   },
   methods: {
     deleteFavorite(id) {

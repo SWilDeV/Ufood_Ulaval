@@ -17,7 +17,6 @@
 import { post } from '@/api'
 export default {
   name: 'panel-v',
-  props: ['username'],
   data() {
     return {
       name: ''

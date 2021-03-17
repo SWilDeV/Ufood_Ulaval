@@ -7,6 +7,7 @@
       :key="favorite.id"
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
+      :favoriteRestaurants="favorite.restaurants"
     />
   </div>
 </template>
@@ -14,7 +15,8 @@
 <script>
 import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
-import { get } from '@/api'
+
+import { get, post } from '@/api'
 export default {
   name: 'userPage',
   components: {
@@ -24,13 +26,15 @@ export default {
   data() {
     return {
       blocks: [],
-      favorites: [],
-      restaurants: []
+      favorites: []
     }
   },
   beforeMount() {
     this.getfavoriteRestaurantLists()
   },
+  // created() {
+  //   this.addRestaurant()
+  // },
   methods: {
     async getfavoriteRestaurantLists() {
       try {
@@ -38,13 +42,16 @@ export default {
         this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === '123@123.com'
         )
+        //console.log(this.favorites[5].restaurants)
       } catch (e) {
         console.error(e)
       }
     },
-    async getRestaurants() {
+    async addRestaurant() {
       try {
-        this.restaurants = await get('/unsecure/restaurants?limit=200')
+        await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
+          id: '5f31fc6d55d7790550c08b01'
+        })
       } catch (e) {
         console.error(e)
       }
@@ -57,6 +64,7 @@ export default {
 .container {
   max-width: 1500px;
   background-color: royalblue;
+  height: 100%;
 }
 
 .favorite-header {
@@ -71,7 +79,5 @@ export default {
   margin: 2rem 25rem;
   border: solid 2px red;
   border-radius: 30px;
-}
-.panel {
 }
 </style>
