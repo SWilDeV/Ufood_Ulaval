@@ -9,6 +9,7 @@
       :favoriteId="favorite.id"
       :favoriteRestaurants="favorite.restaurants"
       v-on:favorite-deleted="deleteFavorite($event)"
+      v-on:favorite-edited="editFavorite($event)"
     />
   </div>
 </template>
@@ -18,7 +19,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get, post } from '@/api'
+import { get } from '@/api'
 
 export default {
   name: 'userPage',
@@ -48,28 +49,33 @@ export default {
         this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === this.user.email
         )
-        //console.log(this.favorites[5].restaurants)
       } catch (e) {
         console.error(e)
       }
     },
-    async addRestaurant() {
-      try {
-        await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
-          id: '5f31fc6d55d7790550c08b01'
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    },
+    // async addRestaurant() {
+    //   try {
+    //     await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
+    //       id: '5f31fc6d55d7790550c08b01'
+    //     })
+    //   } catch (e) {
+    //     console.error(e)
+    //   }
+    // },
     addFavorite(favori) {
       this.favorites.push(favori)
     },
     deleteFavorite(deleteId) {
-      const index = this.favorites.findIndex(favorite => favorite.id === deleteId)
-      console.log(index)
+      const index = this.favorites.findIndex(deletedFavorite => deletedFavorite.id === deleteId)
       if (index >= 0) {
         Vue.delete(this.favorites, index)
+      }
+    },
+    editFavorite(editedId, name) {
+      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === editedId)
+      console.log(index)
+      if (index >= 0) {
+        this.favorites[index].name = name
       }
     }
   }

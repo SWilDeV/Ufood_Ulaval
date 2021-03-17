@@ -24,10 +24,15 @@
 import { get, _delete } from '@/api'
 export default {
   name: 'restaurantUserPage',
-  props: ['restaurant-id', 'list-id'],
+  //props: ['restaurant-id', 'list-id'],
+  props: {
+    restaurantId: { type: String, required: true },
+    listId: { type: String, required: true }
+  },
+
   data() {
     return {
-      name: []
+      name: ''
     }
   },
   mounted() {

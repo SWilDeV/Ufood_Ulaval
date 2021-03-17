@@ -46,6 +46,7 @@
 
 <script>
 import { _delete, put } from '@/api'
+import { mapState } from 'vuex'
 import restaurantUserPage from './RestaurantsUserPage'
 export default {
   name: 'visitedRestaurants',
@@ -61,6 +62,9 @@ export default {
       restaurants: [],
       edit: false
     }
+  },
+  computed: {
+    ...mapState(['user'])
   },
   components: {
     restaurantUserPage
@@ -78,10 +82,10 @@ export default {
       try {
         await put(`/unsecure/favorites/${id}`, {
           name: this.name,
-          owner: '123@123.com'
+          owner: this.user.email
         })
-
-        window.location.reload()
+        this.$emit('favorite-edited', id, this.name)
+        this.name = ''
       } catch (e) {
         console.error(e)
       }
