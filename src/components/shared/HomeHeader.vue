@@ -5,12 +5,8 @@
     <div class="testFlex">
       <div class="search-area">
         <h3>Price range:</h3>
-        <select
-          class="restaurants-dropdown"
-          v-model="selectedPrice"
-          v-on:change="onSelectPriceChange"
-        >
-          <option value="allPrices">All prices</option>
+        <select class="restaurants-dropdown" v-model="selectedPrice">
+          <option value="">All prices</option>
           <option v-for="price in allPriceRanges" :value="price" v-bind:key="price">
             {{ price }}
           </option>
@@ -19,12 +15,8 @@
 
       <div class="search-area">
         <h3>Genres:</h3>
-        <select
-          class="restaurants-dropdown"
-          v-model="selectedGenre"
-          v-on:change="onSelectGenreChange"
-        >
-          <option value="allGenres">All genres</option>
+        <select class="restaurants-dropdown" v-model="selectedGenre">
+          <option value="">All genres</option>
           <option v-for="genre in allGenres" :value="genre" v-bind:key="genre">
             {{ genre }}
           </option>
@@ -38,9 +30,6 @@
           v-model="searchValue"
           placeholder="Search ..."
         />
-        <button class="btn btn-success search-button" type="submit" v-on:click="onClickSearch">
-          Search
-        </button>
       </div>
     </div>
   </div>
@@ -49,25 +38,26 @@
 <script>
 export default {
   name: 'homeHeader',
-  props: ['allGenres', 'allPriceRanges', 'onGenreChange', 'onPriceChange', 'onSearch'],
+  props: ['allGenres', 'allPriceRanges', 'refresh'],
 
   data: () => ({
-    selectedGenre: 'allGenres',
-    selectedPrice: 'allPrices',
+    selectedGenre: '',
+    selectedPrice: '',
     searchValue: ''
   }),
 
-  methods: {
-    onSelectGenreChange() {
-      this.onGenreChange(this.selectedGenre, this.selectedPrice)
-    },
-
-    onSelectPriceChange() {
-      this.onPriceChange(this.selectedGenre, this.selectedPrice)
-    },
-
-    onClickSearch() {
-      this.onSearch(this.searchValue)
+  computed: {
+    params() {
+      return { genre: this.selectedGenre, price: this.selectedPrice, search: this.searchValue }
+    }
+  },
+  watch: {
+    params: {
+      deep: true,
+      immediate: true,
+      handler(value) {
+        this.refresh(value)
+      }
     }
   }
 }

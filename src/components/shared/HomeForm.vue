@@ -3,9 +3,7 @@
     <homeHeader
       v-bind:allGenres="allGenres"
       v-bind:allPriceRanges="allPriceRanges"
-      v-bind:onGenreChange="onGenreChange"
-      v-bind:onPriceChange="onPriceChange"
-      v-bind:onSearch="onSearch"
+      v-bind:refresh="refresh"
     ></homeHeader>
     <restaurantsList v-bind:allRestaurants="allRestaurants"></restaurantsList>
   </div>
@@ -58,54 +56,24 @@ export default {
   },
 
   methods: {
-    async onGenreChange(selectedGenre, selectedPrice) {
-      console.log(selectedGenre, selectedPrice)
-      if (selectedGenre === 'allGenres') {
-        try {
-          const restaurantsResponse = await get(`/unsecure/restaurants?limit=130`)
-          this.allRestaurants = restaurantsResponse.items
-        } catch (e) {
-          console.error(e)
-        }
-      } else {
-        try {
-          const restaurantsResponse = await get(`/unsecure/restaurants?genres=${selectedGenre}`)
-          this.allRestaurants = restaurantsResponse.items
-        } catch (e) {
-          console.error(e)
-        }
+    async refresh({ genre, price, search }) {
+      const query = ['limit=130']
+      if (genre) {
+        query.push(`genres=${genre}`)
       }
-    },
-
-    async onPriceChange(selectedGenre, selectedPrice) {
-      console.log(selectedGenre, selectedPrice)
-      if (selectedPrice === 'allPrices') {
-        try {
-          const restaurantsResponse = await get(`/unsecure/restaurants?limit=30`)
-          this.allRestaurants = restaurantsResponse.items
-        } catch (e) {
-          console.error(e)
-        }
-      } else {
-        try {
-          const restaurantsResponse = await get(
-            `/unsecure/restaurants?price_range=${selectedPrice}`
-          )
-          this.allRestaurants = restaurantsResponse.items
-        } catch (e) {
-          console.error(e)
-        }
+      if (price) {
+        query.push(`price_range=${price}`)
       }
-    },
+      if (search) {
+        query.push(`q=${search}`)
+      }
 
-    async onSearch(searchValue) {
-      console.log(searchValue)
-      if (searchValue === '') {
-        const restaurantsResponse = await get(`/unsecure/restaurants?limit=30`)
+      const queryString = query.join('&')
+      try {
+        const restaurantsResponse = await get(`/unsecure/restaurants?${queryString}`)
         this.allRestaurants = restaurantsResponse.items
-      } else {
-        const restaurantsResponse = await get(`/unsecure/restaurants?q=${searchValue}`)
-        this.allRestaurants = restaurantsResponse.items
+      } catch (e) {
+        console.error(e)
       }
     }
   }
