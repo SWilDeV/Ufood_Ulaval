@@ -84,8 +84,9 @@ export default {
           name: this.name,
           owner: this.user.email
         })
-        this.$emit('favorite-edited', id, name)
-        //this.name = ''
+        const object = [id, this.name]
+        this.$emit('favorite-edited', object)
+        this.name = ''
       } catch (e) {
         console.error(e)
       }

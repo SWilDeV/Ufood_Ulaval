@@ -71,11 +71,10 @@ export default {
         Vue.delete(this.favorites, index)
       }
     },
-    editFavorite(editedId, name) {
-      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === editedId)
-      console.log(index)
+    editFavorite(edited) {
+      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === edited[0])
       if (index >= 0) {
-        this.favorites[index].name = name
+        this.favorites[index].name = edited[1]
       }
     }
   }

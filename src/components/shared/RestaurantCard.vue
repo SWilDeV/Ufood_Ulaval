@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cell-restaurant {
   padding-top: 2%;
   width: 80%;
