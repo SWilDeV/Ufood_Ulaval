@@ -29,7 +29,6 @@ export default {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true }
   },
-
   data() {
     return {
       name: ''

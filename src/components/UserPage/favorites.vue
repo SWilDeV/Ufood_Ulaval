@@ -84,8 +84,8 @@ export default {
           name: this.name,
           owner: this.user.email
         })
-        this.$emit('favorite-edited', id, this.name)
-        this.name = ''
+        this.$emit('favorite-edited', id, name)
+        //this.name = ''
       } catch (e) {
         console.error(e)
       }
