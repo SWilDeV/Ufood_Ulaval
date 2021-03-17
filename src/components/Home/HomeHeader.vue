@@ -40,11 +40,13 @@ export default {
   name: 'homeHeader',
   props: ['allGenres', 'allPriceRanges', 'refresh'],
 
-  data: () => ({
-    selectedGenre: '',
-    selectedPrice: '',
-    searchValue: ''
-  }),
+  data() {
+    return {
+      selectedGenre: '',
+      selectedPrice: '',
+      searchValue: ''
+    }
+  },
 
   computed: {
     params() {

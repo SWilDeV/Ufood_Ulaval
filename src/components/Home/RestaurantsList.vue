@@ -20,5 +20,3 @@ export default {
   props: ['allRestaurants']
 }
 </script>
-
-<style></style>

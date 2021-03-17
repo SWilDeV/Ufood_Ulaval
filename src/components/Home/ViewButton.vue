@@ -2,20 +2,21 @@
   <router-link
     v-bind:to="{ name: 'Restaurant', params: { id: restaurantId } }"
     tag="button"
-    class="orderButton"
-    >View this restaurant</router-link
+    class="viewButton"
   >
+    View this restaurant
+  </router-link>
 </template>
 
 <script>
 export default {
-  name: 'orderButton',
+  name: 'ViewButton',
   props: ['restaurantId']
 }
 </script>
 
 <style scoped>
-.orderButton {
+.viewButton {
   width: 90%;
   margin-left: auto;
   margin-right: auto;

@@ -18,14 +18,16 @@ export default {
   name: 'allRestaurants',
   components: { HomeHeader, RestaurantsList },
 
-  data: () => ({
-    allRestaurants: [],
-    allGenres: [],
-    allPriceRanges: []
-  }),
+  data() {
+    return {
+      allRestaurants: [],
+      allGenres: [],
+      allPriceRanges: []
+    }
+  },
   async created() {
     try {
-      const restaurantsResponse = await get(`/unsecure/restaurants?limit=130`)
+      const restaurantsResponse = await get('/unsecure/restaurants?limit=130')
       this.allRestaurants = restaurantsResponse.items
     } catch (e) {
       console.error(e)
@@ -79,5 +81,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

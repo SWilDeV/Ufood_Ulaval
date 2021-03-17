@@ -9,17 +9,17 @@
         Food genres: {{ restaurantGenres }}<br />
         Rating: {{ restaurant.rating.toFixed(2) }}
       </p>
-      <orderButton v-bind:restaurant-id="restaurant.id"></orderButton>
+      <view-button v-bind:restaurant-id="restaurant.id"></view-button>
     </div>
   </div>
 </template>
 
 <script>
-import OrderButton from './OrderButton'
+import ViewButton from './ViewButton'
 
 export default {
   name: 'restaurantCard',
-  components: { OrderButton },
+  components: { ViewButton },
   props: ['restaurant'],
 
   computed: {
