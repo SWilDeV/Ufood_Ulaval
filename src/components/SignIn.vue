@@ -73,7 +73,7 @@ export default {
       this.error = false
       try {
         const data = await post('/login', new URLSearchParams(this.user))
-        this.$router.push({ name: 'UserPage' })
+        this.$router.push({ name: 'User' })
         this.login(data)
       } catch (e) {
         this.onError(e, e.status === 401 ? e.status : null)

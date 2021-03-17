@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { post } from '@/api'
 export default {
   name: 'panel-v',
@@ -22,14 +23,18 @@ export default {
       name: ''
     }
   },
+  computed: {
+    ...mapState(['user'])
+  },
   methods: {
     async addFavoriteList() {
       try {
-        await post('/unsecure/favorites', {
+        const favorite = await post('/unsecure/favorites', {
           name: this.name,
-          owner: '123@123.com'
+          owner: this.user.email
         })
-        window.location.reload()
+        this.$emit('favorite-added', favorite)
+        this.name = ''
       } catch (e) {
         console.error(e)
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <panel class="p-3" />
+    <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
     <h1 class="title">List of favorite restaurants</h1>
     <favorites
       v-for="favorite in favorites"
@@ -8,6 +8,7 @@
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
       :favoriteRestaurants="favorite.restaurants"
+      v-on:favorite-deleted="deleteFavorite($event)"
     />
   </div>
 </template>
@@ -15,8 +16,10 @@
 <script>
 import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
-
+import { mapState } from 'vuex'
+import Vue from 'vue'
 import { get, post } from '@/api'
+
 export default {
   name: 'userPage',
   components: {
@@ -29,7 +32,10 @@ export default {
       favorites: []
     }
   },
-  beforeMount() {
+  computed: {
+    ...mapState(['user'])
+  },
+  mounted() {
     this.getfavoriteRestaurantLists()
   },
   // created() {
@@ -40,7 +46,7 @@ export default {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
         this.favorites = Object.values(this.blocks)[0].filter(
-          list => list.owner.email === '123@123.com'
+          list => list.owner.email === this.user.email
         )
         //console.log(this.favorites[5].restaurants)
       } catch (e) {
@@ -54,6 +60,16 @@ export default {
         })
       } catch (e) {
         console.error(e)
+      }
+    },
+    addFavorite(favori) {
+      this.favorites.push(favori)
+    },
+    deleteFavorite(deleteId) {
+      const index = this.favorites.findIndex(favorite => favorite.id === deleteId)
+      console.log(index)
+      if (index >= 0) {
+        Vue.delete(this.favorites, index)
       }
     }
   }

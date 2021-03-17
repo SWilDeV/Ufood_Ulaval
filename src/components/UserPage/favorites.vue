@@ -5,8 +5,8 @@
         <div id="title">
           <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
 
-          <div class="d-inline">
-            <input type="text" v-model="name" placeholder="Change name" />
+          <div class="form-inline" v-show="edit">
+            <input type="text" v-model="name" placeholder="Change name" class="form-control" />
             <button
               class="w-10 btn btn-xs btn-outline-primary"
               type="button"
@@ -16,14 +16,18 @@
             </button>
           </div>
           <button
-            class="w-10 btn btn-xs btn-outline-primary float-right"
+            class="w-10 btn btn-xs btn-outline-danger float-right"
             type="button"
             v-on:click="deleteFavorite(favoriteId)"
           >
             Delete
           </button>
 
-          <button class="w-10 btn btn-xs btn-outline-primary float-right" type="button">
+          <button
+            class="w-10 btn btn-xs btn-outline-primary float-right"
+            type="button"
+            v-on:click="edit = !edit"
+          >
             Edit
           </button>
         </div>
@@ -54,17 +58,18 @@ export default {
   data() {
     return {
       name: '',
-      restaurants: []
+      restaurants: [],
+      edit: false
     }
   },
   components: {
     restaurantUserPage
   },
   methods: {
-    deleteFavorite(id) {
+    async deleteFavorite(id) {
       try {
-        _delete(`/unsecure/favorites/${id}`)
-        //window.location.reload()
+        await _delete(`/unsecure/favorites/${id}`)
+        this.$emit('favorite-deleted', id)
       } catch (e) {
         console.error(e)
       }
