@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HomeForm from './shared/HomeForm'
+import HomeForm from './Home/HomeForm'
 export default {
   name: 'Home',
   components: {
