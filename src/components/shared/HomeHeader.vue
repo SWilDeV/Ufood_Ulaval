@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h1 {
   color: black;
   font-family: 'Open Sans Condensed', sans-serif;

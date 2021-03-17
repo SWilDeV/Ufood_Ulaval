@@ -36,5 +36,8 @@
     "success": "Your account has been created. You can now sign in using your email and password by clicking on the link below:",
     "submit": "Sign up",
     "title": "Sign up"
-  }
+  },
+    "userPage":{
+      "hello": "Hello {name}"
+    }
 }

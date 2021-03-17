@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .orderButton {
   width: 90%;
   margin-left: auto;
