@@ -1,5 +1,5 @@
 <template>
-  <div class="restaurant-grid">
+  <div class="row">
     <RestaurantCard
       v-for="restaurant in allRestaurants"
       v-bind:key="restaurant.id"

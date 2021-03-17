@@ -1,10 +1,16 @@
 <template>
-  <router-link to="/restaurant" tag="button" class="orderButton">View this restaurant</router-link>
+  <router-link
+    v-bind:to="{ name: 'Restaurant', params: { id: restaurantId } }"
+    tag="button"
+    class="orderButton"
+    >View this restaurant</router-link
+  >
 </template>
 
 <script>
 export default {
-  name: 'orderButton'
+  name: 'orderButton',
+  props: ['restaurantId']
 }
 </script>
 

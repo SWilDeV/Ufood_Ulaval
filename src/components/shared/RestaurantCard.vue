@@ -1,6 +1,6 @@
 <template>
-  <div class="card cell-restaurant">
-    <img v-bind:src="restaurantPicture" class="img-fluid rounded mx-auto d-block" />
+  <div class="card cell-restaurant col-sm-12 col-md-6 col-lg-4">
+    <img v-bind:src="restaurantPicture" class="rounded mx-auto d-block" height="250" />
     <div class="card-body">
       <h4 class="card-title">{{ restaurant.name }}</h4>
       <p class="card-text">
@@ -9,7 +9,7 @@
         Food genres: {{ restaurantGenres }}<br />
         Rating: {{ restaurant.rating.toFixed(2) }}
       </p>
-      <orderButton></orderButton>
+      <orderButton v-bind:restaurant-id="restaurant.id"></orderButton>
     </div>
   </div>
 </template>
@@ -51,11 +51,6 @@ p {
   font-weight: 300;
   line-height: 1.5625;
   margin-bottom: 15px;
-}
-
-img {
-  width: 300px;
-  height: 250px;
 }
 
 h4 {
