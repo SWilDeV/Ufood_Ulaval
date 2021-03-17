@@ -33,6 +33,7 @@
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
           :restaurantId="restaurant.id"
+          :listId="favoriteId"
         />
       </div>
     </div>
@@ -63,7 +64,7 @@ export default {
     deleteFavorite(id) {
       try {
         _delete(`/unsecure/favorites/${id}`)
-        window.location.reload()
+        //window.location.reload()
       } catch (e) {
         console.error(e)
       }
