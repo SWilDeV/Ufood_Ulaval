@@ -1,7 +1,7 @@
 <template>
   <div class="restaurant-grid">
     <RestaurantCard
-      v-for="restaurant in homeForm"
+      v-for="restaurant in allRestaurants"
       v-bind:key="restaurant.id"
       v-bind:restaurant="restaurant"
     >
@@ -17,7 +17,7 @@ export default {
   components: {
     RestaurantCard
   },
-  props: ['homeForm']
+  props: ['allRestaurants']
 }
 </script>
 

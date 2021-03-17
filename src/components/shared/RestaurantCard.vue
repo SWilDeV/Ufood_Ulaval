@@ -28,15 +28,7 @@ export default {
     },
 
     restaurantGenres: function() {
-      let genres = ''
-      var arrayLength = this.restaurant.genres.length
-      for (var i = 0; i < arrayLength; i++) {
-        if (i != 0) {
-          genres += '  |  '
-        }
-        genres += this.restaurant.genres[i]
-      }
-      return genres
+      return this.restaurant.genres.join(' | ')
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <router-link to="/Restaurant" tag="button" class="orderButton">Order Here</router-link>
+  <router-link to="/restaurant" tag="button" class="orderButton">View this restaurant</router-link>
 </template>
 
 <script>
