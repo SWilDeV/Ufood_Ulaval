@@ -15,8 +15,8 @@
         </div>
 
         <div class="col">
-          <label for="price">Genres:</label>
-          <select class="form-control" v-model="selectedGenre">
+          <label for="genre">Genres:</label>
+          <select id="genre" class="form-control" v-model="selectedGenre">
             <option value="">All genres</option>
             <option v-for="genre in allGenres" :value="genre" v-bind:key="genre">
               {{ genre }}
