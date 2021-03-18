@@ -11,9 +11,7 @@
           >
             &times;
           </button>
-          <button type="button" class=" float-right w-10 btn btn-outline-primary">
-            More Info
-          </button>
+          <view-button v-bind:restaurant-id="restaurantId"></view-button>
         </div>
       </div>
     </div>
@@ -23,11 +21,15 @@
 <script>
 import { mapState } from 'vuex'
 import { get } from '@/api'
+import ViewButton from '@/components/shared/ViewButton.vue'
 export default {
   name: 'restaurantUserPage',
   props: {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true }
+  },
+  components: {
+    ViewButton
   },
   data() {
     return {
@@ -35,7 +37,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
+    visitId() {
+      return `visit-${this.restaurantId}`
+    }
   },
   methods: {
     deleteFavoriteRestaurant() {

@@ -18,7 +18,7 @@
                 class="btn btn-success"
                 @click="onClickAddResto"
               >
-                OK
+                Add
               </button>
             </div>
           </div>

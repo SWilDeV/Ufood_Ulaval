@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
-    <h1 class="title">List of favorite restaurants</h1>
+    <h1 class="title">Lists of favorite restaurants</h1>
     <favorites
       v-for="favorite in favorites"
       :key="favorite.id"
@@ -110,6 +110,10 @@ export default {
 </script>
 
 <style scoped>
+.body {
+  margin: 0;
+  padding: 0;
+}
 .container {
   max-width: 1500px;
   /* background-color: royalblue; */
