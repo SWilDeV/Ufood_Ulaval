@@ -2,9 +2,9 @@
   <div class="container">
     <div class="col">
       <div class="card mb-4 shadow-sm">
-        <div class="card-header">
+        <div class="card-header form-inline">
           <input type="text" v-model="name" placeholder="Create new list" />
-          <button class="w-10 btn btn-xs btn-success" type="button" v-on:click="addFavoriteList">
+          <button class="w-10 btn btn-success" type="button" v-on:click="addFavoriteList">
             Add
           </button>
         </div>

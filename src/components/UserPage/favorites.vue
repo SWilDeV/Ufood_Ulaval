@@ -3,7 +3,25 @@
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <div id="title">
-          <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+          <div class="form-inline">
+            <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+
+            <div class="col form-inline">
+              <select class="form-control w-50" v-model="selectedRestaurant">
+                <option value="">Select restaurant</option>
+                <option v-for="resto in allRestaurants.items" :value="resto.id" :key="resto.id">
+                  {{ resto.name }}
+                </option>
+              </select>
+              <button
+                :disabled="!selectedRestaurant"
+                class="btn btn-success"
+                @click="onClickAddResto"
+              >
+                OK
+              </button>
+            </div>
+          </div>
 
           <div class="form-inline" v-show="edit">
             <input type="text" v-model="name" placeholder="Change name" class="form-control" />
@@ -22,7 +40,6 @@
           >
             Delete
           </button>
-
           <button
             class="w-10 btn btn-xs btn-outline-primary float-right"
             type="button"
@@ -38,6 +55,8 @@
           :key="restaurant.id"
           :restaurantId="restaurant.id"
           :listId="favoriteId"
+          @resto-deleted="$emit('resto-deleted', $event)"
+          @resto-added="$emit('resto-added', $event)"
         />
       </div>
     </div>
@@ -47,20 +66,21 @@
 <script>
 import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
-import restaurantUserPage from './RestaurantsUserPage'
+import restaurantUserPage from './RestaurantUserPage'
 export default {
   name: 'visitedRestaurants',
   props: {
     favoriteListName: String,
     favoriteId: String,
-    favoriteRestaurants: Array
+    favoriteRestaurants: Array,
+    allRestaurants: Object
   },
 
   data() {
     return {
       name: '',
-      restaurants: [],
-      edit: false
+      edit: false,
+      selectedRestaurant: ''
     }
   },
   computed: {
@@ -84,12 +104,18 @@ export default {
           name: this.name,
           owner: this.user.email
         })
-        const object = [id, this.name]
-        this.$emit('favorite-edited', object)
+        const name = this.name
+        this.$emit('favorite-edited', { id, name })
         this.name = ''
       } catch (e) {
         console.error(e)
       }
+    },
+    onClickAddResto() {
+      const favoriteId = this.favoriteId
+      const restaurantId = this.selectedRestaurant
+      this.$emit('add-resto-to-list', { restaurantId, favoriteId })
+      this.selectedRestaurant = ''
     }
   }
 }

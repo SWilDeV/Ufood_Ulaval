@@ -8,8 +8,11 @@
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
       :favoriteRestaurants="favorite.restaurants"
-      v-on:favorite-deleted="deleteFavorite($event)"
-      v-on:favorite-edited="editFavorite($event)"
+      :allRestaurants="restaurants"
+      @favorite-deleted="deleteFavorite($event)"
+      @favorite-edited="editFavorite($event)"
+      @resto-deleted="deleteRestaurant($event)"
+      @add-resto-to-list="addRestaurant($event)"
     />
   </div>
 </template>
@@ -19,7 +22,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get } from '@/api'
+import { get, _delete, post } from '@/api'
 
 export default {
   name: 'userPage',
@@ -30,18 +33,16 @@ export default {
   data() {
     return {
       blocks: [],
-      favorites: []
+      favorites: [],
+      restaurants: []
     }
   },
   computed: {
     ...mapState(['user'])
   },
   mounted() {
-    this.getfavoriteRestaurantLists()
+    this.getfavoriteRestaurantLists(), this.getAllRestaurants()
   },
-  // created() {
-  //   this.addRestaurant()
-  // },
   methods: {
     async getfavoriteRestaurantLists() {
       try {
@@ -53,15 +54,6 @@ export default {
         console.error(e)
       }
     },
-    // async addRestaurant() {
-    //   try {
-    //     await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
-    //       id: '5f31fc6d55d7790550c08b01'
-    //     })
-    //   } catch (e) {
-    //     console.error(e)
-    //   }
-    // },
     addFavorite(favori) {
       this.favorites.push(favori)
     },
@@ -71,10 +63,42 @@ export default {
         Vue.delete(this.favorites, index)
       }
     },
-    editFavorite(edited) {
-      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === edited[0])
+    editFavorite({ id, name }) {
+      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === id)
       if (index >= 0) {
-        this.favorites[index].name = edited[1]
+        this.favorites[index].name = name
+      }
+    },
+    async deleteRestaurant({ restaurantId, listId }) {
+      await _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
+      const index = this.favorites.findIndex(favorite => favorite.id === listId)
+
+      if (index >= 0) {
+        const favorites = this.favorites[index]
+        favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
+        Vue.set(this.favorites, index, favorites)
+      }
+    },
+    async addRestaurant({ restaurantId, favoriteId }) {
+      try {
+        await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
+          id: restaurantId
+        })
+        const index = this.favorites.findIndex(favorite => favorite.id === favoriteId)
+        if (index >= 0) {
+          const favorite = this.favorites[index]
+          favorite.restaurants.push({ id: restaurantId })
+          Vue.set(this.favorites, index, favorite)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async getAllRestaurants() {
+      try {
+        this.restaurants = await get('/unsecure/restaurants?limit=200')
+      } catch (e) {
+        console.error(e)
       }
     }
   }
