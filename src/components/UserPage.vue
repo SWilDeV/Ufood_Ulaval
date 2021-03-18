@@ -19,7 +19,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get } from '@/api'
+import { get, post } from '@/api'
 
 export default {
   name: 'userPage',
@@ -42,6 +42,7 @@ export default {
   // created() {
   //   this.addRestaurant()
   // },
+
   methods: {
     async getfavoriteRestaurantLists() {
       try {
@@ -53,15 +54,16 @@ export default {
         console.error(e)
       }
     },
-    // async addRestaurant() {
-    //   try {
-    //     await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
-    //       id: '5f31fc6d55d7790550c08b01'
-    //     })
-    //   } catch (e) {
-    //     console.error(e)
-    //   }
-    // },
+
+    async addRestaurant() {
+      try {
+        await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
+          id: '5f31fc6d55d7790550c08b01'
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    },
     addFavorite(favori) {
       this.favorites.push(favori)
     },

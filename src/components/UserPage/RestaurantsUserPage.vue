@@ -22,12 +22,16 @@
 
 <script>
 import { get, _delete } from '@/api'
+import { mapState } from 'vuex'
 export default {
   name: 'restaurantUserPage',
   //props: ['restaurant-id', 'list-id'],
   props: {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true }
+  },
+  computed: {
+    ...mapState(['user'])
   },
   data() {
     return {
@@ -51,8 +55,7 @@ export default {
     deleteFavoriteRestaurant(p_listid, p_restoID) {
       try {
         _delete(`/unsecure/favorites/${p_listid}/restaurants/${p_restoID}`)
-        console.log(p_listid, p_restoID)
-        //window.location.reload()
+        this.$emit('resto-deleted', p_restoID)
       } catch (e) {
         console.error(e)
       }

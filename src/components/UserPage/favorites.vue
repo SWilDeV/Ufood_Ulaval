@@ -38,6 +38,7 @@
           :key="restaurant.id"
           :restaurantId="restaurant.id"
           :listId="favoriteId"
+          v-on:resto-deleted="deleteRestaurant($event)"
         />
       </div>
     </div>
@@ -48,6 +49,7 @@
 import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
 import restaurantUserPage from './RestaurantsUserPage'
+import Vue from 'vue'
 export default {
   name: 'visitedRestaurants',
   props: {
@@ -89,6 +91,12 @@ export default {
         this.name = ''
       } catch (e) {
         console.error(e)
+      }
+    },
+    deleteRestaurant(id) {
+      const index = this.restaurants.findIndex(resto => resto.id === id)
+      if (index >= 0) {
+        Vue.delete(this.restaurants, index)
       }
     }
   }
