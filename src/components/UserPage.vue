@@ -80,7 +80,6 @@ export default {
     async getAllRestaurants() {
       try {
         this.restaurants = await get('/unsecure/restaurants?limit=200')
-        console.log(this.restaurants)
       } catch (e) {
         console.error(e)
       }

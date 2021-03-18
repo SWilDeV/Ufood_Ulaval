@@ -40,8 +40,8 @@
           :key="restaurant.id"
           :restaurantId="restaurant.id"
           :listId="favoriteId"
-          v-on:resto-deleted="$emit('resto-deleted', $event)"
-          v-on:resto-added="$emit('resto-added', $event)"
+          @abort="$emit('resto-deleted', $event)"
+          @resto-added="$emit('resto-added', $event)"
         />
       </div>
     </div>
