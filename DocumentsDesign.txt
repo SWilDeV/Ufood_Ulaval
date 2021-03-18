@@ -1,0 +1,18 @@
+Pour démarrer l'application:
+
+- npm install
+- npm run serve 
+_____________________________________________________________________________________________________________________________________________________________________________
+
+Page d'accueil incluant la liste des restaurants: Disponible dès le démarrage de l'application via une requête
+const results = await get('/unsecure/restaurants?limit=1000'). Cliquer sur l'icône en haut à gauche pour revenir à l'accueil.
+
+Page d'un restaurant en particulier: Disponible en cliquant sur le bouton ''View this restaurant'' et déclenche une appel vers restaurants/id
+
+Fitres et search bar: Simplement jouer avec les 3 sections disponibles à l'acceuil et déclenche une requête
+ /unsecure/restaurants?${queryString} ou queryString contient l'information des filtres. 
+
+Page d'un utilisateur: Cliquer sur les options SignUp (ou Login) pour se créer un compte/se connecter avec les requêtes (/login', new URLSearchParams({ email, password })
+et (/signup', new URLSearchParams({ email, name, password })
+
+
