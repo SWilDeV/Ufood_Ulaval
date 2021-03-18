@@ -3,7 +3,25 @@
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <div id="title">
-          <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+          <div class="form-inline">
+            <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
+
+            <div class="col form-inline">
+              <select class="form-control w-50" v-model="selectedRestaurant">
+                <option value="">Select restaurant</option>
+                <option v-for="resto in allRestaurants.items" :value="resto.id" :key="resto.id">
+                  {{ resto.name }}
+                </option>
+              </select>
+              <button
+                :disabled="!selectedRestaurant"
+                class="btn btn-success"
+                @click="onClickAddResto(favoriteId)"
+              >
+                OK
+              </button>
+            </div>
+          </div>
 
           <div class="form-inline" v-show="edit">
             <input type="text" v-model="name" placeholder="Change name" class="form-control" />
@@ -15,9 +33,6 @@
               OK
             </button>
           </div>
-          <button class="w-10 btn btn-xs btn-success" type="button">
-            Add
-          </button>
           <button
             class="w-10 btn btn-xs btn-outline-danger float-right"
             type="button"
@@ -57,13 +72,15 @@ export default {
   props: {
     favoriteListName: String,
     favoriteId: String,
-    favoriteRestaurants: Array
+    favoriteRestaurants: Array,
+    allRestaurants: Object
   },
 
   data() {
     return {
       name: '',
-      edit: false
+      edit: false,
+      selectedRestaurant: ''
     }
   },
   computed: {
@@ -87,24 +104,18 @@ export default {
           name: this.name,
           owner: this.user.email
         })
-        const object = [id, this.name]
-        this.$emit('favorite-edited', object)
+        const name = this.name
+        this.$emit('favorite-edited', { id, name })
         this.name = ''
       } catch (e) {
         console.error(e)
       }
+    },
+    onClickAddResto(favoriteId) {
+      const restaurantId = this.selectedRestaurant
+      this.$emit('add-resto-to-list', { restaurantId, favoriteId })
+      this.selectedRestaurant = ''
     }
-    // async addRestaurant() {
-    //   console.log(id)
-    //   try {
-    //     await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
-    //       id: '5f31fc6d55d7790550c08b01'
-    //     })
-    //     this.$emit('resto-added', '5f31fc6d55d7790550c08b01')
-    //   } catch (e) {
-    //     console.error(e)
-    //   }
-    // }
   }
 }
 </script>

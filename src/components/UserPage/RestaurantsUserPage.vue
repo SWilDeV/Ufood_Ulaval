@@ -2,16 +2,16 @@
   <div class="col">
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
-        <div class="card-body d-inline">
-          <h4 class="d-inline">{{ this.name }}</h4>
+        <div>
+          <h4 class="form-inline">{{ this.name }}</h4>
           <button
-            class="d-inline w-10  m-2 btn btn-xs btn-outline-danger float-right"
+            class="w-10 btn btn-xs btn-outline-danger float-right"
             type="button"
             v-on:click="deleteFavoriteRestaurant(listId, restaurantId)"
           >
             X
           </button>
-          <button type="button" class=" float-right w-10 btn btn-lg btn-outline-primary">
+          <button type="button" class=" float-right w-10 btn btn-outline-primary">
             More Info
           </button>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { get, _delete } from '@/api'
+import { get } from '@/api'
 import { mapState } from 'vuex'
 export default {
   name: 'restaurantUserPage',
@@ -53,8 +53,7 @@ export default {
     },
     deleteFavoriteRestaurant(p_listid, p_restoID) {
       try {
-        _delete(`/unsecure/favorites/${p_listid}/restaurants/${p_restoID}`)
-        this.$emit('resto-deleted', p_restoID)
+        this.$emit('resto-deleted', { p_listid, p_restoID })
       } catch (e) {
         console.error(e)
       }

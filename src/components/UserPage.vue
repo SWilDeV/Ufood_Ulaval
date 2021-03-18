@@ -8,10 +8,11 @@
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
       :favoriteRestaurants="favorite.restaurants"
+      :allRestaurants="restaurants"
       @favorite-deleted="deleteFavorite($event)"
       @favorite-edited="editFavorite($event)"
-      @:resto-deleted="deleteRestaurant($event)"
-      @:resto-added="addRestaurant($event)"
+      @resto-deleted="deleteRestaurant($event)"
+      @add-resto-to-list="addRestaurant($event)"
     />
   </div>
 </template>
@@ -21,7 +22,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get } from '@/api'
+import { get, _delete, post } from '@/api'
 
 export default {
   name: 'userPage',
@@ -62,20 +63,34 @@ export default {
         Vue.delete(this.favorites, index)
       }
     },
-    editFavorite(edited) {
-      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === edited[0])
+    editFavorite({ id, name }) {
+      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === id)
       if (index >= 0) {
-        this.favorites[index].name = edited[1]
+        this.favorites[index].name = name
       }
     },
-    deleteRestaurant(id) {
-      const index = this.favorites.findIndex(resto => resto.id === id)
-      if (index >= 0) {
-        Vue.delete(this.favorites, index)
+    async deleteRestaurant({ p_listid, p_restoID }) {
+      await _delete(`/unsecure/favorites/${p_listid}/restaurants/${p_restoID}`)
+      const favorites = this.favorites.find(favorite => favorite.id === p_listid)
+      if (favorites) {
+        const index = favorites.findIndex(resto => resto.id === p_restoID)
+        if (index >= 0) {
+          Vue.delete(favorites, index)
+        }
       }
     },
-    addRestaurant() {
-      console.log('hello')
+    async addRestaurant({ restaurantId, favoriteId }) {
+      try {
+        await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
+          id: `${restaurantId}`
+        })
+        const index = this.favorites.find(favorite => favorite.id === favoriteId)
+        if (index) {
+          this.favorites[index].restaurants.push(restaurantId)
+        }
+      } catch (e) {
+        console.error(e)
+      }
     },
     async getAllRestaurants() {
       try {
