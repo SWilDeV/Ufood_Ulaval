@@ -36,7 +36,7 @@ import { mapActions } from 'vuex'
 import Alert from '@/components/shared/Alert.vue'
 import FormField from '@/components/shared/FormField.vue'
 import UForm from '@/components/shared/UForm.vue'
-import { post } from '@/api'
+import { logIn } from '@/api/users'
 
 export default {
   components: {
@@ -72,9 +72,9 @@ export default {
     async submit() {
       this.error = false
       try {
-        const data = await post('/login', new URLSearchParams(this.user))
-        this.$router.push({ name: 'User' })
+        const data = await logIn(this.user)
         this.login(data)
+        this.$router.push({ name: 'User' })
       } catch (e) {
         this.onError(e, e.status === 401 ? e.status : null)
       }
