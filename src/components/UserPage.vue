@@ -8,8 +8,10 @@
       :favoriteListName="favorite.name"
       :favoriteId="favorite.id"
       :favoriteRestaurants="favorite.restaurants"
-      v-on:favorite-deleted="deleteFavorite($event)"
-      v-on:favorite-edited="editFavorite($event)"
+      @favorite-deleted="deleteFavorite($event)"
+      @favorite-edited="editFavorite($event)"
+      @:resto-deleted="deleteRestaurant($event)"
+      @:resto-added="addRestaurant($event)"
     />
   </div>
 </template>
@@ -19,7 +21,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get, post } from '@/api'
+import { get } from '@/api'
 
 export default {
   name: 'userPage',
@@ -30,19 +32,16 @@ export default {
   data() {
     return {
       blocks: [],
-      favorites: []
+      favorites: [],
+      restaurants: []
     }
   },
   computed: {
     ...mapState(['user'])
   },
   mounted() {
-    this.getfavoriteRestaurantLists()
+    this.getfavoriteRestaurantLists(), this.getAllRestaurants()
   },
-  // created() {
-  //   this.addRestaurant()
-  // },
-
   methods: {
     async getfavoriteRestaurantLists() {
       try {
@@ -50,16 +49,6 @@ export default {
         this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === this.user.email
         )
-      } catch (e) {
-        console.error(e)
-      }
-    },
-
-    async addRestaurant() {
-      try {
-        await post(`/unsecure/favorites/60514d06c097ff0004d963fe/restaurants`, {
-          id: '5f31fc6d55d7790550c08b01'
-        })
       } catch (e) {
         console.error(e)
       }
@@ -77,6 +66,23 @@ export default {
       const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === edited[0])
       if (index >= 0) {
         this.favorites[index].name = edited[1]
+      }
+    },
+    deleteRestaurant(id) {
+      const index = this.favorites.findIndex(resto => resto.id === id)
+      if (index >= 0) {
+        Vue.delete(this.favorites, index)
+      }
+    },
+    addRestaurant() {
+      console.log('hello')
+    },
+    async getAllRestaurants() {
+      try {
+        this.restaurants = await get('/unsecure/restaurants?limit=200')
+        console.log(this.restaurants)
+      } catch (e) {
+        console.error(e)
       }
     }
   }

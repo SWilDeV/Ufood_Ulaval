@@ -15,6 +15,9 @@
               OK
             </button>
           </div>
+          <button class="w-10 btn btn-xs btn-success" type="button">
+            Add
+          </button>
           <button
             class="w-10 btn btn-xs btn-outline-danger float-right"
             type="button"
@@ -22,7 +25,6 @@
           >
             Delete
           </button>
-
           <button
             class="w-10 btn btn-xs btn-outline-primary float-right"
             type="button"
@@ -38,7 +40,8 @@
           :key="restaurant.id"
           :restaurantId="restaurant.id"
           :listId="favoriteId"
-          v-on:resto-deleted="deleteRestaurant($event)"
+          v-on:resto-deleted="$emit('resto-deleted', $event)"
+          v-on:resto-added="$emit('resto-added', $event)"
         />
       </div>
     </div>
@@ -49,7 +52,6 @@
 import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
 import restaurantUserPage from './RestaurantsUserPage'
-import Vue from 'vue'
 export default {
   name: 'visitedRestaurants',
   props: {
@@ -61,7 +63,6 @@ export default {
   data() {
     return {
       name: '',
-      restaurants: [],
       edit: false
     }
   },
@@ -92,13 +93,18 @@ export default {
       } catch (e) {
         console.error(e)
       }
-    },
-    deleteRestaurant(id) {
-      const index = this.restaurants.findIndex(resto => resto.id === id)
-      if (index >= 0) {
-        Vue.delete(this.restaurants, index)
-      }
     }
+    // async addRestaurant() {
+    //   console.log(id)
+    //   try {
+    //     await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
+    //       id: '5f31fc6d55d7790550c08b01'
+    //     })
+    //     this.$emit('resto-added', '5f31fc6d55d7790550c08b01')
+    //   } catch (e) {
+    //     console.error(e)
+    //   }
+    // }
   }
 }
 </script>

@@ -25,7 +25,6 @@ import { get, _delete } from '@/api'
 import { mapState } from 'vuex'
 export default {
   name: 'restaurantUserPage',
-  //props: ['restaurant-id', 'list-id'],
   props: {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true }
