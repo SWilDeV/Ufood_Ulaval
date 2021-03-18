@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-sm-12 col-lg-8">
           <iframe
-            width="600"
+            width="100%"
             height="450"
             style="border:0"
             loading="lazy"
