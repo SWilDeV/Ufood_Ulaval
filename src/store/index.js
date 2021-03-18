@@ -8,7 +8,7 @@ import state from './state'
 Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
-  storage: window.sessionStorage
+  storage: window.localStorage
 })
 
 export default new Vuex.Store({

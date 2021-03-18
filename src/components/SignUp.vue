@@ -37,7 +37,7 @@
 import Alert from '@/components/shared/Alert.vue'
 import FormField from '@/components/shared/FormField.vue'
 import UForm from '@/components/shared/UForm.vue'
-import { post } from '@/api'
+import { signUp } from '@/api/users'
 
 export default {
   components: {
@@ -74,7 +74,7 @@ export default {
     async submit() {
       this.error = false
       try {
-        await post('/signup', new URLSearchParams(this.user))
+        await signUp(this.user)
         this.success = true
       } catch (e) {
         this.onError(e)
