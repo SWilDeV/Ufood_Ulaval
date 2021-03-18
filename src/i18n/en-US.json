@@ -46,10 +46,12 @@
   },
   "visitModal": {
     "cancel": "Cancel",
+    "close": "Close",
     "comment": "Comment",
     "commentPlaceholder": "Please describe your experience!",
     "date": "Visit date",
     "rating": "Rating",
+    "readTitle": "Read a review",
     "send": "Send",
     "title": "Write a review"
   }
