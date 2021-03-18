@@ -1,11 +1,11 @@
 <template>
-  <div class="d-flex justify-content-cente">
-    <router-link
-      v-bind:to="{ name: 'Restaurant', params: { id: restaurantId } }"
-      class="btn btn-primary w-100 "
-      >View this restaurant</router-link
-    >
-  </div>
+  <router-link
+    v-bind:to="{ name: 'Restaurant', params: { id: restaurantId } }"
+    class="btn btn-primary"
+  >
+    <font-awesome-icon icon="eye" />
+    {{ $t('viewButton.text') }}
+  </router-link>
 </template>
 
 <script>

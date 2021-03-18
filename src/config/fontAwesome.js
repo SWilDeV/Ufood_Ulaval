@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
+  faBan,
+  faEdit,
+  faEye,
   faFastBackward,
   faFastForward,
+  faPaperPlane,
   faSearch,
   faSignInAlt,
   faSignOutAlt,
@@ -13,8 +17,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
+  faBan,
+  faEdit,
+  faEye,
   faFastBackward,
   faFastForward,
+  faPaperPlane,
   faSearch,
   faSignInAlt,
   faSignOutAlt,

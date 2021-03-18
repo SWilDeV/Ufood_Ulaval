@@ -1,34 +1,48 @@
 <template>
   <div class="card cell-restaurant col-sm-12 col-md-6 col-lg-4">
-    <img v-bind:src="restaurantPicture" class="rounded mx-auto d-block" height="250" width="85%" />
+    <img
+      v-if="restaurant.pictures.length"
+      v-bind:src="restaurant.pictures[0]"
+      class="rounded mx-auto d-block"
+      height="250"
+      width="85%"
+    />
     <div class="card-body">
       <h4 class="card-title">{{ restaurant.name }}</h4>
       <p class="card-text">
-        Adress: {{ restaurant.address }}<br />
+        Address: {{ restaurant.address }}<br />
         Price range: {{ restaurant.price_range }}<br />
-        Food genres: {{ restaurantGenres }}<br />
+        Genres: {{ restaurant.genres.join(', ') }}<br />
         Rating: {{ restaurant.rating.toFixed(1) }}
       </p>
-      <view-button v-bind:restaurant-id="restaurant.id"></view-button>
+      <div class="btn-group justify-content-center w-100">
+        <view-button v-bind:restaurant-id="restaurant.id"></view-button>
+        <b-button variant="info" v-b-modal="visitId" :disabled="!user">
+          <font-awesome-icon icon="edit" />
+          {{ $t('restaurantCard.visit') }}
+        </b-button>
+      </div>
+      <visit-modal :id="visitId" :restaurant-id="restaurant.id" />
     </div>
   </div>
 </template>
 
 <script>
-import ViewButton from './ViewButton'
+import { mapState } from 'vuex'
+import ViewButton from '@/components/shared/ViewButton.vue'
+import VisitModal from '@/components/shared/VisitModal.vue'
 
 export default {
   name: 'restaurantCard',
-  components: { ViewButton },
+  components: {
+    ViewButton,
+    VisitModal
+  },
   props: ['restaurant'],
-
   computed: {
-    restaurantPicture: function() {
-      return this.restaurant.pictures[0]
-    },
-
-    restaurantGenres: function() {
-      return this.restaurant.genres.join(' | ')
+    ...mapState(['user']),
+    visitId() {
+      return `visit-${this.restaurant.id}`
     }
   }
 }
