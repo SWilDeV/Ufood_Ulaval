@@ -1,13 +1,13 @@
 <template>
   <div class="card cell-restaurant col-sm-12 col-md-6 col-lg-4">
-    <img v-bind:src="restaurantPicture" class="rounded mx-auto d-block" height="250" />
+    <img v-bind:src="restaurantPicture" class="rounded mx-auto d-block" height="250" width="85%" />
     <div class="card-body">
       <h4 class="card-title">{{ restaurant.name }}</h4>
       <p class="card-text">
         Adress: {{ restaurant.address }}<br />
         Price range: {{ restaurant.price_range }}<br />
         Food genres: {{ restaurantGenres }}<br />
-        Rating: {{ restaurant.rating.toFixed(2) }}
+        Rating: {{ restaurant.rating.toFixed(1) }}
       </p>
       <view-button v-bind:restaurant-id="restaurant.id"></view-button>
     </div>
@@ -37,11 +37,9 @@ export default {
 <style scoped>
 .cell-restaurant {
   padding-top: 2%;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 2em;
   box-shadow: 5px 10px #888888;
+  border: 1px solid black;
 }
 
 p {
