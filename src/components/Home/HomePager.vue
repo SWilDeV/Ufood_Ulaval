@@ -20,13 +20,13 @@
 export default {
   name: 'HomePager',
   props: {
-    total: {
+    count: {
       type: Number,
       required: true
     },
-    count: {
+    total: {
       type: Number,
-      default: 12
+      required: true
     }
   },
   data() {

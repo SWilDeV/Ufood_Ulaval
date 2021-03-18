@@ -6,7 +6,7 @@
       @filters-changed="setFilters($event)"
     />
     <restaurantsList v-bind:allRestaurants="allRestaurants" />
-    <home-pager :total="total" @page-changed="setPage($event)" />
+    <home-pager :count="count" :total="total" @page-changed="setPage($event)" />
   </div>
 </template>
 
