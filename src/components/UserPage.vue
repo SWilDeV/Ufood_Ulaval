@@ -69,24 +69,26 @@ export default {
         this.favorites[index].name = name
       }
     },
-    async deleteRestaurant({ p_listid, p_restoID }) {
-      await _delete(`/unsecure/favorites/${p_listid}/restaurants/${p_restoID}`)
-      const favorites = this.favorites.find(favorite => favorite.id === p_listid)
-      if (favorites) {
-        const index = favorites.findIndex(resto => resto.id === p_restoID)
-        if (index >= 0) {
-          Vue.delete(favorites, index)
-        }
+    async deleteRestaurant({ restaurantId, listId }) {
+      await _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
+      const index = this.favorites.findIndex(favorite => favorite.id === listId)
+
+      if (index >= 0) {
+        const favorites = this.favorites[index]
+        favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
+        Vue.set(this.favorites, index, favorites)
       }
     },
     async addRestaurant({ restaurantId, favoriteId }) {
       try {
         await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
-          id: `${restaurantId}`
+          id: restaurantId
         })
-        const index = this.favorites.find(favorite => favorite.id === favoriteId)
-        if (index) {
-          this.favorites[index].restaurants.push(restaurantId)
+        const index = this.favorites.findIndex(favorite => favorite.id === favoriteId)
+        if (index >= 0) {
+          const favorite = this.favorites[index]
+          favorite.restaurants.push({ id: restaurantId })
+          Vue.set(this.favorites, index, favorite)
         }
       } catch (e) {
         console.error(e)

@@ -7,9 +7,9 @@
           <button
             class="w-10 btn btn-xs btn-outline-danger float-right"
             type="button"
-            v-on:click="deleteFavoriteRestaurant(listId, restaurantId)"
+            v-on:click="deleteFavoriteRestaurant"
           >
-            X
+            &times;
           </button>
           <button type="button" class=" float-right w-10 btn btn-outline-primary">
             More Info
@@ -21,42 +21,40 @@
 </template>
 
 <script>
-import { get } from '@/api'
 import { mapState } from 'vuex'
+import { get } from '@/api'
 export default {
   name: 'restaurantUserPage',
   props: {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true }
   },
-  computed: {
-    ...mapState(['user'])
-  },
   data() {
     return {
       name: ''
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.getRestaurantName(this.restaurantId)
-    })
+  computed: {
+    ...mapState(['user'])
   },
   methods: {
-    async getRestaurantName(id) {
+    deleteFavoriteRestaurant() {
       try {
-        const response = await get(`/unsecure/restaurants/${id}`)
-        this.name = response.name
+        const restaurantId = this.restaurantId
+        const listId = this.listId
+
+        this.$emit('resto-deleted', { restaurantId, listId })
       } catch (e) {
         console.error(e)
       }
-    },
-    deleteFavoriteRestaurant(p_listid, p_restoID) {
-      try {
-        this.$emit('resto-deleted', { p_listid, p_restoID })
-      } catch (e) {
-        console.error(e)
-      }
+    }
+  },
+  async created() {
+    try {
+      const restaurant = await get(`/unsecure/restaurants/${this.restaurantId}`)
+      this.name = restaurant.name
+    } catch (e) {
+      console.error(e)
     }
   }
 }

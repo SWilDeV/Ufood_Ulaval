@@ -16,7 +16,7 @@
               <button
                 :disabled="!selectedRestaurant"
                 class="btn btn-success"
-                @click="onClickAddResto(favoriteId)"
+                @click="onClickAddResto"
               >
                 OK
               </button>
@@ -55,7 +55,7 @@
           :key="restaurant.id"
           :restaurantId="restaurant.id"
           :listId="favoriteId"
-          @abort="$emit('resto-deleted', $event)"
+          @resto-deleted="$emit('resto-deleted', $event)"
           @resto-added="$emit('resto-added', $event)"
         />
       </div>
@@ -66,7 +66,7 @@
 <script>
 import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
-import restaurantUserPage from './RestaurantsUserPage'
+import restaurantUserPage from './RestaurantUserPage'
 export default {
   name: 'visitedRestaurants',
   props: {
@@ -111,7 +111,8 @@ export default {
         console.error(e)
       }
     },
-    onClickAddResto(favoriteId) {
+    onClickAddResto() {
+      const favoriteId = this.favoriteId
       const restaurantId = this.selectedRestaurant
       this.$emit('add-resto-to-list', { restaurantId, favoriteId })
       this.selectedRestaurant = ''
