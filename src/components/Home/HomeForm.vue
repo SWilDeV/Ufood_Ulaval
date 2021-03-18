@@ -3,36 +3,22 @@
     <homeHeader
       v-bind:allGenres="allGenres"
       v-bind:allPriceRanges="allPriceRanges"
-      @filters-changed="updateFilters($event)"
+      @filters-changed="setFilters($event)"
     />
     <restaurantsList v-bind:allRestaurants="allRestaurants" />
-    <div class="form-inline">
-      <button class="btn btn-primary m-1" :disabled="page === 1" @click="page = 1">
-        <font-awesome-icon icon="fast-backward" />
-      </button>
-      <button class="btn btn-primary m-1" :disabled="page === 1" @click="page--">
-        <font-awesome-icon icon="step-backward" />
-      </button>
-      <input type="text" class="form-control m-1" v-model="page" disabled />
-      <button class="btn btn-primary m-1" :disabled="page === pageCount" @click="page++">
-        <font-awesome-icon icon="step-forward" />
-      </button>
-      <button class="btn btn-primary m-1" :disabled="page === pageCount" @click="page = pageCount">
-        <font-awesome-icon icon="fast-forward" />
-      </button>
-    </div>
+    <home-pager :total="total" @page-changed="setPage($event)" />
   </div>
 </template>
 
 <script>
 import HomeHeader from './HomeHeader'
+import HomePager from './HomePager'
 import RestaurantsList from './RestaurantsList'
 import { get } from '@/api'
 
 export default {
   name: 'allRestaurants',
-  components: { HomeHeader, RestaurantsList },
-
+  components: { HomeHeader, HomePager, RestaurantsList },
   data() {
     return {
       allRestaurants: [],
@@ -47,9 +33,6 @@ export default {
     }
   },
   computed: {
-    pageCount() {
-      return Math.ceil(this.total / this.count)
-    },
     params() {
       return {
         genre: this.genre,
@@ -88,12 +71,6 @@ export default {
     }
   },
   methods: {
-    updateFilters({ genre, price, search }) {
-      this.genre = genre
-      this.price = price
-      this.search = search
-      this.page = 1
-    },
     async refresh({ genre, page, price, search }) {
       const query = [`limit=${this.count}`, `page=${page - 1}`]
       if (genre) {
@@ -114,6 +91,15 @@ export default {
       } catch (e) {
         console.error(e)
       }
+    },
+    setFilters({ genre, price, search }) {
+      this.genre = genre
+      this.price = price
+      this.search = search
+      this.page = 1
+    },
+    setPage(page) {
+      this.page = page
     }
   },
   watch: {
