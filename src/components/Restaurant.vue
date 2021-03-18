@@ -9,7 +9,12 @@
         <h5>
           {{ restaurant.address }}
         </h5>
-        <div>Phone: {{ restaurant.tel }}</div>
+        <p>Phone: {{ restaurant.tel }}</p>
+        <b-button variant="info" v-b-modal.visit :disabled="!user">
+          <font-awesome-icon icon="edit" />
+          {{ $t('restaurantCard.visit') }}
+        </b-button>
+        <visit-modal id="visit" :restaurant-id="restaurant.id" />
       </div>
       <br />
       <div class="row">
@@ -40,11 +45,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { get } from '@/api'
+import VisitModal from '@/components/shared/VisitModal.vue'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
+  components: {
+    VisitModal
+  },
   data() {
     return {
       id: '5f31fc6155d7790550c08afe',
@@ -56,46 +66,39 @@ export default {
       longitude: 0
     }
   },
-
   computed: {
+    ...mapState(['user']),
     googleMapAddress() {
       return `https://www.google.com/maps/embed/v1/directions?key=${googleApiKey}
         &origin=${this.latitude},${this.longitude}
         &destination=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]}
         &language=en `
     },
-
     images() {
       return this.restaurant.pictures || []
     },
-
     openingHours() {
       return Object.entries(this.restaurant.opening_hours).map(row => ({
         day: this.$i18n.t(`weekDays.${row[0]}`),
         hours: row[1] || 'Closed'
       }))
     },
-
     restaurantRating() {
       return this.restaurant.rating.toFixed(1)
     }
   },
-
   methods: {
     startRotation() {
       this.timer = setInterval(this.next, 3000)
     },
-
     next() {
       this.currentImage = this.currentImage === this.images.length - 1 ? 0 : this.currentImage + 1
     },
-
     getCurrentPosition() {
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
       })
     },
-
     async getPosition() {
       try {
         const {
@@ -108,7 +111,6 @@ export default {
       }
     }
   },
-
   async created() {
     try {
       this.restaurant = await get(`/unsecure/restaurants/${this.$route.params.id}`)
@@ -120,6 +122,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .row {
   margin-top: 16px;
