@@ -92,6 +92,7 @@ export default {
       this.genre = genre
       this.price = price
       this.search = search
+      this.page = 1
     },
     async refresh({ genre, page, price, search }) {
       const query = [`limit=${this.count}`, `page=${page - 1}`]
