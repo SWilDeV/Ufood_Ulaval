@@ -33,8 +33,7 @@ export default {
   },
   methods: {
     submit() {
-      alert(this.search)
-      this.search = ''
+      this.$router.push({ name: 'Home', query: { search: this.search } })
     }
   }
 }
