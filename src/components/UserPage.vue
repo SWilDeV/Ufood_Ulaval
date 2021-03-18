@@ -14,10 +14,13 @@
       @resto-deleted="deleteRestaurant($event)"
       @add-resto-to-list="addRestaurant($event)"
     />
+    <h2>Visits</h2>
+    <visits />
   </div>
 </template>
 
 <script>
+import Visits from './UserPage/Visits.vue'
 import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
@@ -28,7 +31,8 @@ export default {
   name: 'userPage',
   components: {
     favorites,
-    panel
+    panel,
+    Visits
   },
   data() {
     return {
@@ -108,7 +112,7 @@ export default {
 <style scoped>
 .container {
   max-width: 1500px;
-  background-color: royalblue;
+  /* background-color: royalblue; */
   height: 100%;
 }
 

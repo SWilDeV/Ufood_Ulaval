@@ -1,16 +1,17 @@
 <template>
-  <b-modal :id="id" :title="$t('visitModal.title')">
+  <b-modal :id="id" :title="visit ? $t('visitModal.readTitle') : $t('visitModal.title')">
     <div class="form-group">
       <label for="date">
         {{ $t('visitModal.date') }}
-        <span class="text-danger">*</span>
+        <span v-if="!visit" class="text-danger">*</span>
       </label>
-      <input type="datetime-local" id="date" class="form-control" v-model="date" />
+      <input v-if="!visit" type="datetime-local" id="date" class="form-control" v-model="date" />
+      <input v-else type="text" id="date" class="form-control" :value="date" disabled />
     </div>
     <div class="form-group">
       <label for="rating">
         {{ $t('visitModal.rating') }}
-        <span class="text-danger">*</span>
+        <span v-if="!visit" class="text-danger">*</span>
       </label>
       <input
         type="number"
@@ -19,12 +20,13 @@
         :min="min"
         :max="max"
         v-model="rating"
+        :disabled="visit"
       />
     </div>
     <div class="form-group">
       <label for="comment">
         {{ $t('visitModal.comment') }}
-        <span class="text-danger">*</span>
+        <span v-if="!visit" class="text-danger">*</span>
       </label>
       <textarea
         id="comment"
@@ -32,9 +34,10 @@
         rows="5"
         v-model="comment"
         :placeholder="$t('visitModal.commentPlaceholder')"
+        :disabled="visit"
       />
     </div>
-    <template #modal-footer="{ cancel, ok }">
+    <template v-if="!visit" #modal-footer="{ cancel, ok }">
       <button type="button" class="btn btn-secondary" @click="clear(cancel)">
         <font-awesome-icon icon="ban" />
         {{ $t('visitModal.cancel') }}
@@ -42,6 +45,12 @@
       <button type="button" class="btn btn-primary" :disabled="!isValid" @click="send(ok)">
         <font-awesome-icon icon="paper-plane" />
         {{ $t('visitModal.send') }}
+      </button>
+    </template>
+    <template v-else #modal-footer="{ cancel }">
+      <button type="button" class="btn btn-secondary" @click="cancel()">
+        <font-awesome-icon icon="ban" />
+        {{ $t('visitModal.close') }}
       </button>
     </template>
   </b-modal>
@@ -60,6 +69,10 @@ export default {
     restaurantId: {
       type: String,
       required: true
+    },
+    visit: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -93,6 +106,13 @@ export default {
         restaurantId: this.restaurantId
       })
       this.clear(callback)
+    }
+  },
+  created() {
+    if (this.visit) {
+      this.comment = this.visit.comment
+      this.date = new Date(this.visit.date)
+      this.rating = this.visit.rating
     }
   }
 }
