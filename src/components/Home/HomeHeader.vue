@@ -55,6 +55,9 @@ export default {
       return { genre: this.selectedGenre, price: this.selectedPrice, search: this.searchValue }
     }
   },
+  created() {
+    this.searchValue = this.$route.query.search || ''
+  },
   watch: {
     filters: {
       deep: true,
