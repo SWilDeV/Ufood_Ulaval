@@ -5,7 +5,7 @@
         <div>
           <h4 class="form-inline">{{ this.name }}</h4>
           <button
-            class="w-10 btn btn-xs btn-outline-danger float-right"
+            class="w-10 btn btn-xs btn-outline-danger  float-right"
             type="button"
             v-on:click="deleteFavoriteRestaurant"
           >
