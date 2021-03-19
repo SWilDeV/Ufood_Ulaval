@@ -1,22 +1,25 @@
 <template>
-  <div class="container">
-    <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
-    <h1 class="title">Lists of favorite restaurants</h1>
-    <favorites
-      v-for="favorite in favorites"
-      :key="favorite.id"
-      :favoriteListName="favorite.name"
-      :favoriteId="favorite.id"
-      :favoriteRestaurants="favorite.restaurants"
-      :allRestaurants="restaurants"
-      @favorite-deleted="deleteFavorite($event)"
-      @favorite-edited="editFavorite($event)"
-      @resto-deleted="deleteRestaurant($event)"
-      @add-resto-to-list="addRestaurant($event)"
-    />
-    <h2>Visits</h2>
-    <visits />
-  </div>
+  <body>
+    <div class="container">
+      <h1 class="title" style="font-size:3vw;">Lists of favorite restaurants</h1>
+      <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
+
+      <favorites
+        v-for="favorite in favorites"
+        :key="favorite.id"
+        :favoriteListName="favorite.name"
+        :favoriteId="favorite.id"
+        :favoriteRestaurants="favorite.restaurants"
+        :allRestaurants="restaurants"
+        @favorite-deleted="deleteFavorite($event)"
+        @favorite-edited="editFavorite($event)"
+        @resto-deleted="deleteRestaurant($event)"
+        @add-resto-to-list="addRestaurant($event)"
+      />
+      <h2>Visits</h2>
+      <visits />
+    </div>
+  </body>
 </template>
 
 <script>
@@ -110,14 +113,20 @@ export default {
 </script>
 
 <style scoped>
-.body {
-  margin: 0;
-  padding: 0;
+body {
+  height: 100%;
+  /*background-color: #2c3531;*/
+  /* background-color: #116466; */
+  background-color: #d9b08c;
+  /* background-color: #116466; */
+  bottom: 0;
+}
+footer {
 }
 .container {
   max-width: 1500px;
-  /* background-color: royalblue; */
   height: 100%;
+  bottom: 0;
 }
 
 .favorite-header {
@@ -126,11 +135,8 @@ export default {
   color: white;
 }
 .title {
-  color: blue;
+  color: #2c3531;
   text-align: center;
-  background-color: white;
-  margin: 2rem 25rem;
-  border: solid 2px red;
-  border-radius: 30px;
+  padding: 0vw 1vw 0.5vw 0vw;
 }
 </style>
