@@ -21,7 +21,7 @@
 
 <script>
 import Visits from './UserPage/Visits.vue'
-import favorites from './UserPage/favorites'
+import Favorites from './UserPage/Favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
@@ -30,7 +30,7 @@ import { get, _delete, post } from '@/api'
 export default {
   name: 'userPage',
   components: {
-    favorites,
+    Favorites,
     panel,
     Visits
   },
