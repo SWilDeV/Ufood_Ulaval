@@ -1,13 +1,20 @@
 <template>
   <div class="container">
-    <div class="col">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header form-inline">
-          <input type="text" v-model="name" placeholder="Create new list" />
-          <button class="w-10 btn btn-success" type="button" v-on:click="addFavoriteList">
-            Add
-          </button>
-        </div>
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <form class="form-inline" @submit.prevent="addFavoriteList">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Create new list" v-model="name" />
+            <div class="input-group-append">
+              <button
+                type="submit"
+                class="btn btn-success"
+                v-t="'user.addList'"
+                :disabled="!name"
+              />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
