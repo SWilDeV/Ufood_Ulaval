@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
 import restaurantUserPage from './RestaurantUserPage'
 export default {
@@ -91,25 +90,12 @@ export default {
   },
   methods: {
     async deleteFavorite(id) {
-      try {
-        await _delete(`/unsecure/favorites/${id}`)
-        this.$emit('favorite-deleted', id)
-      } catch (e) {
-        console.error(e)
-      }
+      this.$emit('favorite-deleted', id)
     },
     async editFavoriteListName(id) {
-      try {
-        await put(`/unsecure/favorites/${id}`, {
-          name: this.name,
-          owner: this.user.email
-        })
-        const name = this.name
-        this.$emit('favorite-edited', { id, name })
-        this.name = ''
-      } catch (e) {
-        console.error(e)
-      }
+      const name = this.name
+      this.$emit('favorite-edited', { id, name })
+      this.name = ''
     },
     onClickAddResto() {
       const favoriteId = this.favoriteId

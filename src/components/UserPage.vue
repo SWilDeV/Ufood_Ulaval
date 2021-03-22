@@ -28,7 +28,7 @@ import favorites from './UserPage/favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get, _delete, post } from '@/api'
+import { get, _delete, post, put } from '@/api'
 
 export default {
   name: 'userPage',
@@ -41,7 +41,7 @@ export default {
     return {
       blocks: [],
       favorites: [],
-      restaurants: []
+      restaurants: {}
     }
   },
   computed: {
@@ -61,16 +61,37 @@ export default {
         console.error(e)
       }
     },
-    addFavorite(favori) {
-      this.favorites.push(favori)
+    async addFavorite(name) {
+      try {
+        await post('/unsecure/favorites', {
+          name: name,
+          owner: this.user.email
+        })
+      } catch (e) {
+        console.error(e)
+      }
+      this.favorites.push(name)
     },
-    deleteFavorite(deleteId) {
+    async deleteFavorite(deleteId) {
+      try {
+        await _delete(`/unsecure/favorites/${deleteId}`)
+      } catch (e) {
+        console.error(e)
+      }
       const index = this.favorites.findIndex(deletedFavorite => deletedFavorite.id === deleteId)
       if (index >= 0) {
         Vue.delete(this.favorites, index)
       }
     },
-    editFavorite({ id, name }) {
+    async editFavorite({ id, name }) {
+      try {
+        await put(`/unsecure/favorites/${id}`, {
+          name: name,
+          owner: this.user.email
+        })
+      } catch (e) {
+        console.error(e)
+      }
       const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === id)
       if (index >= 0) {
         this.favorites[index].name = name
