@@ -21,4 +21,10 @@ button:disabled {
   cursor: not-allowed;
   pointer-events: all !important;
 }
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 </style>

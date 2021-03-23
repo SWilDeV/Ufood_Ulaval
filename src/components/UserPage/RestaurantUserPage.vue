@@ -3,9 +3,10 @@
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <div>
-          <h4 class="form-inline">{{ this.name }}</h4>
+          <h4 class="form-inline">{{ this.restaurantName }}</h4>
+
           <button
-            class="w-10 btn btn-xs btn-outline-danger float-right"
+            class="btn btn-xs btn-outline-danger float-right"
             type="button"
             v-on:click="deleteFavoriteRestaurant"
           >
@@ -20,21 +21,16 @@
 
 <script>
 import { mapState } from 'vuex'
-import { get } from '@/api'
 import ViewButton from '@/components/shared/ViewButton.vue'
 export default {
   name: 'restaurantUserPage',
   props: {
     restaurantId: { type: String, required: true },
-    listId: { type: String, required: true }
+    listId: { type: String, required: true },
+    restaurantName: { type: String, required: true }
   },
   components: {
     ViewButton
-  },
-  data() {
-    return {
-      name: ''
-    }
   },
   computed: {
     ...mapState(['user']),
@@ -52,14 +48,6 @@ export default {
       } catch (e) {
         console.error(e)
       }
-    }
-  },
-  async created() {
-    try {
-      const restaurant = await get(`/unsecure/restaurants/${this.restaurantId}`)
-      this.name = restaurant.name
-    } catch (e) {
-      console.error(e)
     }
   }
 }

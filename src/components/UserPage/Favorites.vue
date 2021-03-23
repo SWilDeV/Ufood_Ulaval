@@ -9,7 +9,7 @@
             <div class="col form-inline">
               <select class="form-control w-50" v-model="selectedRestaurant">
                 <option value="">Select restaurant</option>
-                <option v-for="resto in allRestaurants.items" :value="resto.id" :key="resto.id">
+                <option v-for="resto in allRestaurants" :value="resto.id" :key="resto.id">
                   {{ resto.name }}
                 </option>
               </select>
@@ -54,6 +54,7 @@
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
           :restaurant-id="restaurant.id"
+          :restaurant-name="restaurant.name"
           :list-id="favoriteId"
           @resto-deleted="$emit('resto-deleted', $event)"
           @resto-added="$emit('resto-added', $event)"
@@ -64,7 +65,6 @@
 </template>
 
 <script>
-import { _delete, put } from '@/api'
 import { mapState } from 'vuex'
 import RestaurantUserPage from './RestaurantUserPage'
 export default {
@@ -73,7 +73,7 @@ export default {
     favoriteListName: String,
     favoriteId: String,
     favoriteRestaurants: Array,
-    allRestaurants: Object
+    allRestaurants: Array
   },
 
   data() {
@@ -91,25 +91,12 @@ export default {
   },
   methods: {
     async deleteFavorite(id) {
-      try {
-        await _delete(`/unsecure/favorites/${id}`)
-        this.$emit('favorite-deleted', id)
-      } catch (e) {
-        console.error(e)
-      }
+      this.$emit('favorite-deleted', id)
     },
     async editFavoriteListName(id) {
-      try {
-        await put(`/unsecure/favorites/${id}`, {
-          name: this.name,
-          owner: this.user.email
-        })
-        const name = this.name
-        this.$emit('favorite-edited', { id, name })
-        this.name = ''
-      } catch (e) {
-        console.error(e)
-      }
+      const name = this.name
+      this.$emit('favorite-edited', { id, name })
+      this.name = ''
     },
     onClickAddResto() {
       const favoriteId = this.favoriteId
