@@ -1,11 +1,11 @@
 <template>
   <div>
     <home-header
-      v-bind:allGenres="allGenres"
-      v-bind:allPriceRanges="allPriceRanges"
+      v-bind:all-genres="allGenres"
+      v-bind:all-price-ranges="allPriceRanges"
       @filters-changed="setFilters($event)"
     />
-    <restaurant-list v-bind:allRestaurants="allRestaurants" />
+    <restaurant-list v-bind:all-restaurants="allRestaurants" />
     <home-pager :count="count" :total="total" @page-changed="setPage($event)" />
   </div>
 </template>
