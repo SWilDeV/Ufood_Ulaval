@@ -39,7 +39,6 @@ export default {
   },
   data() {
     return {
-      blocks: [],
       favorites: [],
       restaurantDictionary: [],
       favoriteRestaurantList: []
@@ -49,20 +48,23 @@ export default {
     ...mapState(['user'])
   },
   async created() {
-    this.getfavoriteRestaurantLists(), this.getAllRestaurants()
+    try {
+      const restaurants = (await get('/unsecure/restaurants?limit=200')).items
+      for (const restaurant of restaurants) {
+        this.restaurantDictionary.push({
+          id: restaurant.id,
+          name: restaurant.name
+        })
+      }
+
+      const favorites = (await get('/unsecure/favorites?limit=10000')).items
+      this.favorites = favorites.filter(list => list.owner.email === this.user.email)
+      this.makeDictionaryForRestaurant()
+    } catch (e) {
+      console.error(e)
+    }
   },
   methods: {
-    async getfavoriteRestaurantLists() {
-      try {
-        this.blocks = await get('/unsecure/favorites?limit=10000')
-        this.favorites = Object.values(this.blocks)[0].filter(
-          list => list.owner.email === this.user.email
-        )
-        this.makeDictionaryForRestaurant()
-      } catch (e) {
-        console.error(e)
-      }
-    },
     makeDictionaryForRestaurant() {
       let dictArray = []
       for (let i = 0; i < this.favorites.length; i++) {
@@ -147,21 +149,6 @@ export default {
       } catch (e) {
         console.error(e)
       }
-    },
-    async getAllRestaurants() {
-      try {
-        this.restaurants = await get('/unsecure/restaurants?limit=200')
-        const restaurants2 = Object.values(this.restaurants)[0]
-        restaurants2.forEach(item => {
-          const dict = {
-            id: item.id,
-            name: item.name
-          }
-          this.restaurantDictionary.push(dict)
-        })
-      } catch (e) {
-        console.error(e)
-      }
     }
   }
 }
@@ -176,8 +163,7 @@ body {
   /* background-color: #116466; */
   bottom: 0;
 }
-footer {
-}
+
 .container {
   max-width: 1500px;
   height: 100%;
