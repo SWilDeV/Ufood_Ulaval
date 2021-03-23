@@ -40,6 +40,9 @@
     "submit": "Sign up",
     "title": "Sign up"
   },
+  "user": {
+    "addList": "Add"
+  },
   "userRequired": "You must be signed in to perform this action.",
   "viewButton": {
     "text": "View"

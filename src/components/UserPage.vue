@@ -50,7 +50,7 @@ export default {
   },
   async created() {
     this.getfavoriteRestaurantLists(), this.getAllRestaurants()
-  },
+  },git
   methods: {
     async getfavoriteRestaurantLists() {
       try {
