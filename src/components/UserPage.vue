@@ -55,7 +55,7 @@ export default {
     async getfavoriteRestaurantLists() {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
-        this.favorites = await Object.values(this.blocks)[0].filter(
+        this.favorites = Object.values(this.blocks)[0].filter(
           list => list.owner.email === this.user.email
         )
         this.makeDictionaryForRestaurant()
@@ -151,7 +151,7 @@ export default {
     async getAllRestaurants() {
       try {
         this.restaurants = await get('/unsecure/restaurants?limit=200')
-        const restaurants2 = await Object.values(this.restaurants)[0]
+        const restaurants2 = Object.values(this.restaurants)[0]
         restaurants2.forEach(item => {
           const dict = {
             id: item.id,

@@ -3,7 +3,7 @@
     <div class="card mb-4 shadow-sm">
       <div class="card-header">
         <div>
-          <h4 class="form-inline">{{ this.name }}</h4>
+          <h4 class="form-inline">{{ this.restaurantName }}</h4>
 
           <button
             class="btn btn-xs btn-outline-danger float-right"
@@ -32,11 +32,6 @@ export default {
   components: {
     ViewButton
   },
-  data() {
-    return {
-      name: ''
-    }
-  },
   computed: {
     ...mapState(['user']),
     visitId() {
@@ -54,9 +49,6 @@ export default {
         console.error(e)
       }
     }
-  },
-  async mounted() {
-    this.name = this.restaurantName
   }
 }
 </script>
