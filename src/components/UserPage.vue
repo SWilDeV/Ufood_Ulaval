@@ -143,8 +143,9 @@ export default {
         })
         const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
         if (index >= 0) {
+          const restaurant = this.restaurantDictionary.find(resto => resto.id === restaurantId)
           const favorite = this.favoriteRestaurantList[index]
-          favorite.restaurants.push({ id: restaurantId })
+          favorite.restaurants.push({ id: restaurant.id, name: restaurant.name })
           Vue.set(this.favoriteRestaurantList, index, favorite)
         }
       } catch (e) {
