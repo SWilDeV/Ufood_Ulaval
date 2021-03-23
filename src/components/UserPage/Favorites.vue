@@ -80,8 +80,7 @@ export default {
     return {
       name: '',
       edit: false,
-      selectedRestaurant: '',
-      restoDic: []
+      selectedRestaurant: ''
     }
   },
   computed: {
@@ -104,15 +103,6 @@ export default {
       const restaurantId = this.selectedRestaurant
       this.$emit('add-resto-to-list', { restaurantId, favoriteId })
       this.selectedRestaurant = ''
-    },
-    async makeDictionaryForRestaurant() {
-      for (let i = 0; i < this.favoriteRestaurants.length; i++) {
-        for (let j = 0; j < this.allRestaurants.length; j++) {
-          if (this.favoriteRestaurants[i].id === this.allRestaurants[j].id) {
-            this.restoDic.push(this.allRestaurants[j])
-          }
-        }
-      }
     }
   }
 }
