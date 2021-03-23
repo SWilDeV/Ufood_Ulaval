@@ -1,6 +1,6 @@
 <template>
   <div>
-    <homeHeader
+    <home-header
       v-bind:allGenres="allGenres"
       v-bind:allPriceRanges="allPriceRanges"
       @filters-changed="setFilters($event)"

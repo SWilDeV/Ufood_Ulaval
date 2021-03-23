@@ -1,11 +1,10 @@
 <template>
   <div class="row">
-    <RestaurantCard
+    <restaurant-card
       v-for="restaurant in allRestaurants"
       v-bind:key="restaurant.id"
       v-bind:restaurant="restaurant"
-    >
-    </RestaurantCard>
+    />
   </div>
 </template>
 
