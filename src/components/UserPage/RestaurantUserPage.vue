@@ -21,13 +21,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import { get } from '@/api'
 import ViewButton from '@/components/shared/ViewButton.vue'
 export default {
   name: 'restaurantUserPage',
   props: {
     restaurantId: { type: String, required: true },
-    listId: { type: String, required: true }
+    listId: { type: String, required: true },
+    restaurantName: { type: String, required: true }
   },
   components: {
     ViewButton
@@ -55,13 +55,8 @@ export default {
       }
     }
   },
-  async created() {
-    try {
-      const restaurant = await get(`/unsecure/restaurants/${this.restaurantId}`)
-      this.name = restaurant.name
-    } catch (e) {
-      console.error(e)
-    }
+  async mounted() {
+    this.name = this.restaurantName
   }
 }
 </script>

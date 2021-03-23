@@ -9,7 +9,7 @@
             <div class="col form-inline">
               <select class="form-control w-50" v-model="selectedRestaurant">
                 <option value="">Select restaurant</option>
-                <option v-for="resto in allRestaurants.items" :value="resto.id" :key="resto.id">
+                <option v-for="resto in allRestaurants" :value="resto.id" :key="resto.id">
                   {{ resto.name }}
                 </option>
               </select>
@@ -54,6 +54,7 @@
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
           :restaurantId="restaurant.id"
+          :restaurantName="restaurant.name"
           :listId="favoriteId"
           @resto-deleted="$emit('resto-deleted', $event)"
           @resto-added="$emit('resto-added', $event)"
@@ -72,14 +73,15 @@ export default {
     favoriteListName: String,
     favoriteId: String,
     favoriteRestaurants: Array,
-    allRestaurants: Object
+    allRestaurants: Array
   },
 
   data() {
     return {
       name: '',
       edit: false,
-      selectedRestaurant: ''
+      selectedRestaurant: '',
+      restoDic: []
     }
   },
   computed: {
@@ -88,6 +90,9 @@ export default {
   components: {
     restaurantUserPage
   },
+  // created() {
+  //   this.makeDictionaryForRestaurant()
+  // },
   methods: {
     async deleteFavorite(id) {
       this.$emit('favorite-deleted', id)
@@ -100,8 +105,19 @@ export default {
     onClickAddResto() {
       const favoriteId = this.favoriteId
       const restaurantId = this.selectedRestaurant
+      //const restaurantName = this.selectedRestaurant.name
       this.$emit('add-resto-to-list', { restaurantId, favoriteId })
       this.selectedRestaurant = ''
+    },
+    async makeDictionaryForRestaurant() {
+      for (let i = 0; i < this.favoriteRestaurants.length; i++) {
+        for (let j = 0; j < this.allRestaurants.length; j++) {
+          if (this.favoriteRestaurants[i].id === this.allRestaurants[j].id) {
+            this.restoDic.push(this.allRestaurants[j])
+          }
+        }
+      }
+      //console.log(this.restoDic)
     }
   }
 }

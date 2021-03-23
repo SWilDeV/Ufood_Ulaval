@@ -5,12 +5,12 @@
       <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
 
       <favorites
-        v-for="favorite in favorites"
+        v-for="favorite in favoriteRestaurantList"
         :key="favorite.id"
         :favoriteListName="favorite.name"
         :favoriteId="favorite.id"
         :favoriteRestaurants="favorite.restaurants"
-        :allRestaurants="restaurants"
+        :allRestaurants="restaurantDictionary"
         @favorite-deleted="deleteFavorite($event)"
         @favorite-edited="editFavorite($event)"
         @resto-deleted="deleteRestaurant($event)"
@@ -41,36 +41,61 @@ export default {
     return {
       blocks: [],
       favorites: [],
-      restaurants: {}
+      restaurantDictionary: [],
+      favoriteRestaurantList: []
     }
   },
   computed: {
     ...mapState(['user'])
   },
-  mounted() {
+  async created() {
     this.getfavoriteRestaurantLists(), this.getAllRestaurants()
+  },
+  async mounted() {
+    //this.makeDictionaryForRestaurant()
   },
   methods: {
     async getfavoriteRestaurantLists() {
       try {
         this.blocks = await get('/unsecure/favorites?limit=10000')
-        this.favorites = Object.values(this.blocks)[0].filter(
+        this.favorites = await Object.values(this.blocks)[0].filter(
           list => list.owner.email === this.user.email
         )
+        this.makeDictionaryForRestaurant()
       } catch (e) {
         console.error(e)
       }
     },
+    makeDictionaryForRestaurant() {
+      console.log(this.restaurantDictionary[4])
+      let dictArray = []
+      for (let i = 0; i < this.favorites.length; i++) {
+        for (let k = 0; k < this.favorites[i].restaurants.length; k++) {
+          for (let j = 0; j < this.restaurantDictionary.length; j++) {
+            if (this.favorites[i].restaurants[k].id === this.restaurantDictionary[j].id) {
+              dictArray.push(this.restaurantDictionary[j])
+            }
+          }
+        }
+        let items = {
+          restaurants: dictArray,
+          name: this.favorites[i].name,
+          id: this.favorites[i].id
+        }
+        this.favoriteRestaurantList.push(items)
+        dictArray = []
+      }
+    },
     async addFavorite(name) {
       try {
-        await post('/unsecure/favorites', {
+        const favori = await post('/unsecure/favorites', {
           name: name,
           owner: this.user.email
         })
+        this.favoriteRestaurantList.push(favori)
       } catch (e) {
         console.error(e)
       }
-      this.favorites.push(name)
     },
     async deleteFavorite(deleteId) {
       try {
@@ -78,9 +103,11 @@ export default {
       } catch (e) {
         console.error(e)
       }
-      const index = this.favorites.findIndex(deletedFavorite => deletedFavorite.id === deleteId)
+      const index = this.favoriteRestaurantList.findIndex(
+        deletedFavorite => deletedFavorite.id === deleteId
+      )
       if (index >= 0) {
-        Vue.delete(this.favorites, index)
+        Vue.delete(this.favoriteRestaurantList, index)
       }
     },
     async editFavorite({ id, name }) {
@@ -92,19 +119,21 @@ export default {
       } catch (e) {
         console.error(e)
       }
-      const index = this.favorites.findIndex(editedFavorite => editedFavorite.id === id)
+      const index = this.favoriteRestaurantList.findIndex(
+        editedFavorite => editedFavorite.id === id
+      )
       if (index >= 0) {
-        this.favorites[index].name = name
+        this.favoriteRestaurantList[index].name = name
       }
     },
     async deleteRestaurant({ restaurantId, listId }) {
       await _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
-      const index = this.favorites.findIndex(favorite => favorite.id === listId)
+      const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === listId)
 
       if (index >= 0) {
-        const favorites = this.favorites[index]
+        const favorites = this.favoriteRestaurantList[index]
         favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
-        Vue.set(this.favorites, index, favorites)
+        Vue.set(this.favoriteRestaurantList, index, favorites)
       }
     },
     async addRestaurant({ restaurantId, favoriteId }) {
@@ -112,11 +141,11 @@ export default {
         await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
           id: restaurantId
         })
-        const index = this.favorites.findIndex(favorite => favorite.id === favoriteId)
+        const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
         if (index >= 0) {
-          const favorite = this.favorites[index]
+          const favorite = this.favoriteRestaurantList[index]
           favorite.restaurants.push({ id: restaurantId })
-          Vue.set(this.favorites, index, favorite)
+          Vue.set(this.favoriteRestaurantList, index, favorite)
         }
       } catch (e) {
         console.error(e)
@@ -125,6 +154,14 @@ export default {
     async getAllRestaurants() {
       try {
         this.restaurants = await get('/unsecure/restaurants?limit=200')
+        const restaurants2 = await Object.values(this.restaurants)[0]
+        restaurants2.forEach(item => {
+          const dict = {
+            id: item.id,
+            name: item.name
+          }
+          this.restaurantDictionary.push(dict)
+        })
       } catch (e) {
         console.error(e)
       }
