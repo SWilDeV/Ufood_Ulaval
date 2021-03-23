@@ -90,9 +90,6 @@ export default {
   components: {
     RestaurantUserPage
   },
-  // created() {
-  //   this.makeDictionaryForRestaurant()
-  // },
   methods: {
     async deleteFavorite(id) {
       this.$emit('favorite-deleted', id)
@@ -105,7 +102,6 @@ export default {
     onClickAddResto() {
       const favoriteId = this.favoriteId
       const restaurantId = this.selectedRestaurant
-      //const restaurantName = this.selectedRestaurant.name
       this.$emit('add-resto-to-list', { restaurantId, favoriteId })
       this.selectedRestaurant = ''
     },
@@ -117,7 +113,6 @@ export default {
           }
         }
       }
-      //console.log(this.restoDic)
     }
   }
 }

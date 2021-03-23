@@ -51,9 +51,6 @@ export default {
   async created() {
     this.getfavoriteRestaurantLists(), this.getAllRestaurants()
   },
-  async mounted() {
-    //this.makeDictionaryForRestaurant()
-  },
   methods: {
     async getfavoriteRestaurantLists() {
       try {
