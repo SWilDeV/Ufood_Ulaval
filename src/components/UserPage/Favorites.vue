@@ -53,8 +53,8 @@
         <restaurant-user-page
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
-          :restaurantId="restaurant.id"
-          :listId="favoriteId"
+          :restaurant-id="restaurant.id"
+          :list-id="favoriteId"
           @resto-deleted="$emit('resto-deleted', $event)"
           @resto-added="$emit('resto-added', $event)"
         />
