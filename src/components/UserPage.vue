@@ -7,10 +7,10 @@
       <favorites
         v-for="favorite in favoriteRestaurantList"
         :key="favorite.id"
-        :favoriteListName="favorite.name"
-        :favoriteId="favorite.id"
-        :favoriteRestaurants="favorite.restaurants"
-        :allRestaurants="restaurantDictionary"
+        :favorite-list-name="favorite.name"
+        :favorite-id="favorite.id"
+        :favorite-restaurants="favorite.restaurants"
+        :all-restaurants="restaurantDictionary"
         @favorite-deleted="deleteFavorite($event)"
         @favorite-edited="editFavorite($event)"
         @resto-deleted="deleteRestaurant($event)"
@@ -64,7 +64,6 @@ export default {
       }
     },
     makeDictionaryForRestaurant() {
-      console.log(this.restaurantDictionary[4])
       let dictArray = []
       for (let i = 0; i < this.favorites.length; i++) {
         for (let k = 0; k < this.favorites[i].restaurants.length; k++) {
