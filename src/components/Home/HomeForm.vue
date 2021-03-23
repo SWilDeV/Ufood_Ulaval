@@ -1,11 +1,11 @@
 <template>
   <div>
-    <homeHeader
+    <home-header
       v-bind:allGenres="allGenres"
       v-bind:allPriceRanges="allPriceRanges"
       @filters-changed="setFilters($event)"
     />
-    <restaurantsList v-bind:allRestaurants="allRestaurants" />
+    <restaurant-list v-bind:allRestaurants="allRestaurants" />
     <home-pager :count="count" :total="total" @page-changed="setPage($event)" />
   </div>
 </template>
@@ -13,12 +13,12 @@
 <script>
 import HomeHeader from './HomeHeader'
 import HomePager from './HomePager'
-import RestaurantsList from './RestaurantsList'
+import RestaurantList from './RestaurantList'
 import { get } from '@/api'
 
 export default {
   name: 'allRestaurants',
-  components: { HomeHeader, HomePager, RestaurantsList },
+  components: { HomeHeader, HomePager, RestaurantList },
   data() {
     return {
       allRestaurants: [],

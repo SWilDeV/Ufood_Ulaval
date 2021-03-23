@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="card-body">
-        <restaurantUserPage
+        <restaurant-user-page
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
           :restaurantId="restaurant.id"
@@ -66,7 +66,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import restaurantUserPage from './RestaurantUserPage'
+import RestaurantUserPage from './RestaurantUserPage'
 export default {
   name: 'visitedRestaurants',
   props: {
@@ -88,7 +88,7 @@ export default {
     ...mapState(['user'])
   },
   components: {
-    restaurantUserPage
+    RestaurantUserPage
   },
   // created() {
   //   this.makeDictionaryForRestaurant()
