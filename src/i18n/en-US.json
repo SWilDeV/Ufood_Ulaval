@@ -68,6 +68,13 @@
     "send": "Send",
     "title": "Write a review"
   },
+
+  "visits": {
+    "date": "Date",
+    "rating": "Rating",
+    "restaurant": "Restaurant"
+},
+
   "weekDays": {
     "sunday": "Sunday",
     "monday": "Monday",
@@ -76,5 +83,6 @@
     "thursday": "Thursday",
     "friday": "Friday",
     "saturday": "Saturday"
+
   }
 }

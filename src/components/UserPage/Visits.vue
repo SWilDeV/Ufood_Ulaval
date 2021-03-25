@@ -1,12 +1,23 @@
 <template>
-  <ul>
-    <li v-for="visit in visits" :key="visit.id">
-      <a href="#" v-b-modal="visit.id">
-        {{ formatDate(visit.date) }}
-      </a>
-      <visit-modal :id="visit.id" :restaurant-id="visit.restaurant_id" :visit="visit" />
-    </li>
-  </ul>
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" v-t="'visits.restaurant'" />
+          <th scope="col" v-t="'visits.date'" />
+          <th scope="col" v-t="'visits.rating'" />
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="visit in visits" :key="visit.id" v-b-modal="visit.id">
+          <td v-text="index[visit.restaurant_id]" />
+          <td v-text="formatDate(visit.date)" />
+          <td v-text="visit.rating" />
+          <visit-modal :id="visit.id" :restaurant-id="visit.restaurant_id" :visit="visit" />
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -18,9 +29,24 @@ export default {
   components: {
     VisitModal
   },
+  props: {
+    restaurants: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       visits: []
+    }
+  },
+  computed: {
+    index() {
+      const index = {}
+      for (const restaurant of this.restaurants) {
+        index[restaurant.id] = restaurant.name
+      }
+      return index
     }
   },
   methods: {
@@ -42,3 +68,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+tbody tr {
+  cursor: pointer;
+}
+</style>
