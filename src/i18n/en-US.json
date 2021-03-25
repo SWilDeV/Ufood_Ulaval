@@ -57,5 +57,10 @@
     "readTitle": "Read a review",
     "send": "Send",
     "title": "Write a review"
+  },
+  "visits": {
+    "date": "Date",
+    "rating": "Rating",
+    "restaurant": "Restaurant"
   }
 }

@@ -1,25 +1,23 @@
 <template>
-  <body>
-    <div class="container">
-      <h1 class="title" style="font-size:3vw;">Lists of favorite restaurants</h1>
-      <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
+  <div class="container">
+    <h1 class="title" style="font-size:3vw;">Lists of favorite restaurants</h1>
+    <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
 
-      <favorites
-        v-for="favorite in favoriteRestaurantList"
-        :key="favorite.id"
-        :favorite-list-name="favorite.name"
-        :favorite-id="favorite.id"
-        :favorite-restaurants="favorite.restaurants"
-        :all-restaurants="restaurantDictionary"
-        @favorite-deleted="deleteFavorite($event)"
-        @favorite-edited="editFavorite($event)"
-        @resto-deleted="deleteRestaurant($event)"
-        @add-resto-to-list="addRestaurant($event)"
-      />
-      <h2>Visits</h2>
-      <visits />
-    </div>
-  </body>
+    <favorites
+      v-for="favorite in favoriteRestaurantList"
+      :key="favorite.id"
+      :favorite-list-name="favorite.name"
+      :favorite-id="favorite.id"
+      :favorite-restaurants="favorite.restaurants"
+      :all-restaurants="restaurantDictionary"
+      @favorite-deleted="deleteFavorite($event)"
+      @favorite-edited="editFavorite($event)"
+      @resto-deleted="deleteRestaurant($event)"
+      @add-resto-to-list="addRestaurant($event)"
+    />
+    <h2>Visits</h2>
+    <visits :restaurants="restaurantDictionary" />
+  </div>
 </template>
 
 <script>
