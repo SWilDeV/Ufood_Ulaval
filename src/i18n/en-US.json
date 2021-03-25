@@ -1,12 +1,13 @@
 {
-  "weekDays": {
-    "sunday": "Sunday",
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday"
+  "favoriteModal": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "create": "Create",
+    "createList": "Create a new list",
+    "list": "List",
+    "namePlaceholder": "Enter a name",
+    "selectList": "Select a list",
+    "title": "Add to favorites"
   },
   "genericError": "An unexpected error occurred, please try again later.",
   "navigation": {
@@ -16,6 +17,10 @@
     "signOut": "Sign out",
     "signUp": "Sign up",
     "welcome": "Welcome, {name}!"
+  },
+  "restaurant": {
+    "favorite": "Favorite",
+    "visit": "Visit"
   },
   "restaurantCard": {
     "visit": "Visit"
@@ -57,5 +62,14 @@
     "readTitle": "Read a review",
     "send": "Send",
     "title": "Write a review"
+  },
+  "weekDays": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
   }
 }

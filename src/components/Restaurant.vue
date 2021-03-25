@@ -10,9 +10,14 @@
           {{ restaurant.address }}
         </h5>
         <p>Phone: {{ restaurant.tel }}</p>
-        <b-button variant="info" v-b-modal.visit :disabled="!user">
+        <b-button variant="warning" v-b-modal.favorite class="m-1" :disabled="!user">
+          <font-awesome-icon icon="star" />
+          {{ $t('restaurant.favorite') }}
+        </b-button>
+        <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
+        <b-button variant="info" v-b-modal.visit class="m-1" :disabled="!user">
           <font-awesome-icon icon="edit" />
-          {{ $t('restaurantCard.visit') }}
+          {{ $t('restaurant.visit') }}
         </b-button>
         <visit-modal id="visit" :restaurant-id="restaurant.id" />
       </div>
@@ -47,12 +52,14 @@
 <script>
 import { mapState } from 'vuex'
 import { get } from '@/api'
+import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
   components: {
+    FavoriteModal,
     VisitModal
   },
   data() {
