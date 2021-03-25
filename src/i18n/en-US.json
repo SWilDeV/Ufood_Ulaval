@@ -1,12 +1,17 @@
 {
-  "weekDays": {
-    "sunday": "Sunday",
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday"
+  "favoriteModal": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "create": "Create",
+    "createList": "Create a new list",
+    "list": "List",
+    "namePlaceholder": "Enter a name",
+    "selectList": "Select a list",
+    "title": "Add to favorites"
+  },
+  "favorites": {
+    "addToList": "Add",
+    "selectRestaurant": "Select a restaurant"
   },
   "genericError": "An unexpected error occurred, please try again later.",
   "navigation": {
@@ -17,6 +22,10 @@
     "signUp": "Sign up",
     "welcome": "Welcome, {name}!"
   },
+  "restaurant": {
+    "favorite": "Favorite",
+    "visit": "Visit"
+  },
   "restaurantCard": {
     "visit": "Visit"
   },
@@ -26,6 +35,7 @@
     "invalidCredentials": "The specified email and/or password did not match.",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
+    "signUpLink": "Don't have an account yet? Click here to create one now.",
     "submit": "Sign in",
     "title": "Sign in"
   },
@@ -58,9 +68,21 @@
     "send": "Send",
     "title": "Write a review"
   },
+
   "visits": {
     "date": "Date",
     "rating": "Rating",
     "restaurant": "Restaurant"
+},
+
+  "weekDays": {
+    "sunday": "Sunday",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday"
+
   }
 }

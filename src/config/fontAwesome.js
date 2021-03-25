@@ -7,9 +7,11 @@ import {
   faFastBackward,
   faFastForward,
   faPaperPlane,
+  faPlus,
   faSearch,
   faSignInAlt,
   faSignOutAlt,
+  faStar,
   faStepBackward,
   faStepForward,
   faUser
@@ -23,9 +25,11 @@ library.add(
   faFastBackward,
   faFastForward,
   faPaperPlane,
+  faPlus,
   faSearch,
   faSignInAlt,
   faSignOutAlt,
+  faStar,
   faStepBackward,
   faStepForward,
   faUser

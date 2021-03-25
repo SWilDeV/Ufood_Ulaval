@@ -19,15 +19,18 @@
         label="signIn.email"
         placeholder="signIn.emailPlaceholder"
         v-model="user.email"
-      ></form-field>
+      />
       <form-field
         type="password"
         ref="password"
         label="signIn.password"
         placeholder="signIn.passwordPlaceholder"
         v-model="user.password"
-      ></form-field>
+      />
     </u-form>
+    <div class="my-2">
+      <router-link :to="{ name: 'SignUp' }" v-t="'signIn.signUpLink'" />
+    </div>
   </div>
 </template>
 

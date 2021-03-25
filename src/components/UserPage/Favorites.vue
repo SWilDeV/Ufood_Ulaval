@@ -7,19 +7,21 @@
             <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
 
             <div class="col form-inline">
-              <select class="form-control w-50" v-model="selectedRestaurant">
-                <option value="">Select restaurant</option>
-                <option v-for="resto in allRestaurants" :value="resto.id" :key="resto.id">
-                  {{ resto.name }}
-                </option>
-              </select>
-              <button
-                :disabled="!selectedRestaurant"
-                class="btn btn-success"
-                @click="onClickAddResto"
-              >
-                Add
-              </button>
+              <div class="input-group">
+                <b-form-select v-model="selectedRestaurant" :options="options">
+                  <template #first>
+                    <b-form-select-option value="" v-t="'favorites.selectRestaurant'" disabled />
+                  </template>
+                </b-form-select>
+                <div class="input-group-append">
+                  <b-button
+                    variant="success"
+                    v-t="'favorites.addToList'"
+                    :disabled="!selectedRestaurant"
+                    @click="onClickAddResto"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -84,7 +86,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
+    options() {
+      return this.allRestaurants
+        .map(restaurant => ({
+          text: restaurant.name,
+          value: restaurant.id
+        }))
+        .sort((a, b) => (a.text >= b.text ? 1 : -1))
+    }
   },
   components: {
     RestaurantUserPage
@@ -106,6 +116,7 @@ export default {
     }
   }
 }
+// comment for LF
 </script>
 
 <style scoped></style>
