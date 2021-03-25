@@ -26,6 +26,7 @@
     "invalidCredentials": "The specified email and/or password did not match.",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
+    "signUpLink": "Don't have an account yet? Click here to create one now.",
     "submit": "Sign in",
     "title": "Sign in"
   },
