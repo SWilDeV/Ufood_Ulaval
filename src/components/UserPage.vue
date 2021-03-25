@@ -152,6 +152,7 @@ export default {
     }
   }
 }
+// comment for LF
 </script>
 
 <style scoped>

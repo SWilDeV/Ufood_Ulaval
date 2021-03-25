@@ -99,13 +99,17 @@ export default {
       }
     },
     async send(callback) {
-      await createVisit({
-        comment: this.comment,
-        date: this.date,
-        rating: this.rating,
-        restaurantId: this.restaurantId
-      })
-      this.clear(callback)
+      try {
+        await createVisit({
+          comment: this.comment,
+          date: this.date,
+          rating: this.rating,
+          restaurantId: this.restaurantId
+        })
+        this.clear(callback)
+      } catch (e) {
+        console.error(e)
+      }
     }
   },
   created() {
