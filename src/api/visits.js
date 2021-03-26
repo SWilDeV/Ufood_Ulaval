@@ -2,7 +2,7 @@ import store from '@/store'
 import { get, post } from './index'
 
 export async function createVisit({ comment, date, rating, restaurantId }) {
-  return post(`/unsecure/users/${store.state.user.id}/restaurants/visits`, {
+  return post(`/users/${store.state.user.id}/restaurants/visits`, {
     comment,
     date,
     rating,
@@ -11,5 +11,5 @@ export async function createVisit({ comment, date, rating, restaurantId }) {
 }
 
 export async function getVisits(limit) {
-  return get(`/unsecure/users/${store.state.user.id}/restaurants/visits?limit=${limit || 100}`)
+  return get(`/users/${store.state.user.id}/restaurants/visits?limit=${limit || 100}`)
 }
