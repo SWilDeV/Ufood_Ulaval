@@ -27,12 +27,12 @@ import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
 import {
-  getFavorites,
+  addRestaurantToList,
   createList,
   deleteFavoriteList,
-  updateFavorite,
   deleteRestaurantFromList,
-  addRestaurantToList
+  getFavorites,
+  updateFavorite
 } from '@/api/favorites'
 import { getRestaurants } from '@/api/restaurants'
 
@@ -46,8 +46,8 @@ export default {
   data() {
     return {
       favorites: [],
-      restaurantDictionary: [],
-      favoriteRestaurantList: []
+      favoriteRestaurantList: [],
+      restaurantDictionary: []
     }
   },
   computed: {
@@ -71,25 +71,6 @@ export default {
     }
   },
   methods: {
-    makeDictionaryForRestaurant() {
-      let dictArray = []
-      for (let i = 0; i < this.favorites.length; i++) {
-        for (let k = 0; k < this.favorites[i].restaurants.length; k++) {
-          for (let j = 0; j < this.restaurantDictionary.length; j++) {
-            if (this.favorites[i].restaurants[k].id === this.restaurantDictionary[j].id) {
-              dictArray.push(this.restaurantDictionary[j])
-            }
-          }
-        }
-        let items = {
-          restaurants: dictArray,
-          name: this.favorites[i].name,
-          id: this.favorites[i].id
-        }
-        this.favoriteRestaurantList.push(items)
-        dictArray = []
-      }
-    },
     async addFavorite(name) {
       try {
         const favori = await createList({
@@ -97,6 +78,20 @@ export default {
           owner: this.user.email
         })
         this.favoriteRestaurantList.push(favori)
+      } catch (e) {
+        console.error(e)
+      }
+    },
+    async addRestaurant({ restaurantId, favoriteId }) {
+      try {
+        await addRestaurantToList({ restaurantId, favoriteId })
+        const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
+        if (index >= 0) {
+          const restaurant = this.restaurantDictionary.find(resto => resto.id === restaurantId)
+          const favorite = this.favoriteRestaurantList[index]
+          favorite.restaurants.push({ id: restaurant.id, name: restaurant.name })
+          Vue.set(this.favoriteRestaurantList, index, favorite)
+        }
       } catch (e) {
         console.error(e)
       }
@@ -114,6 +109,16 @@ export default {
         Vue.delete(this.favoriteRestaurantList, index)
       }
     },
+    async deleteRestaurant({ restaurantId, listId }) {
+      await deleteRestaurantFromList(restaurantId, listId)
+
+      const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === listId)
+      if (index >= 0) {
+        const favorites = this.favoriteRestaurantList[index]
+        favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
+        Vue.set(this.favoriteRestaurantList, index, favorites)
+      }
+    },
     async editFavorite({ id, name }) {
       try {
         const owner = this.user.owner
@@ -128,28 +133,23 @@ export default {
         this.favoriteRestaurantList[index].name = name
       }
     },
-    async deleteRestaurant({ restaurantId, listId }) {
-      await deleteRestaurantFromList(restaurantId, listId)
-
-      const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === listId)
-      if (index >= 0) {
-        const favorites = this.favoriteRestaurantList[index]
-        favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
-        Vue.set(this.favoriteRestaurantList, index, favorites)
-      }
-    },
-    async addRestaurant({ restaurantId, favoriteId }) {
-      try {
-        await addRestaurantToList({ restaurantId, favoriteId })
-        const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
-        if (index >= 0) {
-          const restaurant = this.restaurantDictionary.find(resto => resto.id === restaurantId)
-          const favorite = this.favoriteRestaurantList[index]
-          favorite.restaurants.push({ id: restaurant.id, name: restaurant.name })
-          Vue.set(this.favoriteRestaurantList, index, favorite)
+    makeDictionaryForRestaurant() {
+      let dictArray = []
+      for (let i = 0; i < this.favorites.length; i++) {
+        for (let k = 0; k < this.favorites[i].restaurants.length; k++) {
+          for (let j = 0; j < this.restaurantDictionary.length; j++) {
+            if (this.favorites[i].restaurants[k].id === this.restaurantDictionary[j].id) {
+              dictArray.push(this.restaurantDictionary[j])
+            }
+          }
         }
-      } catch (e) {
-        console.error(e)
+        let items = {
+          restaurants: dictArray,
+          name: this.favorites[i].name,
+          id: this.favorites[i].id
+        }
+        this.favoriteRestaurantList.push(items)
+        dictArray = []
       }
     }
   }

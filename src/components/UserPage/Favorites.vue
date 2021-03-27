@@ -80,8 +80,8 @@ export default {
 
   data() {
     return {
-      name: '',
       edit: false,
+      name: '',
       selectedRestaurant: ''
     }
   },
