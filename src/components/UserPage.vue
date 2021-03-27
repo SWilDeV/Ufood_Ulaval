@@ -26,12 +26,15 @@ import Favorites from './UserPage/Favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { getFavorites, createList, deleteFavoriteList, editFavorite } from '@/api/favorites'
 import {
+  getFavorites,
+  createList,
+  deleteFavoriteList,
+  updateFavorite,
   deleteRestaurantFromList,
-  AddRestaurantToList,
-  getRestaurantsFromApi
-} from '@/api/restaurants'
+  addRestaurantToList
+} from '@/api/favorites'
+import { getRestaurants } from '@/api/restaurants'
 
 export default {
   name: 'userPage',
@@ -52,7 +55,7 @@ export default {
   },
   async created() {
     try {
-      const restaurants = (await getRestaurantsFromApi(200)).items
+      const restaurants = (await getRestaurants(200)).items
       for (const restaurant of restaurants) {
         this.restaurantDictionary.push({
           id: restaurant.id,
@@ -113,10 +116,8 @@ export default {
     },
     async editFavorite({ id, name }) {
       try {
-        await editFavorite({
-          name: name,
-          id: id
-        })
+        const owner = this.user.owner
+        await updateFavorite({ id, name }, owner)
       } catch (e) {
         console.error(e)
       }
@@ -139,7 +140,7 @@ export default {
     },
     async addRestaurant({ restaurantId, favoriteId }) {
       try {
-        await AddRestaurantToList({ restaurantId, favoriteId })
+        await addRestaurantToList({ restaurantId, favoriteId })
         const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
         if (index >= 0) {
           const restaurant = this.restaurantDictionary.find(resto => resto.id === restaurantId)

@@ -6,6 +6,7 @@ import {
   faEye,
   faFastBackward,
   faFastForward,
+  faMinus,
   faPaperPlane,
   faPlus,
   faSearch,
@@ -14,8 +15,7 @@ import {
   faStar,
   faStepBackward,
   faStepForward,
-  faUser,
-  faMinus
+  faUser
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -25,6 +25,7 @@ library.add(
   faEye,
   faFastBackward,
   faFastForward,
+  faMinus,
   faPaperPlane,
   faPlus,
   faSearch,
@@ -33,8 +34,7 @@ library.add(
   faStar,
   faStepBackward,
   faStepForward,
-  faUser,
-  faMinus
+  faUser
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
