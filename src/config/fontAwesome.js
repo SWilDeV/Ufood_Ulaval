@@ -14,7 +14,8 @@ import {
   faStar,
   faStepBackward,
   faStepForward,
-  faUser
+  faUser,
+  faMinus
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -32,7 +33,8 @@ library.add(
   faStar,
   faStepBackward,
   faStepForward,
-  faUser
+  faUser,
+  faMinus
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

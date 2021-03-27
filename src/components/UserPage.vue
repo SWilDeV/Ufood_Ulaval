@@ -26,7 +26,12 @@ import Favorites from './UserPage/Favorites'
 import panel from './UserPage/Panel'
 import { mapState } from 'vuex'
 import Vue from 'vue'
-import { get, _delete, post, put } from '@/api'
+import { getFavorites, createList, deleteFavoriteList, editFavorite } from '@/api/favorites'
+import {
+  deleteRestaurantFromList,
+  AddRestaurantToList,
+  getRestaurantsFromApi
+} from '@/api/restaurants'
 
 export default {
   name: 'userPage',
@@ -47,7 +52,7 @@ export default {
   },
   async created() {
     try {
-      const restaurants = (await get('/unsecure/restaurants?limit=200')).items
+      const restaurants = (await getRestaurantsFromApi(200)).items
       for (const restaurant of restaurants) {
         this.restaurantDictionary.push({
           id: restaurant.id,
@@ -55,7 +60,7 @@ export default {
         })
       }
 
-      const favorites = (await get('/unsecure/favorites?limit=10000')).items
+      const favorites = (await getFavorites(10000)).items
       this.favorites = favorites.filter(list => list.owner.email === this.user.email)
       this.makeDictionaryForRestaurant()
     } catch (e) {
@@ -84,7 +89,7 @@ export default {
     },
     async addFavorite(name) {
       try {
-        const favori = await post('/unsecure/favorites', {
+        const favori = await createList({
           name: name,
           owner: this.user.email
         })
@@ -95,7 +100,7 @@ export default {
     },
     async deleteFavorite(deleteId) {
       try {
-        await _delete(`/unsecure/favorites/${deleteId}`)
+        await deleteFavoriteList(deleteId)
       } catch (e) {
         console.error(e)
       }
@@ -108,9 +113,9 @@ export default {
     },
     async editFavorite({ id, name }) {
       try {
-        await put(`/unsecure/favorites/${id}`, {
+        await editFavorite({
           name: name,
-          owner: this.user.email
+          id: id
         })
       } catch (e) {
         console.error(e)
@@ -123,9 +128,9 @@ export default {
       }
     },
     async deleteRestaurant({ restaurantId, listId }) {
-      await _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
-      const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === listId)
+      await deleteRestaurantFromList(restaurantId, listId)
 
+      const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === listId)
       if (index >= 0) {
         const favorites = this.favoriteRestaurantList[index]
         favorites.restaurants = favorites.restaurants.filter(resto => resto.id !== restaurantId)
@@ -134,9 +139,7 @@ export default {
     },
     async addRestaurant({ restaurantId, favoriteId }) {
       try {
-        await post(`/unsecure/favorites/${favoriteId}/restaurants`, {
-          id: restaurantId
-        })
+        await AddRestaurantToList({ restaurantId, favoriteId })
         const index = this.favoriteRestaurantList.findIndex(favorite => favorite.id === favoriteId)
         if (index >= 0) {
           const restaurant = this.restaurantDictionary.find(resto => resto.id === restaurantId)
@@ -154,7 +157,7 @@ export default {
 </script>
 
 <style scoped>
-body {
+.orange {
   height: 100%;
   /*background-color: #2c3531;*/
   /* background-color: #116466; */
