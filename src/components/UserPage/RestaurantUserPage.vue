@@ -10,7 +10,7 @@
             type="button"
             v-on:click="deleteFavoriteRestaurant"
           >
-            &times;
+            <font-awesome-icon icon="minus" />
           </button>
           <view-button v-bind:restaurant-id="restaurantId"></view-button>
         </div>

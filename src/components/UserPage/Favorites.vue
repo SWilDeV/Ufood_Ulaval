@@ -80,8 +80,8 @@ export default {
 
   data() {
     return {
-      name: '',
       edit: false,
+      name: '',
       selectedRestaurant: ''
     }
   },
@@ -89,6 +89,7 @@ export default {
     ...mapState(['user']),
     options() {
       return this.allRestaurants
+        .filter(item => this.favoriteRestaurants.every(res => res.id !== item.id))
         .map(restaurant => ({
           text: restaurant.name,
           value: restaurant.id
