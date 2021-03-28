@@ -1,3 +1,5 @@
+import store from '@/store'
+
 const execute = async (method, url, data) => {
   let body = null
   const headers = { Accept: 'application/json' }
@@ -9,6 +11,9 @@ const execute = async (method, url, data) => {
       headers['Content-Type'] = 'application/json; charset=UTF-8'
       body = JSON.stringify(data)
     }
+  }
+  if (store.state.token) {
+    headers['Authorization'] = store.state.token
   }
   const response = await fetch(`${process.env.VUE_APP_API_BASE_URL}${url}`, {
     body,

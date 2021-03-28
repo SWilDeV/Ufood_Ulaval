@@ -14,7 +14,6 @@ export default {
     'nav-menu': Navigation
   }
 }
-// comment for LF
 </script>
 
 <style>

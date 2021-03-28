@@ -51,5 +51,4 @@ export default {
     }
   }
 }
-// comment for LF
 </script>
