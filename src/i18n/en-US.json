@@ -14,6 +14,18 @@
     "selectRestaurant": "Select a restaurant"
   },
   "genericError": "An unexpected error occurred, please try again later.",
+  "home": {
+    "address": "Address: ",
+    "genreDropDownDefault": "All genres",
+    "genres": "Genres: ",
+    "priceDropDownDefault": "All prices",
+    "priceRange": "Price range: ",
+    "rating": "Rating: ",
+    "search": "Search:",
+    "view": "View",
+    "visit": "Visit",
+    "welcome": "Welcome to UFood!"
+  },
   "navigation": {
     "profile": "User Profile",
     "searchPlaceholder": "Search",

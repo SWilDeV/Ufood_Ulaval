@@ -10,10 +10,14 @@
     <div class="card-body">
       <h4 class="card-title">{{ restaurant.name }}</h4>
       <p class="card-text">
-        Address: {{ restaurant.address }}<br />
-        Price range: {{ restaurant.price_range }}<br />
-        Genres: {{ restaurant.genres.join(', ') }}<br />
-        Rating: {{ restaurant.rating.toFixed(1) }}
+        <span v-t="'home.address'"></span>
+        <span>{{ restaurant.address }} <br /></span>
+        <span v-t="'home.priceRange'"></span>
+        <span>{{ restaurant.price_range }} <br /></span>
+        <span v-t="'home.genres'"></span>
+        <span>{{ restaurant.genres.join(', ') }} <br /></span>
+        <span v-t="'home.rating'"></span>
+        <span>{{ restaurant.rating.toFixed(1) }} <br /></span>
       </p>
       <b-button-group class="w-100">
         <view-button v-bind:restaurant-id="restaurant.id" />

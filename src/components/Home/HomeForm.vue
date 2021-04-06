@@ -14,7 +14,7 @@
 import HomeHeader from './HomeHeader'
 import HomePager from './HomePager'
 import RestaurantList from './RestaurantList'
-import { get } from '@/api'
+import { getRestaurants, getFilteredRestaurants } from '@/api/restaurants'
 
 export default {
   name: 'allRestaurants',
@@ -44,7 +44,7 @@ export default {
   },
   async created() {
     try {
-      const results = await get('/unsecure/restaurants?limit=1000')
+      const results = await getRestaurants(1000)
 
       //On va chercher la liste de tous les genres différents:
       const restaurantsNumber = results.items.length
@@ -57,7 +57,7 @@ export default {
           }
         }
       }
-
+      this.allGenres.sort()
       //On va chercher toutes les fourchettes de prix différentes:
       for (let i = 0; i < restaurantsNumber; i++) {
         const priceRange = results.items[i].price_range
@@ -72,20 +72,8 @@ export default {
   },
   methods: {
     async refresh({ genre, page, price, search }) {
-      const query = [`limit=${this.count}`, `page=${page - 1}`]
-      if (genre) {
-        query.push(`genres=${genre}`)
-      }
-      if (price) {
-        query.push(`price_range=${price}`)
-      }
-      if (search) {
-        query.push(`q=${search}`)
-      }
-
-      const queryString = query.join('&')
       try {
-        const results = await get(`/unsecure/restaurants?${queryString}`)
+        const results = await getFilteredRestaurants(this.count, genre, page, price, search)
         this.allRestaurants = results.items
         this.total = results.total
       } catch (e) {
