@@ -23,7 +23,12 @@
   },
   "restaurant": {
     "favorite": "Favorite",
-    "visit": "Visit"
+    "visit": "Visit",
+    "phone": "Phone: ",
+    "foodType": "Food types: ",
+    "priceRange": "Price range: ",
+    "rating": "Rating: ",
+    "openingHours": "Opening Hours"
   },
   "restaurantCard": {
     "visit": "Visit"

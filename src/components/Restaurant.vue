@@ -9,7 +9,10 @@
         <h5>
           {{ restaurant.address }}
         </h5>
-        <p>Phone: {{ restaurant.tel }}</p>
+        <p>
+          <span v-t="'restaurant.phone'"></span>
+          <span>{{ restaurant.tel }}</span>
+        </p>
         <b-button variant="warning" v-b-modal.favorite class="m-1" :disabled="!user">
           <font-awesome-icon icon="star" />
           {{ $t('restaurant.favorite') }}
@@ -23,9 +26,18 @@
       </div>
       <br />
       <div class="row">
-        <span class="col-sm-3">Food types: {{ restaurant.genres.join(', ') }} </span>
-        <span class="col-sm-3">Price range: {{ restaurant.price_range }}/5</span>
-        <span class="col-sm-3 font-weight-bold">Rating: {{ restaurantRating }}/5</span>
+        <span class="col-sm-3">
+          <span v-t="'restaurant.foodType'" />
+          <span>{{ restaurant.genres.join(', ') }}</span>
+        </span>
+        <span class="col-sm-3">
+          <span v-t="'restaurant.priceRange'" />
+          <span>{{ restaurant.price_range }}/5</span>
+        </span>
+        <span class="col-sm-3 font-weight-bold">
+          <span v-t="'restaurant.rating'" />
+          <span>{{ restaurantRating }}/5</span>
+        </span>
       </div>
       <div class="row">
         <div class="col-sm-12 col-lg-8">
@@ -40,7 +52,7 @@
           </iframe>
         </div>
         <div class="col-sm-12 col-lg-4">
-          <h4>Opening Hours</h4>
+          <h4 v-t="'restaurant.openingHours'" />
           <b-table striped :items="openingHours" :fields="fields" />
         </div>
         <div class="directions"></div>
