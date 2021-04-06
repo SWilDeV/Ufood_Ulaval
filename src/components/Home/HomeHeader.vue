@@ -26,13 +26,14 @@
 
         <div class="col">
           <label for="search">Search:</label>
-          <input
-            id="search"
-            class="form-control mr-sm-2"
-            type="text"
-            v-model="searchValue"
-            placeholder="Search..."
-          />
+          <b-input-group>
+            <b-form-input id="search" v-model="searchValue" placeholder="Search" />
+            <b-input-group-append>
+              <b-button variant="danger" :disabled="!Boolean(searchValue)" @click="clear">
+                <font-awesome-icon icon="times" />
+              </b-button>
+            </b-input-group-append>
+          </b-input-group>
         </div>
       </div>
     </div>
@@ -53,6 +54,11 @@ export default {
   computed: {
     filters() {
       return { genre: this.selectedGenre, price: this.selectedPrice, search: this.searchValue }
+    }
+  },
+  methods: {
+    clear() {
+      this.searchValue = ''
     }
   },
   created() {
