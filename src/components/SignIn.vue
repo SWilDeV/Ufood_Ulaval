@@ -9,30 +9,36 @@
       :dismiss="clearError"
     />
     <b-form @submit.prevent="submit">
-      <b-form-group :label="$t('signIn.email')" label-for="email">
+      <b-form-group
+        :label="$t('signIn.email')"
+        label-for="email"
+        :invalid-feedback="errors.email"
+        :state="errors.email ? false : null"
+      >
         <b-form-input
           type="email"
           id="email"
           v-model="user.email"
           :placeholder="$t('signIn.emailPlaceholder')"
+          :state="errors.email ? false : null"
         />
       </b-form-group>
-      <b-form-group :label="$t('signIn.password')" label-for="password">
+      <b-form-group
+        :label="$t('signIn.password')"
+        label-for="password"
+        :invalid-feedback="errors.password"
+        :state="errors.password ? false : null"
+      >
         <b-form-input
           type="password"
           id="password"
           ref="password"
           v-model="user.password"
           :placeholder="$t('signIn.passwordPlaceholder')"
+          :state="errors.password ? false : null"
         />
       </b-form-group>
-      <icon-button
-        icon="sign-in-alt"
-        text="signIn.submit"
-        type="submit"
-        variant="primary"
-        :disabled="!isValid"
-      />
+      <icon-button icon="sign-in-alt" text="signIn.submit" type="submit" variant="primary" />
     </b-form>
     <div class="my-2">
       <router-link :to="{ name: 'SignUp' }" v-t="'signIn.signUpLink'" />
@@ -41,6 +47,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapActions } from 'vuex'
 import Alert from '@/components/shared/Alert.vue'
 import IconButton from '@/components/shared/IconButton.vue'
@@ -55,15 +62,11 @@ export default {
   data() {
     return {
       error: false,
+      errors: {},
       user: {
         email: '',
         password: ''
       }
-    }
-  },
-  computed: {
-    isValid() {
-      return Boolean(this.user.email) && Boolean(this.user.password)
     }
   },
   methods: {
@@ -78,13 +81,27 @@ export default {
       this.$refs.password.focus()
     },
     async submit() {
-      this.error = false
-      try {
-        const data = await logIn(this.user)
-        this.login(data)
-        this.$router.push({ name: 'User' })
-      } catch (e) {
-        this.onError(e, e.status === 401 ? e.status : null)
+      if (this.user.email === '') {
+        Vue.set(this.errors, 'email', this.$i18n.t('required'))
+      } else {
+        Vue.delete(this.errors, 'email')
+      }
+
+      if (this.user.password === '') {
+        Vue.set(this.errors, 'password', this.$i18n.t('required'))
+      } else {
+        Vue.delete(this.errors, 'password')
+      }
+
+      if (!Object.keys(this.errors).length) {
+        this.error = false
+        try {
+          const data = await logIn(this.user)
+          this.login(data)
+          this.$router.push({ name: 'User' })
+        } catch (e) {
+          this.onError(e, e.status === 401 ? e.status : null)
+        }
       }
     }
   }
