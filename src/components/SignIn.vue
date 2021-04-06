@@ -18,7 +18,7 @@
         <b-form-input
           type="email"
           id="email"
-          v-model="user.email"
+          v-model="email"
           :placeholder="$t('signIn.emailPlaceholder')"
           :state="errors.email ? false : null"
         />
@@ -33,7 +33,7 @@
           type="password"
           id="password"
           ref="password"
-          v-model="user.password"
+          v-model="password"
           :placeholder="$t('signIn.passwordPlaceholder')"
           :state="errors.password ? false : null"
         />
@@ -61,12 +61,10 @@ export default {
   },
   data() {
     return {
+      email: '',
       error: false,
       errors: {},
-      user: {
-        email: '',
-        password: ''
-      }
+      password: ''
     }
   },
   methods: {
@@ -77,17 +75,17 @@ export default {
     onError(error, status) {
       console.error(error)
       this.error = status || true
-      this.user.password = ''
+      this.password = ''
       this.$refs.password.focus()
     },
     async submit() {
-      if (this.user.email === '') {
+      if (this.email === '') {
         Vue.set(this.errors, 'email', this.$i18n.t('required'))
       } else {
         Vue.delete(this.errors, 'email')
       }
 
-      if (this.user.password === '') {
+      if (this.password === '') {
         Vue.set(this.errors, 'password', this.$i18n.t('required'))
       } else {
         Vue.delete(this.errors, 'password')
@@ -96,13 +94,21 @@ export default {
       if (!Object.keys(this.errors).length) {
         this.error = false
         try {
-          const data = await logIn(this.user)
+          const data = await logIn({ email: this.email, password: this.password })
           this.login(data)
           this.$router.push({ name: 'User' })
         } catch (e) {
           this.onError(e, e.status === 401 ? e.status : null)
         }
       }
+    }
+  },
+  watch: {
+    email() {
+      Vue.delete(this.errors, 'email')
+    },
+    password() {
+      Vue.delete(this.errors, 'password')
     }
   }
 }
