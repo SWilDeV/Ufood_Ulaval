@@ -18,7 +18,7 @@
         <b-form-input
           type="email"
           id="email"
-          v-model="user.email"
+          v-model="email"
           :placeholder="$t('signUp.emailPlaceholder')"
           :state="errors.email ? false : null"
         />
@@ -31,7 +31,7 @@
       >
         <b-form-input
           id="name"
-          v-model="user.name"
+          v-model="name"
           :placeholder="$t('signUp.namePlaceholder')"
           :state="errors.name ? false : null"
         />
@@ -46,7 +46,7 @@
           type="password"
           id="password"
           ref="password"
-          v-model="user.password"
+          v-model="password"
           :placeholder="$t('signUp.passwordPlaceholder')"
           :state="errors.password ? false : null"
         />
@@ -73,14 +73,12 @@ export default {
   },
   data() {
     return {
+      email: '',
       error: false,
       errors: {},
-      success: false,
-      user: {
-        email: '',
-        name: '',
-        password: ''
-      }
+      name: '',
+      password: '',
+      success: false
     }
   },
   methods: {
@@ -90,23 +88,23 @@ export default {
     onError(error) {
       console.error(error)
       this.error = true
-      this.user.password = ''
+      this.password = ''
       this.$refs.password.focus()
     },
     async submit() {
-      if (this.user.email === '') {
+      if (this.email === '') {
         Vue.set(this.errors, 'email', this.$i18n.t('required'))
       } else {
         Vue.delete(this.errors, 'email')
       }
 
-      if (this.user.name === '') {
+      if (this.name === '') {
         Vue.set(this.errors, 'name', this.$i18n.t('required'))
       } else {
         Vue.delete(this.errors, 'name')
       }
 
-      if (this.user.password === '') {
+      if (this.password === '') {
         Vue.set(this.errors, 'password', this.$i18n.t('required'))
       } else {
         Vue.delete(this.errors, 'password')
@@ -115,12 +113,23 @@ export default {
       if (!Object.keys(this.errors).length) {
         this.error = false
         try {
-          await signUp(this.user)
+          await signUp({ email: this.email, name: this.name, password: this.password })
           this.success = true
         } catch (e) {
           this.onError(e)
         }
       }
+    }
+  },
+  watch: {
+    email() {
+      Vue.delete(this.errors, 'email')
+    },
+    name() {
+      Vue.delete(this.errors, 'name')
+    },
+    password() {
+      Vue.delete(this.errors, 'password')
     }
   }
 }
