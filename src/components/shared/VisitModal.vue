@@ -7,7 +7,13 @@
       :state="errors.date ? false : null"
     >
       <b-form-input v-if="Boolean(visit)" id="date" :value="formatDate(date)" disabled />
-      <b-form-input v-else type="datetime-local" id="date" v-model="date" />
+      <b-form-input
+        v-else
+        type="datetime-local"
+        id="date"
+        v-model="date"
+        :state="errors.date ? false : null"
+      />
     </b-form-group>
     <b-form-group
       :label="$t('visitModal.rating')"
@@ -22,6 +28,7 @@
         max="5"
         v-model="rating"
         :disabled="Boolean(visit)"
+        :state="errors.rating ? false : null"
       />
     </b-form-group>
     <b-form-group
@@ -36,6 +43,7 @@
         v-model="comment"
         :placeholder="$t('visitModal.commentPlaceholder')"
         :disabled="Boolean(visit)"
+        :state="errors.comment ? false : null"
       />
     </b-form-group>
     <template v-if="Boolean(visit)" #modal-footer="{ cancel }">
@@ -88,10 +96,11 @@ export default {
   },
   methods: {
     clear(callback) {
-      this.date = null
-      this.rating = 0
       this.comment = ''
+      this.date = ''
       this.errors = {}
+      this.rating = 0
+
       if (callback) {
         callback()
       }
