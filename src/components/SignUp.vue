@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <h1 v-t="'signUp.title'" />
-    <alert v-if="error === true" type="danger" text="genericError" :dismiss="clearError" />
-    <alert v-if="success" type="success" text="signUp.success">
+    <alert v-if="error === true" text="genericError" variant="danger" @dismissed="clearError" />
+    <alert v-if="success" text="signUp.success" variant="success" :dismissible="false">
       <template v-slot:after>
         <br />
         <router-link :to="{ name: 'SignIn' }" v-t="'navigation.signIn'" />
@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     clearError() {
-      this.error = null
+      this.error = false
     },
     onError(error) {
       console.error(error)
@@ -111,7 +111,7 @@ export default {
       }
 
       if (!Object.keys(this.errors).length) {
-        this.error = false
+        this.clearError()
         try {
           await signUp({ email: this.email, name: this.name, password: this.password })
           this.success = true

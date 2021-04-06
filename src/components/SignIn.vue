@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <h1 v-t="'signIn.title'" />
-    <alert v-if="error === true" type="danger" text="genericError" :dismiss="clearError" />
+    <alert v-if="error === true" text="genericError" variant="danger" @dismissed="clearError" />
     <alert
       v-if="error === 401"
-      type="warning"
       text="signIn.invalidCredentials"
-      :dismiss="clearError"
+      variant="warning"
+      @dismissed="clearError"
     />
     <b-form @submit.prevent="submit">
       <b-form-group
@@ -70,7 +70,7 @@ export default {
   methods: {
     ...mapActions(['login']),
     clearError() {
-      this.error = null
+      this.error = false
     },
     onError(error, status) {
       console.error(error)
@@ -92,7 +92,7 @@ export default {
       }
 
       if (!Object.keys(this.errors).length) {
-        this.error = false
+        this.clearError()
         try {
           const data = await logIn({ email: this.email, password: this.password })
           this.login(data)
