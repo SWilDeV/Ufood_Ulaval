@@ -1,8 +1,8 @@
 <template>
-  <button :type="type">
+  <b-button :size="size" :type="type" :variant="variant">
     <font-awesome-icon :icon="icon" />
-    {{ displayText }}
-  </button>
+    {{ $t(text) }}
+  </b-button>
 </template>
 
 <script>
@@ -12,18 +12,10 @@ export default {
       type: String,
       required: true
     },
-    text: {
-      type: String
-    },
-    type: {
-      type: String,
-      default: 'button'
-    }
-  },
-  computed: {
-    displayText() {
-      return this.$i18n.t(this.text) || this.text
-    }
+    size: String,
+    text: String,
+    type: String,
+    variant: String
   }
 }
 </script>

@@ -17,10 +17,9 @@
   "navigation": {
     "profile": "User Profile",
     "searchPlaceholder": "Search",
-    "signIn": "Sign in",
-    "signOut": "Sign out",
-    "signUp": "Sign up",
-    "welcome": "Welcome, {name}!"
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signUp": "Sign Up"
   },
   "restaurant": {
     "favorite": "Favorite",
@@ -68,13 +67,11 @@
     "send": "Send",
     "title": "Write a review"
   },
-
   "visits": {
     "date": "Date",
     "rating": "Rating",
     "restaurant": "Restaurant"
-},
-
+  },
   "weekDays": {
     "sunday": "Sunday",
     "monday": "Monday",
@@ -83,6 +80,5 @@
     "thursday": "Thursday",
     "friday": "Friday",
     "saturday": "Saturday"
-
   }
 }
