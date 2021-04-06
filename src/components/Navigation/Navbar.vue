@@ -9,7 +9,7 @@
       <b-navbar-nav v-if="user">
         <b-nav-item href="#">
           <!-- TODO: voir la liste des utilisateurs ref#61 -->
-          Membres
+          Members
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
@@ -17,7 +17,7 @@
         <b-nav-item-dropdown right v-if="user">
           <template #button-content>
             <!-- TODO: en mobile la taille ne doit pas être fixée -->
-            <v-gravatar class="rounded-circle" :email="user.email" size="40" />
+            <v-gravatar class="rounded-circle" :email="user.email" :size="40" />
           </template>
           <b-dropdown-item href="#">
             <!-- TODO: navigation au profil public ref#64 -->
@@ -55,6 +55,7 @@ import { mapState } from 'vuex'
 import Search from '@/components/Navigation/Search.vue'
 
 export default {
+  name: 'Navbar',
   components: {
     Search
   },

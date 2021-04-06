@@ -1,24 +1,45 @@
 <template>
   <div class="form-inline justify-content-center mb-4">
-    <button class="btn btn-primary m-1" :disabled="page === 1" @click="page = 1">
-      <font-awesome-icon icon="fast-backward" />
-    </button>
-    <button class="btn btn-primary m-1" :disabled="page === 1" @click="page--">
-      <font-awesome-icon icon="step-backward" />
-    </button>
-    <input type="text" class="form-control m-1" v-model="page" disabled />
-    <button class="btn btn-primary m-1" :disabled="page === pageCount" @click="page++">
-      <font-awesome-icon icon="step-forward" />
-    </button>
-    <button class="btn btn-primary m-1" :disabled="page === pageCount" @click="page = pageCount">
-      <font-awesome-icon icon="fast-forward" />
-    </button>
+    <icon-button
+      class="m-1"
+      icon="fast-backward"
+      variant="primary"
+      :disabled="page === 1"
+      @click="page = 1"
+    />
+    <icon-button
+      class="m-1"
+      icon="step-backward"
+      variant="primary"
+      :disabled="page === 1"
+      @click="page--"
+    />
+    <b-form-input class="m-1" :value="page" disabled />
+    <icon-button
+      class="m-1"
+      icon="step-forward"
+      variant="primary"
+      :disabled="page === pageCount"
+      @click="page++"
+    />
+    <icon-button
+      class="m-1"
+      icon="fast-forward"
+      variant="primary"
+      :disabled="page === pageCount"
+      @click="page = pageCount"
+    />
   </div>
 </template>
 
 <script>
+import IconButton from '@/components/shared/IconButton.vue'
+
 export default {
   name: 'HomePager',
+  components: {
+    IconButton
+  },
   props: {
     count: {
       type: Number,

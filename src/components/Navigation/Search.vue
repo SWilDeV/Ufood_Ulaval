@@ -20,6 +20,7 @@
 import IconButton from '@/components/shared/IconButton.vue'
 
 export default {
+  name: 'Search',
   components: {
     IconButton
   },

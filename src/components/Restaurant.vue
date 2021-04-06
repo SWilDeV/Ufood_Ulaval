@@ -13,16 +13,28 @@
           <span v-t="'restaurant.phone'"></span>
           <span>{{ restaurant.tel }}</span>
         </p>
-        <b-button variant="warning" v-b-modal.favorite class="m-1" :disabled="!user">
-          <font-awesome-icon icon="star" />
-          {{ $t('restaurant.favorite') }}
-        </b-button>
-        <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
-        <b-button variant="info" v-b-modal.visit class="m-1" :disabled="!user">
-          <font-awesome-icon icon="edit" />
-          {{ $t('restaurant.visit') }}
-        </b-button>
-        <visit-modal id="visit" :restaurant-id="restaurant.id" />
+        <div v-if="user">
+          <icon-button
+            class="m-1"
+            icon="star"
+            text="restaurant.favorite"
+            variant="warning"
+            v-b-modal.favorite
+          />
+          <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
+          <icon-button
+            class="m-1"
+            icon="edit"
+            text="restaurant.visit"
+            variant="info"
+            v-b-modal.visit
+          />
+          <visit-modal
+            id="visit"
+            :restaurant-id="restaurant.id"
+            :title="$t('visitModal.newVisit')"
+          />
+        </div>
       </div>
       <br />
       <div class="row">
@@ -65,6 +77,7 @@
 import { mapState } from 'vuex'
 import { get } from '@/api'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
+import IconButton from '@/components/shared/IconButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
@@ -72,17 +85,17 @@ const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 export default {
   components: {
     FavoriteModal,
+    IconButton,
     VisitModal
   },
   data() {
     return {
-      id: '5f31fc6155d7790550c08afe',
-      restaurant: null,
-      fields: ['day', 'hours'],
       currentImage: 0,
-      timer: null,
+      fields: ['day', 'hours'],
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      restaurant: null,
+      timer: null
     }
   },
   computed: {

@@ -1,72 +1,83 @@
 <template>
-  <b-modal :id="id" :title="visit ? $t('visitModal.readTitle') : $t('visitModal.title')">
-    <div class="form-group">
-      <label for="date">
-        {{ $t('visitModal.date') }}
-        <span v-if="!visit" class="text-danger">*</span>
-      </label>
-      <input v-if="!visit" type="datetime-local" id="date" class="form-control" v-model="date" />
-      <input v-else type="text" id="date" class="form-control" :value="date" disabled />
-    </div>
-    <div class="form-group">
-      <label for="rating">
-        {{ $t('visitModal.rating') }}
-        <span v-if="!visit" class="text-danger">*</span>
-      </label>
-      <input
+  <b-modal :id="id" :title="title">
+    <b-form-group
+      :label="$t('visitModal.date')"
+      label-for="date"
+      :invalid-feedback="errors.date"
+      :state="errors.date ? false : null"
+    >
+      <b-form-input v-if="Boolean(visit)" id="date" :value="formatDate(date)" disabled />
+      <b-form-input
+        v-else
+        type="datetime-local"
+        id="date"
+        v-model="date"
+        :state="errors.date ? false : null"
+      />
+    </b-form-group>
+    <b-form-group
+      :label="$t('visitModal.rating')"
+      label-for="rating"
+      :invalid-feedback="errors.rating"
+      :state="errors.rating ? false : null"
+    >
+      <b-form-input
         type="number"
         id="rating"
-        class="form-control"
-        :min="min"
-        :max="max"
+        min="0"
+        max="5"
         v-model="rating"
-        :disabled="visit"
+        :disabled="Boolean(visit)"
+        :state="errors.rating ? false : null"
       />
-    </div>
-    <div class="form-group">
-      <label for="comment">
-        {{ $t('visitModal.comment') }}
-        <span v-if="!visit" class="text-danger">*</span>
-      </label>
-      <textarea
+    </b-form-group>
+    <b-form-group
+      :label="$t('visitModal.comment')"
+      label-for="comment"
+      :invalid-feedback="errors.comment"
+      :state="errors.comment ? false : null"
+    >
+      <b-form-textarea
         id="comment"
-        class="form-control"
         rows="5"
         v-model="comment"
         :placeholder="$t('visitModal.commentPlaceholder')"
-        :disabled="visit"
+        :disabled="Boolean(visit)"
+        :state="errors.comment ? false : null"
       />
-    </div>
-    <template v-if="!visit" #modal-footer="{ cancel, ok }">
-      <button type="button" class="btn btn-secondary" @click="clear(cancel)">
-        <font-awesome-icon icon="ban" />
-        {{ $t('visitModal.cancel') }}
-      </button>
-      <button type="button" class="btn btn-primary" :disabled="!isValid" @click="send(ok)">
-        <font-awesome-icon icon="paper-plane" />
-        {{ $t('visitModal.send') }}
-      </button>
+    </b-form-group>
+    <template v-if="Boolean(visit)" #modal-footer="{ cancel }">
+      <icon-button icon="times" text="visitModal.close" @click="cancel()" />
     </template>
-    <template v-else #modal-footer="{ cancel }">
-      <button type="button" class="btn btn-secondary" @click="cancel()">
-        <font-awesome-icon icon="ban" />
-        {{ $t('visitModal.close') }}
-      </button>
+    <template v-else #modal-footer="{ cancel, ok }">
+      <icon-button icon="ban" text="visitModal.cancel" @click="clear(cancel)" />
+      <icon-button icon="paper-plane" text="visitModal.send" variant="primary" @click="send(ok)" />
     </template>
   </b-modal>
 </template>
 
 <script>
+import Vue from 'vue'
+import mixins from '@/mixins'
+import IconButton from '@/components/shared/IconButton.vue'
 import { createVisit } from '@/api/visits'
 
 export default {
   name: 'VisitModal',
+  mixins: [mixins],
+  components: {
+    IconButton
+  },
   props: {
     id: {
       type: String,
       required: true
     },
     restaurantId: {
+      type: String,
+      required: true
+    },
+    title: {
       type: String,
       required: true
     },
@@ -78,45 +89,78 @@ export default {
   data() {
     return {
       comment: '',
-      date: null,
-      max: 5,
-      min: 0,
+      errors: {},
+      date: '',
       rating: 0
-    }
-  },
-  computed: {
-    isValid() {
-      return this.date && this.rating >= 0 && this.rating <= 5 && this.comment
     }
   },
   methods: {
     clear(callback) {
-      this.date = null
-      this.rating = 0
       this.comment = ''
+      this.date = ''
+      this.errors = {}
+      this.rating = 0
+
       if (callback) {
         callback()
       }
     },
     async send(callback) {
-      try {
-        await createVisit({
-          comment: this.comment,
-          date: this.date,
-          rating: this.rating,
-          restaurantId: this.restaurantId
-        })
-        this.clear(callback)
-      } catch (e) {
-        console.error(e)
+      if (this.date === '') {
+        Vue.set(this.errors, 'date', this.$i18n.t('required'))
+      } else if (new Date(this.date) > new Date()) {
+        Vue.set(this.errors, 'date', this.$i18n.t('visitModal.futureDate'))
+      } else {
+        Vue.delete(this.errors, 'date')
+      }
+
+      if (this.rating === '') {
+        Vue.set(this.errors, 'rating', this.$i18n.t('required'))
+      } else if (isNaN(this.rating) || this.rating < 0 || this.rating > 5) {
+        Vue.set(this.errors, 'rating', this.$i18n.t('visitModal.invalidRating'))
+      } else {
+        Vue.delete(this.errors, 'rating')
+      }
+
+      if (this.comment === '') {
+        Vue.set(this.errors, 'comment', this.$i18n.t('required'))
+      } else {
+        Vue.delete(this.errors, 'comment')
+      }
+
+      if (!Object.keys(this.errors).length) {
+        try {
+          await createVisit({
+            comment: this.comment,
+            date: this.date,
+            rating: this.rating,
+            restaurantId: this.restaurantId
+          })
+          this.clear(callback)
+        } catch (e) {
+          console.error(e)
+        }
       }
     }
   },
   created() {
     if (this.visit) {
       this.comment = this.visit.comment
-      this.date = new Date(this.visit.date)
+      this.date = this.visit.date
       this.rating = this.visit.rating
+    }
+  },
+  watch: {
+    comment() {
+      Vue.delete(this.errors, 'comment')
+    },
+    date() {
+      Vue.delete(this.errors, 'date')
+    },
+    rating(value) {
+      if (value !== '' && !isNaN(value) && value >= 0 && value <= 5) {
+        Vue.delete(this.errors, 'rating')
+      }
     }
   }
 }
