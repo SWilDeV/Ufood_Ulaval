@@ -13,7 +13,12 @@
           <td v-text="index[visit.restaurant_id]" />
           <td v-text="formatDate(visit.date)" />
           <td v-text="visit.rating" />
-          <visit-modal :id="visit.id" :restaurant-id="visit.restaurant_id" :visit="visit" />
+          <visit-modal
+            :id="visit.id"
+            :restaurant-id="visit.restaurant_id"
+            :title="index[visit.restaurant_id]"
+            :visit="visit"
+          />
         </tr>
       </tbody>
     </table>
@@ -21,11 +26,13 @@
 </template>
 
 <script>
-import { getVisits } from '@/api/visits'
+import mixins from '@/mixins'
 import VisitModal from '@/components/shared/VisitModal.vue'
+import { getVisits } from '@/api/visits'
 
 export default {
-  name: 'Visits',
+  name: 'VisitList',
+  mixins: [mixins],
   components: {
     VisitModal
   },
@@ -47,16 +54,6 @@ export default {
         index[restaurant.id] = restaurant.name
       }
       return index
-    }
-  },
-  methods: {
-    formatDate(value) {
-      const date = new Date(value)
-      const formatter = new Intl.DateTimeFormat(this.$i18n.locale, {
-        dateStyle: 'medium',
-        timeStyle: 'medium'
-      })
-      return formatter.format(date)
     }
   },
   async created() {

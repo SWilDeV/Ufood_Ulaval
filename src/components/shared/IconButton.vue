@@ -1,5 +1,5 @@
 <template>
-  <b-button :size="size" :type="type" :variant="variant">
+  <b-button :size="size" :type="type" :variant="variant" @click="$emit('click', $event)">
     <font-awesome-icon :icon="icon" />
     {{ $t(text) }}
   </b-button>
@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'IconButton',
   props: {
     icon: {
       type: String,

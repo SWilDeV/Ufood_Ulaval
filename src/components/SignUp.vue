@@ -8,42 +8,51 @@
         <router-link :to="{ name: 'SignIn' }" v-t="'navigation.signIn'" />
       </template>
     </alert>
-    <u-form
-      v-else
-      :canSubmit="isValid"
-      submitIcon="user"
-      submitText="signUp.submit"
-      @submit="submit"
-    >
-      <form-field
-        type="email"
-        label="signUp.email"
-        placeholder="signUp.emailPlaceholder"
-        v-model="user.email"
+    <b-form v-else @submit.prevent="submit">
+      <b-form-group :label="$t('signUp.email')" label-for="email">
+        <b-form-input
+          type="email"
+          id="email"
+          v-model="user.email"
+          :placeholder="$t('signUp.emailPlaceholder')"
+        />
+      </b-form-group>
+      <b-form-group :label="$t('signUp.name')" label-for="name">
+        <b-form-input id="name" v-model="user.name" :placeholder="$t('signUp.namePlaceholder')" />
+      </b-form-group>
+      <b-form-group :label="$t('signUp.password')" label-for="password">
+        <b-form-input
+          type="password"
+          id="password"
+          ref="password"
+          v-model="user.password"
+          :placeholder="$t('signUp.passwordPlaceholder')"
+        />
+      </b-form-group>
+      <icon-button
+        icon="user"
+        text="signUp.submit"
+        type="submit"
+        variant="primary"
+        :disabled="!isValid"
       />
-      <form-field label="signUp.name" placeholder="signUp.namePlaceholder" v-model="user.name" />
-      <form-field
-        type="password"
-        ref="password"
-        label="signUp.password"
-        placeholder="signUp.passwordPlaceholder"
-        v-model="user.password"
-      />
-    </u-form>
+      <div class="my-2">
+        <router-link :to="{ name: 'SignIn' }" v-t="'signUp.signInLink'" />
+      </div>
+    </b-form>
   </div>
 </template>
 
 <script>
 import Alert from '@/components/shared/Alert.vue'
-import FormField from '@/components/shared/FormField.vue'
-import UForm from '@/components/shared/UForm.vue'
+import IconButton from '@/components/shared/IconButton.vue'
 import { signUp } from '@/api/users'
 
 export default {
+  name: 'SignUp',
   components: {
     Alert,
-    FormField,
-    UForm
+    IconButton
   },
   data() {
     return {
@@ -58,7 +67,7 @@ export default {
   },
   computed: {
     isValid() {
-      return Boolean(this.user.email && this.user.name && this.user.password)
+      return Boolean(this.user.email) && Boolean(this.user.name) && Boolean(this.user.password)
     }
   },
   methods: {

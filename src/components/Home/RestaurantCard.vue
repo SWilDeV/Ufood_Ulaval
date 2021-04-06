@@ -15,14 +15,20 @@
         Genres: {{ restaurant.genres.join(', ') }}<br />
         Rating: {{ restaurant.rating.toFixed(1) }}
       </p>
-      <div class="btn-group justify-content-center w-100">
-        <view-button v-bind:restaurant-id="restaurant.id"></view-button>
-        <b-button variant="info" v-b-modal="visitId" :disabled="!user">
-          <font-awesome-icon icon="edit" />
-          {{ $t('restaurantCard.visit') }}
-        </b-button>
-      </div>
-      <visit-modal :id="visitId" :restaurant-id="restaurant.id" />
+      <b-button-group class="w-100">
+        <view-button v-bind:restaurant-id="restaurant.id" />
+        <template v-if="user">
+          <b-button variant="info" v-b-modal="visitId">
+            <font-awesome-icon icon="edit" />
+            {{ $t('restaurantCard.visit') }}
+          </b-button>
+          <visit-modal
+            :id="visitId"
+            :restaurant-id="restaurant.id"
+            :title="$t('visitModal.newVisit')"
+          />
+        </template>
+      </b-button-group>
     </div>
   </div>
 </template>

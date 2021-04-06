@@ -21,6 +21,7 @@
     "signOut": "Sign Out",
     "signUp": "Sign Up"
   },
+  "required": "This field is required.",
   "restaurant": {
     "favorite": "Favorite",
     "visit": "Visit",
@@ -50,6 +51,7 @@
     "namePlaceholder": "Enter your name",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
+    "signInLink": "Already have an account? Click here to sign in.",
     "success": "Your account has been created. You can now sign in using your email and password by clicking on the link below:",
     "submit": "Sign up",
     "title": "Sign up"
@@ -57,7 +59,6 @@
   "user": {
     "addList": "Add"
   },
-  "userRequired": "You must be signed in to perform this action.",
   "viewButton": {
     "text": "View"
   },
@@ -67,10 +68,11 @@
     "comment": "Comment",
     "commentPlaceholder": "Please describe your experience!",
     "date": "Visit date",
+    "futureDate": "The date cannot be in the future.",
+    "invalidRating": "Enter a rating between 0 and 5.",
+    "newVisit": "Write a review",
     "rating": "Rating",
-    "readTitle": "Read a review",
-    "send": "Send",
-    "title": "Write a review"
+    "send": "Send"
   },
   "visits": {
     "date": "Date",

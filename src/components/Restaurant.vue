@@ -13,16 +13,22 @@
           <span v-t="'restaurant.phone'"></span>
           <span>{{ restaurant.tel }}</span>
         </p>
-        <b-button variant="warning" v-b-modal.favorite class="m-1" :disabled="!user">
-          <font-awesome-icon icon="star" />
-          {{ $t('restaurant.favorite') }}
-        </b-button>
-        <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
-        <b-button variant="info" v-b-modal.visit class="m-1" :disabled="!user">
-          <font-awesome-icon icon="edit" />
-          {{ $t('restaurant.visit') }}
-        </b-button>
-        <visit-modal id="visit" :restaurant-id="restaurant.id" />
+        <div v-if="user">
+          <b-button variant="warning" v-b-modal.favorite class="m-1">
+            <font-awesome-icon icon="star" />
+            {{ $t('restaurant.favorite') }}
+          </b-button>
+          <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
+          <b-button variant="info" v-b-modal.visit class="m-1">
+            <font-awesome-icon icon="edit" />
+            {{ $t('restaurant.visit') }}
+          </b-button>
+          <visit-modal
+            id="visit"
+            :restaurant-id="restaurant.id"
+            :title="$t('visitModal.newVisit')"
+          />
+        </div>
       </div>
       <br />
       <div class="row">

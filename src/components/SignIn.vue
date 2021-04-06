@@ -8,26 +8,32 @@
       text="signIn.invalidCredentials"
       :dismiss="clearError"
     />
-    <u-form
-      :canSubmit="isValid"
-      submitIcon="sign-in-alt"
-      submitText="signIn.submit"
-      @submit="submit"
-    >
-      <form-field
-        type="email"
-        label="signIn.email"
-        placeholder="signIn.emailPlaceholder"
-        v-model="user.email"
+    <b-form @submit.prevent="submit">
+      <b-form-group :label="$t('signIn.email')" label-for="email">
+        <b-form-input
+          type="email"
+          id="email"
+          v-model="user.email"
+          :placeholder="$t('signIn.emailPlaceholder')"
+        />
+      </b-form-group>
+      <b-form-group :label="$t('signIn.password')" label-for="password">
+        <b-form-input
+          type="password"
+          id="password"
+          ref="password"
+          v-model="user.password"
+          :placeholder="$t('signIn.passwordPlaceholder')"
+        />
+      </b-form-group>
+      <icon-button
+        icon="sign-in-alt"
+        text="signIn.submit"
+        type="submit"
+        variant="primary"
+        :disabled="!isValid"
       />
-      <form-field
-        type="password"
-        ref="password"
-        label="signIn.password"
-        placeholder="signIn.passwordPlaceholder"
-        v-model="user.password"
-      />
-    </u-form>
+    </b-form>
     <div class="my-2">
       <router-link :to="{ name: 'SignUp' }" v-t="'signIn.signUpLink'" />
     </div>
@@ -37,15 +43,14 @@
 <script>
 import { mapActions } from 'vuex'
 import Alert from '@/components/shared/Alert.vue'
-import FormField from '@/components/shared/FormField.vue'
-import UForm from '@/components/shared/UForm.vue'
+import IconButton from '@/components/shared/IconButton.vue'
 import { logIn } from '@/api/users'
 
 export default {
+  name: 'SignIn',
   components: {
     Alert,
-    FormField,
-    UForm
+    IconButton
   },
   data() {
     return {
@@ -58,7 +63,7 @@ export default {
   },
   computed: {
     isValid() {
-      return Boolean(this.user.email && this.user.password)
+      return Boolean(this.user.email) && Boolean(this.user.password)
     }
   },
   methods: {

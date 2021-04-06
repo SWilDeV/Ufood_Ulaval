@@ -6,6 +6,7 @@
 import { mapActions } from 'vuex'
 
 export default {
+  name: 'SignOut',
   methods: {
     ...mapActions(['logout'])
   },

@@ -14,6 +14,7 @@
 const types = ['danger', 'success', 'warning']
 
 export default {
+  name: 'Alert',
   props: {
     text: {
       type: String,

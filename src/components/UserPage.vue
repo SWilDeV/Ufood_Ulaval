@@ -16,16 +16,16 @@
       @add-resto-to-list="addRestaurant($event)"
     />
     <h2>Visits</h2>
-    <visits :restaurants="restaurantDictionary" />
+    <visit-list :restaurants="restaurantDictionary" />
   </div>
 </template>
 
 <script>
-import Visits from './UserPage/Visits.vue'
-import Favorites from './UserPage/Favorites'
-import panel from './UserPage/Panel'
-import { mapState } from 'vuex'
 import Vue from 'vue'
+import Favorites from '@/components/UserPage/Favorites.vue'
+import Panel from '@/components/UserPage/Panel.vue'
+import VisitList from '@/components/UserPage/VisitList.vue'
+import { mapState } from 'vuex'
 import {
   addRestaurantToList,
   createList,
@@ -37,11 +37,11 @@ import {
 import { getRestaurants } from '@/api/restaurants'
 
 export default {
-  name: 'userPage',
+  name: 'UserPage',
   components: {
     Favorites,
-    panel,
-    Visits
+    Panel,
+    VisitList
   },
   data() {
     return {
