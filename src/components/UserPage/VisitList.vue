@@ -16,7 +16,7 @@
           <visit-modal
             :id="visit.id"
             :restaurant-id="visit.restaurant_id"
-            :title="index[visit.restaurant_id]"
+            :title="index[visit.restaurant_id] || ''"
             :visit="visit"
           />
         </tr>
