@@ -1,22 +1,19 @@
 <template>
-  <form class="form-inline" @submit.prevent="submit">
-    <div class="input-group">
-      <input
-        type="text"
-        class="form-control"
-        :placeholder="$t('navigation.searchPlaceholder')"
-        v-model="search"
-      />
-      <div class="input-group-append">
+  <b-nav-form @submit.prevent="submit">
+    <!-- TODO: supporter la recherche d'usagers en mode connecté ref#61 -->
+    <b-input-group>
+      <b-form-input size="sm" v-model="search" :placeholder="$t('navigation.searchPlaceholder')" />
+      <b-input-group-append>
         <icon-button
-          type="submit"
           icon="search"
-          class="btn btn-success"
+          size="sm"
+          type="submit"
+          variant="success"
           :disabled="!Boolean(search)"
         />
-      </div>
-    </div>
-  </form>
+      </b-input-group-append>
+    </b-input-group>
+  </b-nav-form>
 </template>
 
 <script>
