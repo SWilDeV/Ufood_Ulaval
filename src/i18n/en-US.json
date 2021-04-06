@@ -21,6 +21,18 @@
     "signOut": "Sign Out",
     "signUp": "Sign Up"
   },
+  "home":{
+    "address": "Address: ",
+    "genreDropDownDefault": "All genres",
+    "genres": "Genres: ",
+    "priceDropDownDefault": "All prices",
+    "priceRange": "Price range: ",
+    "rating": "Rating: ",
+    "search": "Search:",
+    "view": "View",
+    "visit": "Visit",
+    "welcome": "Welcome to UFood!"
+  },
   "restaurant": {
     "favorite": "Favorite",
     "visit": "Visit",
