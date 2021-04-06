@@ -1,44 +1,54 @@
 <template>
   <b-modal :id="id" :title="$t('favoriteModal.title')">
-    <div class="form-group">
-      <label for="name" v-t="'favoriteModal.createList'" />
-      <div class="input-group">
+    <b-form-group :label="$t('favoriteModal.createList')" label-for="name">
+      <b-input-group>
         <b-form-input id="name" :placeholder="$t('favoriteModal.namePlaceholder')" v-model="name" />
-        <div class="input-group-append">
-          <b-button variant="success" :disabled="!name" @click="createList">
-            <font-awesome-icon icon="plus" />
-            {{ $t('favoriteModal.create') }}
-          </b-button>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="list" v-t="'favoriteModal.list'" />
-      <b-form-select id="list" :options="lists" v-model="listId">
+        <b-input-group-append>
+          <icon-button
+            icon="plus"
+            text="favoriteModal.create"
+            variant="success"
+            :disabled="!name"
+            @click="createList"
+          />
+        </b-input-group-append>
+      </b-input-group>
+    </b-form-group>
+    <b-form-group
+      :label="$t('favoriteModal.list')"
+      label-for="list"
+      :invalid-feedback="errors.listId"
+      :state="errors.listId ? false : null"
+    >
+      <b-form-select
+        id="list"
+        :options="lists"
+        v-model="listId"
+        :state="errors.listId ? false : null"
+      >
         <template #first>
           <b-form-select-option value="" v-t="'favoriteModal.selectList'" disabled />
         </template>
       </b-form-select>
-    </div>
+    </b-form-group>
     <template #modal-footer="{ cancel, ok }">
-      <button type="button" class="btn btn-secondary" @click="clear(cancel)">
-        <font-awesome-icon icon="ban" />
-        {{ $t('favoriteModal.cancel') }}
-      </button>
-      <button type="button" class="btn btn-primary" :disabled="!isValid" @click="addToList(ok)">
-        <font-awesome-icon icon="star" />
-        {{ $t('favoriteModal.add') }}
-      </button>
+      <icon-button icon="ban" text="favoriteModal.cancel" @click="clear(cancel)" />
+      <icon-button icon="star" text="favoriteModal.add" variant="primary" @click="addToList(ok)" />
     </template>
   </b-modal>
 </template>
 
 <script>
+import Vue from 'vue'
+import IconButton from '@/components/shared/IconButton.vue'
 import { mapState } from 'vuex'
 import { addFavoriteToList, createList, getFavorites } from '@/api/favorites'
 
 export default {
   name: 'FavoriteModal',
+  components: {
+    IconButton
+  },
   props: {
     id: {
       type: String,
@@ -51,6 +61,7 @@ export default {
   },
   data() {
     return {
+      errors: {},
       lists: [],
       listId: '',
       name: ''
@@ -64,11 +75,19 @@ export default {
   },
   methods: {
     async addToList(callback) {
-      try {
-        await addFavoriteToList(this.listId, this.restaurantId)
-        this.clear(callback)
-      } catch (e) {
-        console.error(e)
+      if (this.listId === '') {
+        Vue.set(this.errors, 'listId', this.$i18n.t('required'))
+      } else {
+        Vue.delete(this.errors, 'listId')
+      }
+
+      if (!Object.keys(this.errors).length) {
+        try {
+          await addFavoriteToList(this.listId, this.restaurantId)
+          this.clear(callback)
+        } catch (e) {
+          console.error(e)
+        }
       }
     },
     clear(callback) {
@@ -103,6 +122,11 @@ export default {
         .sort((a, b) => (a.text >= b.text ? 1 : -1))
     } catch (e) {
       console.error(e)
+    }
+  },
+  watch: {
+    listId() {
+      Vue.delete(this.errors, 'listId')
     }
   }
 }
