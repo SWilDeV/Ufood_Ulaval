@@ -14,7 +14,7 @@
 import HomeHeader from './HomeHeader'
 import HomePager from './HomePager'
 import RestaurantList from './RestaurantList'
-import { getRestaurants, getFilteredRestaurants } from '@/api/home'
+import { getRestaurants, getFilteredRestaurants } from '@/api/restaurants'
 
 export default {
   name: 'allRestaurants',
@@ -72,20 +72,8 @@ export default {
   },
   methods: {
     async refresh({ genre, page, price, search }) {
-      const query = [`limit=${this.count}`, `page=${page - 1}`]
-      if (genre) {
-        query.push(`genres=${genre}`)
-      }
-      if (price) {
-        query.push(`price_range=${price}`)
-      }
-      if (search) {
-        query.push(`q=${search}`)
-      }
-
-      const queryString = query.join('&')
       try {
-        const results = await getFilteredRestaurants(queryString)
+        const results = await getFilteredRestaurants(this.count, genre, page, price, search)
         this.allRestaurants = results.items
         this.total = results.total
       } catch (e) {

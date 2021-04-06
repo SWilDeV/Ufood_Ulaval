@@ -7,7 +7,7 @@
         <div class="col">
           <label for="price" v-t="'home.priceRange'"></label>
           <select id="price" class="form-control" v-model="selectedPrice">
-            <option value="" v-t="'home.priceDropDownDefault'">All prices</option>
+            <option value="" v-t="'home.priceDropDownDefault'"></option>
             <option v-for="price in allPriceRanges" :value="price" v-bind:key="price">
               {{ price }}
             </option>
