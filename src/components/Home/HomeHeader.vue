@@ -29,9 +29,12 @@
           <b-input-group>
             <b-form-input id="search" v-model="searchValue" placeholder="Search" />
             <b-input-group-append>
-              <b-button variant="danger" :disabled="!Boolean(searchValue)" @click="clear">
-                <font-awesome-icon icon="times" />
-              </b-button>
+              <icon-button
+                icon="times"
+                variant="danger"
+                :disabled="!Boolean(searchValue)"
+                @click="clear"
+              />
             </b-input-group-append>
           </b-input-group>
         </div>
@@ -41,14 +44,19 @@
 </template>
 
 <script>
+import IconButton from '@/components/shared/IconButton.vue'
+
 export default {
-  name: 'homeHeader',
+  name: 'HomeHeader',
+  components: {
+    IconButton
+  },
   props: ['allGenres', 'allPriceRanges'],
   data() {
     return {
+      searchValue: '',
       selectedGenre: '',
-      selectedPrice: '',
-      searchValue: ''
+      selectedPrice: ''
     }
   },
   computed: {

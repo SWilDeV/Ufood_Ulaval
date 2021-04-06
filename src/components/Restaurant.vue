@@ -14,15 +14,21 @@
           <span>{{ restaurant.tel }}</span>
         </p>
         <div v-if="user">
-          <b-button variant="warning" v-b-modal.favorite class="m-1">
-            <font-awesome-icon icon="star" />
-            {{ $t('restaurant.favorite') }}
-          </b-button>
+          <icon-button
+            class="m-1"
+            icon="star"
+            text="restaurant.favorite"
+            variant="warning"
+            v-b-modal.favorite
+          />
           <favorite-modal id="favorite" :restaurant-id="restaurant.id" />
-          <b-button variant="info" v-b-modal.visit class="m-1">
-            <font-awesome-icon icon="edit" />
-            {{ $t('restaurant.visit') }}
-          </b-button>
+          <icon-button
+            class="m-1"
+            icon="edit"
+            text="restaurant.visit"
+            variant="info"
+            v-b-modal.visit
+          />
           <visit-modal
             id="visit"
             :restaurant-id="restaurant.id"
@@ -71,6 +77,7 @@
 import { mapState } from 'vuex'
 import { get } from '@/api'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
+import IconButton from '@/components/shared/IconButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
@@ -78,17 +85,17 @@ const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 export default {
   components: {
     FavoriteModal,
+    IconButton,
     VisitModal
   },
   data() {
     return {
-      id: '5f31fc6155d7790550c08afe',
-      restaurant: null,
-      fields: ['day', 'hours'],
       currentImage: 0,
-      timer: null,
+      fields: ['day', 'hours'],
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      restaurant: null,
+      timer: null
     }
   },
   computed: {

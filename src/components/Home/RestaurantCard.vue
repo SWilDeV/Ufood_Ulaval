@@ -18,10 +18,7 @@
       <b-button-group class="w-100">
         <view-button v-bind:restaurant-id="restaurant.id" />
         <template v-if="user">
-          <b-button variant="info" v-b-modal="visitId">
-            <font-awesome-icon icon="edit" />
-            {{ $t('restaurantCard.visit') }}
-          </b-button>
+          <icon-button icon="edit" text="restaurantCard.visit" variant="info" v-b-modal="visitId" />
           <visit-modal
             :id="visitId"
             :restaurant-id="restaurant.id"
@@ -35,12 +32,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import IconButton from '@/components/shared/IconButton.vue'
 import ViewButton from '@/components/shared/ViewButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 export default {
   name: 'restaurantCard',
   components: {
+    IconButton,
     ViewButton,
     VisitModal
   },
