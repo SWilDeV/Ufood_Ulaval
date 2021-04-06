@@ -85,5 +85,18 @@
     "thursday": "Thursday",
     "friday": "Friday",
     "saturday": "Saturday"
+  },
+
+  "home":{
+    "welcome": "Welcome to UFood!",
+    "address": "Address: ",
+    "priceRange": "Price range: ",
+    "genres": "Genres: ",
+    "rating": "Rating: ",
+    "priceDropDownDefault": "All prices",
+    "genreDropDownDefault": "All genres",
+    "search": "Search:",
+    "view": "View",
+    "visit": "Visit"
   }
 }

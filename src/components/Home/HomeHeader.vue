@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1>Welcome to UFood!</h1>
+    <h1 v-t="'home.welcome'"></h1>
 
     <div class="mb-4">
       <div class="form-row">
         <div class="col">
-          <label for="price">Price range:</label>
+          <label for="price" v-t="'home.priceRange'"></label>
           <select id="price" class="form-control" v-model="selectedPrice">
-            <option value="">All prices</option>
+            <option value="" v-t="'home.priceDropDownDefault'">All prices</option>
             <option v-for="price in allPriceRanges" :value="price" v-bind:key="price">
               {{ price }}
             </option>
@@ -15,9 +15,9 @@
         </div>
 
         <div class="col">
-          <label for="genre">Genres:</label>
+          <label for="genre" v-t="'home.genres'"></label>
           <select id="genre" class="form-control" v-model="selectedGenre">
-            <option value="">All genres</option>
+            <option value="" v-t="'home.genreDropDownDefault'"></option>
             <option v-for="genre in allGenres" :value="genre" v-bind:key="genre">
               {{ genre }}
             </option>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col">
-          <label for="search">Search:</label>
+          <label for="search" v-t="'home.search'"></label>
           <b-input-group>
             <b-form-input id="search" v-model="searchValue" placeholder="Search" />
             <b-input-group-append>
