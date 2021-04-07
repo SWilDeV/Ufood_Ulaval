@@ -1,10 +1,12 @@
+import Cookies from 'js-cookie'
+
 export default {
   login({ commit }, { email, id, name, token }) {
-    commit('setToken', token)
+    Cookies.set('token', token)
     commit('setUser', { email, id, name })
   },
   logout({ commit }) {
-    commit('setToken', null)
+    Cookies.remove('token')
     commit('setUser', null)
   }
 }
