@@ -1,7 +1,7 @@
 <template>
   <table class="table table-striped">
     <tbody>
-      <tr v-for="item in items" :key="item.id">
+      <tr v-for="item in sortedItems" :key="item.id">
         <td>
           <router-link :to="{ name: 'Member', params: { id: item.id } }">
             <v-gravatar class="mr-2" :email="item.email" />
@@ -32,6 +32,11 @@ export default {
     editable: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    sortedItems() {
+      return this.items.slice().sort((a, b) => (a.name >= b.name ? 1 : -1))
     }
   }
 }
