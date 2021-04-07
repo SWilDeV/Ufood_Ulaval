@@ -34,8 +34,8 @@ export default {
   computed: {
     params() {
       return {
-        limit: this.count,
-        page: this.page - 1,
+        count: this.count,
+        page: this.page,
         search: this.search
       }
     }

@@ -4,17 +4,26 @@ export function follow(id) {
   return post('/follow', { id })
 }
 
+export function getFavorites(id, { count }) {
+  const params = []
+  if (count) {
+    params.push(`limit=${count}`)
+  }
+  const query = params.length ? `?${params.join('&')}` : ''
+  return get(`/users/${id}/favorites${query}`)
+}
+
 export function getMember(id) {
   return get(`/users/${id}`)
 }
 
-export function getMembers({ limit, page, search }) {
+export function getMembers({ count, page, search }) {
   const params = []
-  if (limit) {
-    params.push(`limit=${limit}`)
+  if (count) {
+    params.push(`limit=${count}`)
   }
   if (page) {
-    params.push(`page=${page}`)
+    params.push(`page=${page - 1}`)
   }
   if (search) {
     params.push(`q=${search}`)

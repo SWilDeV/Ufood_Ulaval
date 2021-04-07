@@ -55,7 +55,7 @@ export default {
   },
   async created() {
     try {
-      const restaurants = (await getRestaurants(200)).items
+      const restaurants = (await getRestaurants({ count: 200 })).items
       for (const restaurant of restaurants) {
         this.restaurantDictionary.push({
           id: restaurant.id,

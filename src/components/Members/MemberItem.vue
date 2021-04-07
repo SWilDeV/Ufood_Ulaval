@@ -4,7 +4,7 @@
     <br />
     <strong>{{ item.name }}</strong>
     <br />
-    <member-rating v-if="item.rating" :rating="item.rating" />
+    <member-rating v-if="item.rating >= 0" :rating="item.rating" />
   </router-link>
 </template>
 

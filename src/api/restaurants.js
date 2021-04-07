@@ -1,21 +1,22 @@
 import { get } from './index'
 
-export function getRestaurants(limit) {
-  return get(`/unsecure/restaurants?limit=${limit}`)
-}
-
-export function getFilteredRestaurants(count, genre, page, price, search) {
-  const query = [`limit=${count}`, `page=${page - 1}`]
+export function getRestaurants({ count, genre, page, price, search }) {
+  const params = []
   if (genre) {
-    query.push(`genres=${genre}`)
+    params.push(`genres=${genre}`)
+  }
+  if (count) {
+    params.push(`limit=${count}`)
+  }
+  if (page) {
+    params.push(`page=${page - 1}`)
   }
   if (price) {
-    query.push(`price_range=${price}`)
+    params.push(`price_range=${price}`)
   }
   if (search) {
-    query.push(`q=${search}`)
+    params.push(`q=${search}`)
   }
-
-  const queryString = query.join('&')
-  return get(`/unsecure/restaurants?${queryString}`)
+  const query = params.length ? `?${params.join('&')}` : ''
+  return get(`/unsecure/restaurants${query}`)
 }

@@ -14,7 +14,7 @@
 import HomeHeader from './HomeHeader'
 import Pager from '@/components/shared/Pager.vue'
 import RestaurantList from './RestaurantList'
-import { getRestaurants, getFilteredRestaurants } from '@/api/restaurants'
+import { getRestaurants } from '@/api/restaurants'
 
 export default {
   name: 'HomeForm',
@@ -48,7 +48,7 @@ export default {
   },
   async created() {
     try {
-      const results = await getRestaurants(1000)
+      const results = await getRestaurants({ count: 1000 })
 
       //On va chercher la liste de tous les genres différents:
       const restaurantsNumber = results.items.length
@@ -77,7 +77,7 @@ export default {
   methods: {
     async refresh({ genre, page, price, search }) {
       try {
-        const results = await getFilteredRestaurants(this.count, genre, page, price, search)
+        const results = await getRestaurants({ count: this.count, genre, page, price, search })
         this.allRestaurants = results.items
         this.total = results.total
       } catch (e) {

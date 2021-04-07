@@ -10,6 +10,6 @@ export async function createVisit({ comment, date, rating, restaurantId }) {
   })
 }
 
-export async function getVisits(limit) {
-  return get(`/users/${store.state.user.id}/restaurants/visits?limit=${limit || 100}`)
+export async function getVisits(count) {
+  return get(`/users/${store.state.user.id}/restaurants/visits?limit=${count}`)
 }

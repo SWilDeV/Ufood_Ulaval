@@ -30,7 +30,7 @@
       {{ $t('member.followingFormat') }}
       &middot;
       <font-awesome-icon icon="star" />
-      {{ favorites }}
+      {{ favoriteCount }}
     </p>
     <p>
       <member-rating :rating="member.rating" />
@@ -57,7 +57,7 @@ export default {
   },
   props: {
     favorites: {
-      type: Number,
+      type: Array,
       required: true
     },
     member: {
@@ -70,6 +70,9 @@ export default {
     }
   },
   computed: {
+    favoriteCount() {
+      return this.favorites.reduce((a, b) => a + b.restaurants.length, 0)
+    },
     followed() {
       return this.member.followers.some(user => user.id === this.user.id)
     },

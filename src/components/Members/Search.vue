@@ -1,5 +1,5 @@
 <template>
-  <b-input-group class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+  <b-input-group class="col-sm-12 col-md-6 col-lg-4">
     <b-form-input
       id="search"
       :value="value"
