@@ -6,24 +6,28 @@
       @filters-changed="setFilters($event)"
     />
     <restaurant-list v-bind:all-restaurants="allRestaurants" />
-    <home-pager :count="count" :total="total" @page-changed="setPage($event)" />
+    <pager class="mb-3" v-model="page" :count="count" :total="total" />
   </div>
 </template>
 
 <script>
 import HomeHeader from './HomeHeader'
-import HomePager from './HomePager'
+import Pager from '@/components/shared/Pager.vue'
 import RestaurantList from './RestaurantList'
 import { getRestaurants, getFilteredRestaurants } from '@/api/restaurants'
 
 export default {
-  name: 'allRestaurants',
-  components: { HomeHeader, HomePager, RestaurantList },
+  name: 'HomeForm',
+  components: {
+    HomeHeader,
+    Pager,
+    RestaurantList
+  },
   data() {
     return {
-      allRestaurants: [],
       allGenres: [],
       allPriceRanges: [],
+      allRestaurants: [],
       count: 12,
       genre: '',
       page: 1,

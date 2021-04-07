@@ -3,9 +3,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faBan,
   faEdit,
+  faEnvelope,
   faEye,
   faFastBackward,
   faFastForward,
+  faHamburger,
   faMinus,
   faPaperPlane,
   faPlus,
@@ -16,16 +18,21 @@ import {
   faStepBackward,
   faStepForward,
   faTimes,
-  faUser
+  faUser,
+  faUserFriends,
+  faUserPlus,
+  faUserTimes
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
   faBan,
   faEdit,
+  faEnvelope,
   faEye,
   faFastBackward,
   faFastForward,
+  faHamburger,
   faMinus,
   faPaperPlane,
   faPlus,
@@ -36,7 +43,10 @@ library.add(
   faStepBackward,
   faStepForward,
   faTimes,
-  faUser
+  faUser,
+  faUserFriends,
+  faUserPlus,
+  faUserTimes
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

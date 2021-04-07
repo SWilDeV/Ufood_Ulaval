@@ -7,20 +7,17 @@
     <b-navbar-toggle target="nav-collapse" />
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav v-if="user">
-        <b-nav-item href="#">
-          <!-- TODO: voir la liste des utilisateurs ref#61 -->
-          Members
+        <b-nav-item :to="{ name: 'Members' }">
+          {{ $t('members.title') }}
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <Search v-if="$route.name !== 'Home'" />
+        <Search v-if="!$route.meta.noSearch" />
         <b-nav-item-dropdown right v-if="user">
           <template #button-content>
-            <!-- TODO: en mobile la taille ne doit pas être fixée -->
             <v-gravatar class="rounded-circle" :email="user.email" :size="40" />
           </template>
-          <b-dropdown-item href="#">
-            <!-- TODO: navigation au profil public ref#64 -->
+          <b-dropdown-item :to="{ name: 'Member', params: { id: user.id } }">
             <strong v-text="user.name" />
             <br />
             <span v-text="user.email" />

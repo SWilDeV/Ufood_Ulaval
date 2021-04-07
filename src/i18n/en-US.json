@@ -13,6 +13,10 @@
     "addToList": "Add",
     "selectRestaurant": "Select a restaurant"
   },
+  "followButton": {
+    "follow": "Follow",
+    "unfollow": "Unfollow"
+  },
   "genericError": "An unexpected error occurred, please try again later.",
   "home": {
     "address": "Address: ",
@@ -22,9 +26,21 @@
     "priceRange": "Price range: ",
     "rating": "Rating: ",
     "search": "Search:",
-    "view": "View",
-    "visit": "Visit",
     "welcome": "Welcome to UFood!"
+  },
+  "member": {
+    "editProfile": "Edit profile",
+    "favorites": "Favorites",
+    "followerFormat": "follower",
+    "followers": "Followers",
+    "followersFormat": "followers",
+    "following": "Following",
+    "followingFormat": "following"
+  },
+  "memberRating": "{rating} points",
+  "members": {
+    "search": "Search",
+    "title": "Members"
   },
   "navigation": {
     "profile": "User Profile",

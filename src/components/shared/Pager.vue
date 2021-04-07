@@ -1,33 +1,33 @@
 <template>
-  <div class="form-inline justify-content-center mb-4">
+  <div class="form-inline justify-content-center">
     <icon-button
       class="m-1"
       icon="fast-backward"
       variant="primary"
-      :disabled="page === 1"
-      @click="page = 1"
+      :disabled="value === 1"
+      @click="goToPage(1)"
     />
     <icon-button
       class="m-1"
       icon="step-backward"
       variant="primary"
-      :disabled="page === 1"
-      @click="page--"
+      :disabled="value === 1"
+      @click="goToPage(value - 1)"
     />
-    <b-form-input class="m-1" :value="page" disabled />
+    <b-form-input class="m-1" :value="value" disabled />
     <icon-button
       class="m-1"
       icon="step-forward"
       variant="primary"
-      :disabled="page === pageCount"
-      @click="page++"
+      :disabled="value >= pageCount"
+      @click="goToPage(value + 1)"
     />
     <icon-button
       class="m-1"
       icon="fast-forward"
       variant="primary"
-      :disabled="page === pageCount"
-      @click="page = pageCount"
+      :disabled="value >= pageCount"
+      @click="goToPage(pageCount)"
     />
   </div>
 </template>
@@ -36,7 +36,7 @@
 import IconButton from '@/components/shared/IconButton.vue'
 
 export default {
-  name: 'HomePager',
+  name: 'Pager',
   components: {
     IconButton
   },
@@ -48,11 +48,10 @@ export default {
     total: {
       type: Number,
       required: true
-    }
-  },
-  data() {
-    return {
-      page: 1
+    },
+    value: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -60,9 +59,9 @@ export default {
       return Math.ceil(this.total / this.count)
     }
   },
-  watch: {
-    page(value) {
-      this.$emit('page-changed', value)
+  methods: {
+    goToPage(page) {
+      this.$emit('input', page)
     }
   }
 }
