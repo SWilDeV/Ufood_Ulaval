@@ -1,19 +1,25 @@
-import store from '@/store'
+import Cookies from 'js-cookie'
+
+const applicationJson = 'application/json'
+const contentType = 'Content-Type'
 
 const execute = async (method, url, data) => {
   let body = null
-  const headers = { Accept: 'application/json' }
+  const headers = { Accept: applicationJson }
   if (data) {
     if (data instanceof URLSearchParams) {
-      headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+      headers[contentType] = 'application/x-www-form-urlencoded; charset=UTF-8'
       body = data
     } else {
-      headers['Content-Type'] = 'application/json; charset=UTF-8'
+      headers[contentType] = `${applicationJson}; charset=UTF-8`
       body = JSON.stringify(data)
     }
   }
-  if (store.state.token) {
-    headers['Authorization'] = store.state.token
+  if (!url.includes('unsecure')) {
+    const token = Cookies.get('token')
+    if (token) {
+      headers['Authorization'] = token
+    }
   }
   const response = await fetch(`${process.env.VUE_APP_API_BASE_URL}${url}`, {
     body,
@@ -23,7 +29,14 @@ const execute = async (method, url, data) => {
   if (!response.ok) {
     throw response
   }
-  return response.json()
+  const dataType = response.headers.get(contentType)
+  if (dataType) {
+    if (dataType.includes(applicationJson)) {
+      return response.json()
+    } else {
+      throw new Error(`Unsupported Content-Type: ${dataType}`)
+    }
+  }
 }
 
 export function _delete(url) {
