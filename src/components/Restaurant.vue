@@ -80,12 +80,18 @@ import mixins from '@/mixins'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import IconButton from '@/components/shared/IconButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
+import mixins from '@/mixins'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
+<<<<<<< HEAD
   name: 'Restaurant',
   mixins: [mixins],
+=======
+  mixins: [mixins],
+
+>>>>>>> Bouton pour changer de mode. Début de la map.
   components: {
     FavoriteModal,
     IconButton,
@@ -95,8 +101,6 @@ export default {
     return {
       currentImage: 0,
       fields: ['day', 'hours'],
-      latitude: 0,
-      longitude: 0,
       restaurant: null,
       timer: null
     }
@@ -125,22 +129,6 @@ export default {
     },
     next() {
       this.currentImage = this.currentImage === this.images.length - 1 ? 0 : this.currentImage + 1
-    },
-    getCurrentPosition() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-      })
-    },
-    async getPosition() {
-      try {
-        const {
-          coords: { latitude, longitude }
-        } = await this.getCurrentPosition()
-        this.latitude = latitude
-        this.longitude = longitude
-      } catch (e) {
-        console.error(e)
-      }
     }
   },
   async created() {

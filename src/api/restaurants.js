@@ -1,6 +1,6 @@
 import { get } from './index'
 
-export function getRestaurants({ count, genre, page, price, search }) {
+export function getRestaurants({ count, genre, page, price, search, longitude, latitude }) {
   const params = []
   if (genre) {
     params.push(`genres=${genre}`)
@@ -16,6 +16,13 @@ export function getRestaurants({ count, genre, page, price, search }) {
   }
   if (search) {
     params.push(`q=${search}`)
+  }
+
+  if (longitude) {
+    if (latitude) {
+      params.push(`lon=${longitude}`)
+      params.push(`lat=${latitude}`)
+    }
   }
   const query = params.length ? `?${params.join('&')}` : ''
   return get(`/unsecure/restaurants${query}`)
