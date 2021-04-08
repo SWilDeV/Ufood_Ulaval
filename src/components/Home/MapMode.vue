@@ -1,7 +1,5 @@
 <template>
-  <div id="map">
-    <button @click="test()">Show names</button>
-  </div>
+  <div id="map"></div>
 </template>
 
 <script>
@@ -19,49 +17,40 @@ export default {
     }
   },
 
-  async mounted() {
-    try {
-      const google = await gmapsInit()
-
-      const map = new google.maps.Map(this.$el)
-
-      var Item_1 = new google.maps.LatLng(this.latitude + 1, this.longitude + 1)
-      var myPlace = new google.maps.LatLng(this.latitude, this.longitude)
-      var bounds = new google.maps.LatLngBounds()
-      bounds.extend(myPlace)
-      bounds.extend(Item_1)
-      map.fitBounds(bounds)
-      map.setCenter({ lat: this.latitude, lng: this.longitude })
-
-      /*
-      const myLatLng = { lat: -25.363, lng: 131.044 }
-      const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
-        center: myLatLng
-      })
-      new google.maps.Marker({
-        position: myLatLng,
-        map,
-        title: 'Hello World!'
-      })
-      */
-    } catch (error) {
-      console.error(error)
-    }
-  },
-
   methods: {
-    test() {
-      const restaurantsNumber = this.restaurants.length
-      for (let i = 0; i < restaurantsNumber; i++) {
-        const namesForRestaurantArray = this.restaurants[i].name
-        console.log(namesForRestaurantArray)
+    async renderMap() {
+      try {
+        const google = await gmapsInit()
+        let myMap = new google.maps.Map(document.getElementById('map'), {
+          center: { lat: this.latitude, lng: this.longitude },
+          zoom: 12
+        })
+
+        //On rajoute les markers:
+
+        const restaurantsNumber = this.restaurants.length
+        for (let i = 0; i < restaurantsNumber; i++) {
+          const coordonnees = this.restaurants[i].location.coordinates
+          const longitude = coordonnees[0]
+          const latitude = coordonnees[1]
+          const latlng = new google.maps.LatLng(latitude, longitude)
+          const myMarkerOptions = {
+            position: latlng,
+            map: myMap,
+            label: this.restaurants[i].name
+          }
+          const myMarker = new google.maps.Marker(myMarkerOptions)
+          console.log(myMarker)
+        }
+      } catch (error) {
+        console.error(error)
       }
     }
   },
 
   async created() {
     await this.getPosition()
+    this.renderMap()
   },
 
   watch: {
@@ -80,6 +69,7 @@ export default {
           })
           this.restaurants = results.items
           console.log(this.restaurants)
+          this.renderMap()
         } catch (e) {
           console.error(e)
         }
@@ -97,7 +87,8 @@ body {
 }
 
 #map {
-  width: 100vw;
-  height: 100vh;
+  width: 97.5vw;
+  height: 97.5vh;
+  margin-bottom: 1%;
 }
 </style>
