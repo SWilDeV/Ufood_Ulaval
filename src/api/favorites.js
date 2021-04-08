@@ -24,8 +24,8 @@ export function deleteRestaurantFromList(restaurantId, listId) {
   return _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
 }
 
-export function getFavorites(limit) {
-  return get(`/favorites?limit=${limit}`)
+export function getFavorites(count) {
+  return get(`/favorites?limit=${count}`)
 }
 
 export function updateFavorite({ id, name }, owner) {

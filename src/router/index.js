@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import Member from '@/components/Member'
+import Members from '@/components/Members'
 import Restaurant from '@/components/Restaurant'
 import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
@@ -15,7 +17,19 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: { noSearch: true }
+    },
+    {
+      path: '/member/:id',
+      name: 'Member',
+      component: Member
+    },
+    {
+      path: '/members',
+      name: 'Members',
+      component: Members,
+      meta: { noSearch: true }
     },
     {
       path: '/restaurant/:id',
