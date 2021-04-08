@@ -46,6 +46,9 @@ export default {
       this.search = search
     }
   },
+  created() {
+    this.search = this.$route.query.search || ''
+  },
   watch: {
     params: {
       deep: true,
