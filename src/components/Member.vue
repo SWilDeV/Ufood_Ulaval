@@ -72,34 +72,30 @@ export default {
       )
     }
   },
-  watch: {
-    '$route.params.id': {
-      immediate: true,
-      async handler(id) {
-        try {
-          this.member = await getMember(id)
-          const results = await getFavorites(id, { count: 1000 })
-          if (this.restaurants === null) {
-            this.restaurants = Object.fromEntries(
-              (await getRestaurants({ count: 1000 })).items.map(item => [item.id, item.name])
-            )
-          }
-          this.favorites = results.items
-            .map(list => ({
-              id: list.id,
-              name: list.name,
-              restaurants: list.restaurants
-                .map(restaurant => ({
-                  id: restaurant.id,
-                  name: this.restaurants[restaurant.id]
-                }))
-                .sort((a, b) => (a.name >= b.name ? 1 : -1))
+  async created() {
+    try {
+      const id = this.$route.params.id
+      this.member = await getMember(id)
+      const results = await getFavorites(id, { count: 1000 })
+      if (this.restaurants === null) {
+        this.restaurants = Object.fromEntries(
+          (await getRestaurants({ count: 1000 })).items.map(item => [item.id, item.name])
+        )
+      }
+      this.favorites = results.items
+        .map(list => ({
+          id: list.id,
+          name: list.name,
+          restaurants: list.restaurants
+            .map(restaurant => ({
+              id: restaurant.id,
+              name: this.restaurants[restaurant.id]
             }))
             .sort((a, b) => (a.name >= b.name ? 1 : -1))
-        } catch (e) {
-          console.error(e)
-        }
-      }
+        }))
+        .sort((a, b) => (a.name >= b.name ? 1 : -1))
+    } catch (e) {
+      console.error(e)
     }
   }
 }

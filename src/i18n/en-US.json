@@ -78,6 +78,12 @@
   "restaurantCard": {
     "visit": "Visit"
   },
+  "search": {
+    "moreResults": "More results",
+    "noResult": "No result matched your search.",
+    "restaurants": "Restaurants",
+    "title": "Search"
+  },
   "signIn": {
     "invalidCredentials": "The specified email and/or password did not match.",
     "signUpLink": "Don't have an account yet? Click here to create one now.",

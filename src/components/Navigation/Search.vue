@@ -31,7 +31,8 @@ export default {
   },
   methods: {
     submit() {
-      this.$router.push({ name: 'Home', query: { search: this.search } })
+      this.$router.push({ name: 'Search', query: { q: this.search } })
+      this.search = ''
     }
   }
 }
