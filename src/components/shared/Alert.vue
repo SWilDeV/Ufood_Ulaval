@@ -6,10 +6,8 @@
     :dismissible="dismissible"
     @dismissed="$emit('dismissed', $event)"
   >
-    <slot name="before" />
     <strong v-if="important" v-text="important" />
     {{ description }}
-    <slot name="after" />
   </b-alert>
 </template>
 

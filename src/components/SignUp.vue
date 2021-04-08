@@ -2,15 +2,10 @@
   <div class="container">
     <h1 v-t="'signUp.title'" />
     <alert v-if="error === true" text="genericError" variant="danger" @dismissed="clearError" />
-    <alert v-if="success" text="signUp.success" variant="success" :dismissible="false">
-      <template v-slot:after>
-        <br />
-        <router-link :to="{ name: 'SignIn' }" v-t="'navigation.signIn'" />
-      </template>
-    </alert>
+    <alert v-if="success" text="signUp.success" variant="success" :dismissible="false" />
     <b-form v-else @submit.prevent="submit">
       <b-form-group
-        :label="$t('signUp.email')"
+        :label="$t('fields.email.label')"
         label-for="email"
         :invalid-feedback="errors.email"
         :state="errors.email ? false : null"
@@ -19,12 +14,12 @@
           type="email"
           id="email"
           v-model="email"
-          :placeholder="$t('signUp.emailPlaceholder')"
+          :placeholder="$t('fields.email.placeholder')"
           :state="errors.email ? false : null"
         />
       </b-form-group>
       <b-form-group
-        :label="$t('signUp.name')"
+        :label="$t('fields.name.label')"
         label-for="name"
         :invalid-feedback="errors.name"
         :state="errors.name ? false : null"
@@ -32,12 +27,12 @@
         <b-form-input
           id="name"
           v-model="name"
-          :placeholder="$t('signUp.namePlaceholder')"
+          :placeholder="$t('fields.name.placeholder')"
           :state="errors.name ? false : null"
         />
       </b-form-group>
       <b-form-group
-        :label="$t('signUp.password')"
+        :label="$t('fields.password.label')"
         label-for="password"
         :invalid-feedback="errors.password"
         :state="errors.password ? false : null"
@@ -47,14 +42,11 @@
           id="password"
           ref="password"
           v-model="password"
-          :placeholder="$t('signUp.passwordPlaceholder')"
+          :placeholder="$t('fields.password.placeholder')"
           :state="errors.password ? false : null"
         />
       </b-form-group>
       <icon-button icon="user" text="signUp.submit" type="submit" variant="primary" />
-      <div class="my-2">
-        <router-link :to="{ name: 'SignIn' }" v-t="'signUp.signInLink'" />
-      </div>
     </b-form>
   </div>
 </template>
@@ -85,12 +77,6 @@ export default {
     clearError() {
       this.error = false
     },
-    onError(error) {
-      console.error(error)
-      this.error = true
-      this.password = ''
-      this.$refs.password.focus()
-    },
     async submit() {
       if (this.email === '') {
         Vue.set(this.errors, 'email', this.$i18n.t('required'))
@@ -116,10 +102,16 @@ export default {
           await signUp({ email: this.email, name: this.name, password: this.password })
           this.success = true
         } catch (e) {
-          this.onError(e)
+          console.error(e)
+          this.error = true
+          this.password = ''
+          this.$refs.password.focus()
         }
       }
     }
+  },
+  created() {
+    this.$root.$emit('bv::hide::modal', 'signModal')
   },
   watch: {
     email() {
