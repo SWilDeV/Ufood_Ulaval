@@ -32,16 +32,16 @@
             {{ $t('navigation.signOut') }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <template v-else>
-          <b-nav-item :to="{ name: 'SignIn' }">
-            <font-awesome-icon icon="sign-in-alt" />
-            {{ $t('navigation.signIn') }}
-          </b-nav-item>
-          <b-nav-item :to="{ name: 'SignUp' }">
-            <font-awesome-icon icon="user" />
-            {{ $t('navigation.signUp') }}
-          </b-nav-item>
-        </template>
+        <b-nav-text v-else>
+          <icon-button
+            class="ml-3"
+            icon="sign-in-alt"
+            text="signIn.title"
+            variant="light"
+            v-b-modal.signModal
+          />
+          <sign-in-modal id="signModal" />
+        </b-nav-text>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -49,12 +49,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import IconButton from '@/components/shared/IconButton.vue'
 import Search from '@/components/Navigation/Search.vue'
+import SignInModal from '@/components/Navigation/SignInModal.vue'
 
 export default {
   name: 'Navbar',
   components: {
-    Search
+    IconButton,
+    Search,
+    SignInModal
   },
   computed: {
     ...mapState(['user'])

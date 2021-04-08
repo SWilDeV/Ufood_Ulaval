@@ -1,8 +1,12 @@
 {
-  "favoriteModal": {
+  "buttons": {
     "add": "Add",
     "cancel": "Cancel",
+    "close": "Close",
     "create": "Create",
+    "send": "Send"
+  },
+  "favoriteModal": {
     "createList": "Create a new list",
     "list": "List",
     "namePlaceholder": "Enter a name",
@@ -12,6 +16,20 @@
   "favorites": {
     "addToList": "Add",
     "selectRestaurant": "Select a restaurant"
+  },
+  "fields": {
+    "email": {
+      "label": "Email address",
+      "placeholder": "Enter your email address"
+    },
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter your name"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter your password"
+    }
   },
   "followButton": {
     "follow": "Follow",
@@ -45,9 +63,7 @@
   "navigation": {
     "profile": "User Profile",
     "searchPlaceholder": "Search",
-    "signIn": "Sign In",
-    "signOut": "Sign Out",
-    "signUp": "Sign Up"
+    "signOut": "Sign Out"
   },
   "required": "This field is required.",
   "restaurant": {
@@ -63,24 +79,13 @@
     "visit": "Visit"
   },
   "signIn": {
-    "email": "Email address",
-    "emailPlaceholder": "Enter your email address",
     "invalidCredentials": "The specified email and/or password did not match.",
-    "password": "Password",
-    "passwordPlaceholder": "Enter your password",
     "signUpLink": "Don't have an account yet? Click here to create one now.",
     "submit": "Sign in",
     "title": "Sign in"
   },
   "signUp": {
-    "email": "Email address",
-    "emailPlaceholder": "Enter your email address",
-    "name": "Name",
-    "namePlaceholder": "Enter your name",
-    "password": "Password",
-    "passwordPlaceholder": "Enter your password",
-    "signInLink": "Already have an account? Click here to sign in.",
-    "success": "Your account has been created. You can now sign in using your email and password by clicking on the link below:",
+    "success": "Your account has been created. You may now sign in using your email and password.",
     "submit": "Sign up",
     "title": "Sign up"
   },
@@ -91,16 +96,15 @@
     "text": "View"
   },
   "visitModal": {
-    "cancel": "Cancel",
-    "close": "Close",
-    "comment": "Comment",
-    "commentPlaceholder": "Please describe your experience!",
+    "comment": {
+      "label": "Comment",
+      "placeholder": "Please describe your experience!"
+    },
     "date": "Visit date",
     "futureDate": "The date cannot be in the future.",
     "invalidRating": "Enter a rating between 0 and 5.",
     "newVisit": "Write a review",
-    "rating": "Rating",
-    "send": "Send"
+    "rating": "Rating"
   },
   "visits": {
     "date": "Date",

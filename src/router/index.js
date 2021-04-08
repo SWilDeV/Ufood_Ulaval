@@ -4,7 +4,6 @@ import Home from '@/components/Home'
 import Member from '@/components/Member'
 import Members from '@/components/Members'
 import Restaurant from '@/components/Restaurant'
-import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
 import UserPage from '@/components/UserPage'
@@ -35,11 +34,6 @@ export default new Router({
       path: '/restaurant/:id',
       name: 'Restaurant',
       component: Restaurant
-    },
-    {
-      path: '/signin',
-      name: 'SignIn',
-      component: SignIn
     },
     {
       path: '/signout',

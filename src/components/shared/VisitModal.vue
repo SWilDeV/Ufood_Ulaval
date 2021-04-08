@@ -32,7 +32,7 @@
       />
     </b-form-group>
     <b-form-group
-      :label="$t('visitModal.comment')"
+      :label="$t('visitModal.comment.label')"
       label-for="comment"
       :invalid-feedback="errors.comment"
       :state="errors.comment ? false : null"
@@ -41,17 +41,17 @@
         id="comment"
         rows="5"
         v-model="comment"
-        :placeholder="$t('visitModal.commentPlaceholder')"
+        :placeholder="$t('visitModal.comment.placeholder')"
         :disabled="Boolean(visit)"
         :state="errors.comment ? false : null"
       />
     </b-form-group>
     <template v-if="Boolean(visit)" #modal-footer="{ cancel }">
-      <icon-button icon="times" text="visitModal.close" @click="cancel()" />
+      <icon-button icon="times" text="buttons.close" @click="cancel()" />
     </template>
     <template v-else #modal-footer="{ cancel, ok }">
-      <icon-button icon="ban" text="visitModal.cancel" @click="clear(cancel)" />
-      <icon-button icon="paper-plane" text="visitModal.send" variant="primary" @click="send(ok)" />
+      <icon-button icon="ban" text="buttons.cancel" @click="clear(cancel)" />
+      <icon-button icon="paper-plane" text="buttons.send" variant="primary" @click="send(ok)" />
     </template>
   </b-modal>
 </template>

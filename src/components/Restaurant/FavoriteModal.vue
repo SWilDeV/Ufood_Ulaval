@@ -6,7 +6,7 @@
         <b-input-group-append>
           <icon-button
             icon="plus"
-            text="favoriteModal.create"
+            text="buttons.create"
             variant="success"
             :disabled="!name"
             @click="createList"
@@ -32,8 +32,8 @@
       </b-form-select>
     </b-form-group>
     <template #modal-footer="{ cancel, ok }">
-      <icon-button icon="ban" text="favoriteModal.cancel" @click="clear(cancel)" />
-      <icon-button icon="star" text="favoriteModal.add" variant="primary" @click="addToList(ok)" />
+      <icon-button icon="ban" text="buttons.cancel" @click="clear(cancel)" />
+      <icon-button icon="star" text="buttons.add" variant="primary" @click="addToList(ok)" />
     </template>
   </b-modal>
 </template>

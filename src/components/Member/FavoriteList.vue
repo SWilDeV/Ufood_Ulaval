@@ -2,7 +2,7 @@
   <b-card class="mb-1" no-body>
     <b-card-header role="tab">
       <h5 class="mb-0">
-        <button class="btn btn-link" v-b-toggle="collapseId" v-text="item.name" />
+        <b-button variant="link" v-b-toggle="collapseId" v-text="item.name" />
       </h5>
     </b-card-header>
     <b-collapse :id="collapseId" visible :accordion="accordion" role="tabpanel">
