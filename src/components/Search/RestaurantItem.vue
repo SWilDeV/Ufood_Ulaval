@@ -6,12 +6,16 @@
     <br />
     <font-awesome-icon icon="star" />
     {{ $t('restaurant.rating') }}
-    {{ rating.toFixed(1) }}
+    {{ formatRating(rating) }}
   </router-link>
 </template>
 
 <script>
+import mixins from '@/mixins'
+
 export default {
+  name: 'RestaurantItem',
+  mixins: [mixins],
   props: {
     id: {
       type: String,
