@@ -15,6 +15,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "js-cookie": "^2.2.1",
     "vue": "^2.6.12",
     "vue-gravatar": "^1.4.1",
     "vue-i18n": "^8.24.1",
