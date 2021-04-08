@@ -39,8 +39,8 @@ export default {
             map: myMap,
             label: this.restaurants[i].name
           }
+          // eslint-disable-next-line no-unused-vars
           const myMarker = new google.maps.Marker(myMarkerOptions)
-          console.log(myMarker)
         }
       } catch (error) {
         console.error(error)
@@ -68,7 +68,6 @@ export default {
             latitude: this.latitude
           })
           this.restaurants = results.items
-          console.log(this.restaurants)
           this.renderMap()
         } catch (e) {
           console.error(e)
