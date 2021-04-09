@@ -61,7 +61,7 @@
     "title": "Members"
   },
   "navigation": {
-    "profile": "User Profile",
+    "profile": "Edit Profile",
     "searchPlaceholder": "Search",
     "signOut": "Sign Out"
   },

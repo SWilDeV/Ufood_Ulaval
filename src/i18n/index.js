@@ -8,3 +8,12 @@ export default new VueI18n({
   locale: 'en-US',
   messages: { 'en-US': enUS }
 })
+
+// Ajouter la mmchose en FR
+
+// Vue.use(VueI18n)
+
+// export default new VueI18n({
+//   locale: 'en-US',
+//   messages: { 'en-US': enUS }
+// })

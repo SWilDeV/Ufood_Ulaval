@@ -7,7 +7,7 @@ export function addFavoriteToList(listId, restaurantId) {
 }
 
 export function addRestaurantToList({ restaurantId, favoriteId }) {
-  return post(`/unsecure/favorites/${favoriteId}/restaurants`, {
+  return post(`/favorites/${favoriteId}/restaurants`, {
     id: restaurantId
   })
 }
@@ -17,11 +17,11 @@ export function createList({ name, owner }) {
 }
 
 export function deleteFavoriteList(deleteId) {
-  return _delete(`/unsecure/favorites/${deleteId}`)
+  return _delete(`/favorites/${deleteId}`)
 }
 
 export function deleteRestaurantFromList(restaurantId, listId) {
-  return _delete(`/unsecure/favorites/${listId}/restaurants/${restaurantId}`)
+  return _delete(`/favorites/${listId}/restaurants/${restaurantId}`)
 }
 
 export function getFavorites(count) {
@@ -29,7 +29,7 @@ export function getFavorites(count) {
 }
 
 export function updateFavorite({ id, name }, owner) {
-  return put(`/unsecure/favorites/${id}`, {
+  return put(`/favorites/${id}`, {
     name: name,
     owner: owner
   })
