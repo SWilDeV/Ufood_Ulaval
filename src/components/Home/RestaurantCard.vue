@@ -17,7 +17,7 @@
         <span v-t="'home.genres'"></span>
         <span>{{ restaurant.genres.join(', ') }} <br /></span>
         <span v-t="'home.rating'"></span>
-        <span>{{ restaurant.rating.toFixed(1) }} <br /></span>
+        <span>{{ formatRating(restaurant.rating) }} <br /></span>
       </p>
       <b-button-group class="w-100">
         <view-button v-bind:restaurant-id="restaurant.id" />
@@ -36,12 +36,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import mixins from '@/mixins'
 import IconButton from '@/components/shared/IconButton.vue'
 import ViewButton from '@/components/shared/ViewButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 export default {
-  name: 'restaurantCard',
+  name: 'RestaurantCard',
+  mixins: [mixins],
   components: {
     IconButton,
     ViewButton,
