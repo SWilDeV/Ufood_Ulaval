@@ -48,7 +48,7 @@
         </span>
         <span class="col-sm-3 font-weight-bold">
           <span v-t="'restaurant.rating'" />
-          <span>{{ restaurantRating }}/5</span>
+          <span>{{ formatRating(restaurant.rating) }}/5</span>
         </span>
       </div>
       <div class="row">
@@ -76,6 +76,7 @@
 <script>
 import { mapState } from 'vuex'
 import { get } from '@/api'
+import mixins from '@/mixins'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import IconButton from '@/components/shared/IconButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
@@ -83,6 +84,8 @@ import VisitModal from '@/components/shared/VisitModal.vue'
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
+  name: 'Restaurant',
+  mixins: [mixins],
   components: {
     FavoriteModal,
     IconButton,
@@ -114,9 +117,6 @@ export default {
         day: this.$i18n.t(`weekDays.${row[0]}`),
         hours: row[1] || 'Closed'
       }))
-    },
-    restaurantRating() {
-      return this.restaurant.rating.toFixed(1)
     }
   },
   methods: {
