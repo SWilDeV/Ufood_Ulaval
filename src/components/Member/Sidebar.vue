@@ -7,7 +7,7 @@
     <div class="mb-2">
       <router-link
         v-if="user.id === member.id"
-        :to="{ name: 'User' }"
+        :to="{ name: 'Favorites' }"
         class="btn btn-primary w-100"
       >
         <font-awesome-icon icon="user" />
