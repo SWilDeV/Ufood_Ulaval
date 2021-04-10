@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <h1 class="title" style="font-size:3vw;">Lists of favorite restaurants</h1>
+    <h1 class="title" style="font-size:3vw;">{{ $t('favorites.title') }}</h1>
     <panel class="p-3" v-on:favorite-added="addFavorite($event)" />
 
-    <favorites
+    <favorite-lists
       v-for="favorite in favoriteRestaurantList"
       :key="favorite.id"
       :favorite-list-name="favorite.name"
@@ -15,16 +15,13 @@
       @resto-deleted="deleteRestaurant($event)"
       @add-resto-to-list="addRestaurant($event)"
     />
-    <h2>Visits</h2>
-    <visit-list :restaurants="restaurantDictionary" />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import Favorites from '@/components/UserPage/Favorites.vue'
-import Panel from '@/components/UserPage/Panel.vue'
-import VisitList from '@/components/UserPage/VisitList.vue'
+import FavoriteLists from '@/components/Favorites/FavoriteLists.vue'
+import Panel from '@/components/Favorites/FavoriteForm.vue'
 import { mapState } from 'vuex'
 import {
   addRestaurantToList,
@@ -37,11 +34,10 @@ import {
 import { getRestaurants } from '@/api/restaurants'
 
 export default {
-  name: 'UserPage',
+  name: 'Favorites',
   components: {
-    Favorites,
-    Panel,
-    VisitList
+    FavoriteLists,
+    Panel
   },
   data() {
     return {

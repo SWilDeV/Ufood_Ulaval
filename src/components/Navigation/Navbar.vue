@@ -24,8 +24,12 @@
           </b-dropdown-item>
           <b-dropdown-divider />
           <b-dropdown-item :to="{ name: 'User' }">
-            <font-awesome-icon icon="user" />
+            <font-awesome-icon icon="pizza-slice" />
             {{ $t('navigation.profile') }}
+          </b-dropdown-item>
+          <b-dropdown-item :to="{ name: 'Visits' }">
+            <font-awesome-icon icon="pen" />
+            {{ $t('navigation.visits') }}
           </b-dropdown-item>
           <b-dropdown-item :to="{ name: 'SignOut' }">
             <font-awesome-icon icon="sign-out-alt" />

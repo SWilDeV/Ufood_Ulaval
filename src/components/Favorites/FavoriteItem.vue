@@ -23,7 +23,7 @@
 import { mapState } from 'vuex'
 import ViewButton from '@/components/shared/ViewButton.vue'
 export default {
-  name: 'restaurantUserPage',
+  name: 'FavoriteItem',
   props: {
     restaurantId: { type: String, required: true },
     listId: { type: String, required: true },

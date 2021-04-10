@@ -15,7 +15,8 @@
   },
   "favorites": {
     "addToList": "Add",
-    "selectRestaurant": "Select a restaurant"
+    "selectRestaurant": "Select a restaurant",
+    "title":"Lists of favorite restaurants"
   },
   "fields": {
     "email": {
@@ -61,7 +62,8 @@
     "title": "Members"
   },
   "navigation": {
-    "profile": "Edit Profile",
+    "profile": "My Restaurants",
+    "visits": "Reviews",
     "searchPlaceholder": "Search",
     "signOut": "Sign Out"
   },
@@ -113,6 +115,7 @@
     "rating": "Rating"
   },
   "visits": {
+    "title":"Past Reviews",
     "date": "Date",
     "rating": "Rating",
     "restaurant": "Restaurant"
