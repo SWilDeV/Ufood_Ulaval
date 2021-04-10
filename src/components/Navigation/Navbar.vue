@@ -23,12 +23,12 @@
             <span v-text="user.email" />
           </b-dropdown-item>
           <b-dropdown-divider />
-          <b-dropdown-item :to="{ name: 'User' }">
-            <font-awesome-icon icon="pizza-slice" />
-            {{ $t('navigation.profile') }}
+          <b-dropdown-item :to="{ name: 'Favorites' }">
+            <font-awesome-icon icon="star" />
+            {{ $t('navigation.favorites') }}
           </b-dropdown-item>
           <b-dropdown-item :to="{ name: 'Visits' }">
-            <font-awesome-icon icon="pen" />
+            <font-awesome-icon icon="edit" />
             {{ $t('navigation.visits') }}
           </b-dropdown-item>
           <b-dropdown-item :to="{ name: 'SignOut' }">

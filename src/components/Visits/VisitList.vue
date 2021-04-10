@@ -31,7 +31,7 @@ import VisitModal from '@/components/shared/VisitModal.vue'
 import { getVisits } from '@/api/visits'
 
 export default {
-  name: 'VisitLists',
+  name: 'VisitList',
   mixins: [mixins],
   components: {
     VisitModal

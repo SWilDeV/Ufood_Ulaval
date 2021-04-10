@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <h1 class="title" style="font-size:3vw;">{{ $t('visits.title') }}</h1>
-    <visit-lists :restaurants="restaurantDictionary" />
+    <visit-list :restaurants="restaurantDictionary" />
   </div>
 </template>
 
 <script>
-import VisitLists from '@/components/Visits/VisitLists.vue'
+import VisitList from '@/components/Visits/VisitList.vue'
 import { getRestaurants } from '@/api/restaurants'
 export default {
   name: 'Visits',
-  components: { VisitLists },
+  components: { VisitList },
   data() {
     return {
       restaurantDictionary: []

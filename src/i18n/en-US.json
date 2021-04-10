@@ -62,7 +62,7 @@
     "title": "Members"
   },
   "navigation": {
-    "profile": "My Restaurants",
+    "favorites": "Favorites",
     "visits": "Reviews",
     "searchPlaceholder": "Search",
     "signOut": "Sign Out"

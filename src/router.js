@@ -7,7 +7,6 @@ import Restaurant from '@/components/Restaurant'
 import Search from '@/components/Search'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
-import UserPage from '@/components/Favorites'
 import Favorites from '@/components/Favorites'
 import Visits from '@/components/Visits'
 
@@ -52,11 +51,6 @@ export default new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
-    },
-    {
-      path: '/user',
-      name: 'User',
-      component: UserPage
     },
     {
       path: '/favorites',

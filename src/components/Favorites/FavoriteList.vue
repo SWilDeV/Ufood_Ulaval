@@ -70,7 +70,7 @@
 import { mapState } from 'vuex'
 import FavoriteItem from './FavoriteItem'
 export default {
-  name: 'FavoriteLists',
+  name: 'FavoriteList',
   props: {
     favoriteListName: String,
     favoriteId: String,
