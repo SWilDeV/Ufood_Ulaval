@@ -7,7 +7,8 @@ import Restaurant from '@/components/Restaurant'
 import Search from '@/components/Search'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
-import UserPage from '@/components/UserPage'
+import Favorites from '@/components/Favorites'
+import Visits from '@/components/Visits'
 
 Vue.use(Router)
 
@@ -52,9 +53,14 @@ export default new Router({
       component: SignUp
     },
     {
-      path: '/user',
-      name: 'User',
-      component: UserPage
+      path: '/favorites',
+      name: 'Favorites',
+      component: Favorites
+    },
+    {
+      path: '/visits',
+      name: 'Visits',
+      component: Visits
     }
   ]
 })

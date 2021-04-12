@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="card-body">
-        <restaurant-user-page
+        <favorite-item
           v-for="restaurant in favoriteRestaurants"
           :key="restaurant.id"
           :restaurant-id="restaurant.id"
@@ -68,9 +68,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import RestaurantUserPage from './RestaurantUserPage'
+import FavoriteItem from './FavoriteItem'
 export default {
-  name: 'visitedRestaurants',
+  name: 'FavoriteList',
   props: {
     favoriteListName: String,
     favoriteId: String,
@@ -98,7 +98,7 @@ export default {
     }
   },
   components: {
-    RestaurantUserPage
+    FavoriteItem
   },
   methods: {
     async deleteFavorite(id) {

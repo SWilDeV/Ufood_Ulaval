@@ -23,7 +23,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'panel-v',
+  name: 'FavoriteForm',
   data() {
     return {
       name: ''
