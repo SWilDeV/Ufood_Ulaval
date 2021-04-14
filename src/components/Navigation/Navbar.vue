@@ -13,6 +13,7 @@
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <Search v-if="!$route.meta.noSearch" />
+        <select-locale></select-locale>
         <b-nav-item-dropdown right v-if="user">
           <template #button-content>
             <v-gravatar class="rounded-circle" :email="user.email" :size="40" />
@@ -53,6 +54,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import SelectLocale from '@/components/shared/SelectLocale.vue'
 import IconButton from '@/components/shared/IconButton.vue'
 import Search from '@/components/Navigation/Search.vue'
 import SignInModal from '@/components/Navigation/SignInModal.vue'
@@ -62,7 +64,8 @@ export default {
   components: {
     IconButton,
     Search,
-    SignInModal
+    SignInModal,
+    SelectLocale
   },
   computed: {
     ...mapState(['user'])

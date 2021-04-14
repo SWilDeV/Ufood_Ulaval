@@ -1,0 +1,132 @@
+{
+  "buttons": {
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "create": "Créer",
+    "send": "Envoyer"
+  },
+  "favoriteModal": {
+    "createList": "Créer une nouvelle liste",
+    "list": "Liste",
+    "namePlaceholder": "Entrer un nom",
+    "selectList": "Selectionner une liste",
+    "title": "Ajouter aux favoris"
+  },
+  "favorites": {
+    "addToList": "Ajouter",
+    "selectRestaurant": "Selectionner un restaurant",
+    "title": "Listes de restaurants favoris"
+  },
+  "fields": {
+    "email": {
+      "label": "Adresse email",
+      "placeholder": "Entrer votre adresse email"
+    },
+    "name": {
+      "label": "Nom",
+      "placeholder": "Entrer votre nom"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "placeholder": "Entrer votre mot de passe"
+    }
+  },
+  "followButton": {
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre"
+  },
+  "genericError": "Une erreur imprévue est survenue, veuillez rééssayer plus tard.",
+  "home": {
+    "address": "Addresse: ",
+    "genreDropDownDefault": "Tous les genres",
+    "genres": "Genres: ",
+    "priceDropDownDefault": "Tous les prix",
+    "priceRange": "Gamme de prix: ",
+    "rating": "Note: ",
+    "search": "Rechercher:",
+    "welcome": "Bienvenue sur UFood!"
+  },
+  "member": {
+    "editProfile": "Éditer profile",
+    "favorites": "Favoris",
+    "followerFormat": "abonnés",
+    "followers": "Abonnés",
+    "followersFormat": "abonnés",
+    "following": "Personnes suivies",
+    "followingFormat": "personnes suivies"
+  },
+  "memberRating": "{rating} points",
+  "members": {
+    "search": "Rechercher",
+    "title": "Membres"
+  },
+  "navigation": {
+    "favorites": "Favoris",
+    "visits": "Avis",
+    "searchPlaceholder": "Rechercher",
+    "signOut": "Déconnexion"
+  },
+  "required": "Ce champ est obligatoire.",
+  "restaurant": {
+    "favorite": "Favoris",
+    "visit": "Avis",
+    "phone": "Téléphone: ",
+    "foodType": "Type de plat: ",
+    "priceRange": "Gamme de prix: ",
+    "rating": "Note: ",
+    "openingHours": "Heures d'ouvertures"
+  },
+  "restaurantCard": {
+    "visit": "Avis"
+  },
+  "search": {
+    "moreResults": "Plus de résultats",
+    "noResult": "Aucun résultat ne correspond à votre recherche.",
+    "restaurants": "Restaurants",
+    "title": "Recherche"
+  },
+  "signIn": {
+    "invalidCredentials": "L'adresse email et/ou le mot de passe est incorrect.",
+    "signUpLink": "Pas encore de compte? Clic ici pour en créer un maintenant.",
+    "submit": "Connexion",
+    "title": "Connexion"
+  },
+  "signUp": {
+    "success": "Votre compte a été créé. Vous pouvez maintenant vous connecter avec vos identifiants.",
+    "submit": "Inscription",
+    "title": "Inscription"
+  },
+  "user": {
+    "addList": "Ajouter"
+  },
+  "viewButton": {
+    "text": "Voir"
+  },
+  "visitModal": {
+    "comment": {
+      "label": "Commentaires",
+      "placeholder": "Décris ton expérience!"
+    },
+    "date": "Date de l'avis",
+    "futureDate": "La date ne peut être dans le futur.",
+    "invalidRating": "Veuillez entrer une note entre 0 et 5.",
+    "newVisit": "Écrire un avis",
+    "rating": "Note"
+  },
+  "visits": {
+    "title": "Avis précédents",
+    "date": "Date",
+    "rating": "note",
+    "restaurant": "Restaurant"
+  },
+  "weekDays": {
+    "sunday": "Dimanche",
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi"
+  }
+}
