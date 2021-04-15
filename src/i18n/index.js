@@ -19,7 +19,7 @@ function loadLocaleMessages() {
 }
 
 export default new VueI18n({
-  locale: 'fr-Ca',
+  locale: 'fr',
   messages: loadLocaleMessages()
   // messages: { 'en-US': enUS, 'fr-Ca': frCA }
 })
