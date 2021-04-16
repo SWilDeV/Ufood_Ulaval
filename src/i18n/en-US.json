@@ -16,7 +16,7 @@
   "favorites": {
     "addToList": "Add",
     "selectRestaurant": "Select a restaurant",
-    "title":"Lists of favorite restaurants"
+    "title": "Lists of favorite restaurants"
   },
   "fields": {
     "email": {
@@ -65,9 +65,7 @@
     "favorites": "Favorites",
     "visits": "Reviews",
     "searchPlaceholder": "Search",
-    "signOut": "Sign Out",
-    "language": "EN",
-    "otherLanguage": "FR"
+    "signOut": "Sign Out"
   },
   "required": "This field is required.",
   "restaurant": {
@@ -117,7 +115,7 @@
     "rating": "Rating"
   },
   "visits": {
-    "title":"Past Reviews",
+    "title": "Past Reviews",
     "date": "Date",
     "rating": "Rating",
     "restaurant": "Restaurant"

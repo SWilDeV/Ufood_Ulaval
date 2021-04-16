@@ -65,9 +65,7 @@
     "favorites": "Favoris",
     "visits": "Avis",
     "searchPlaceholder": "Rechercher",
-    "signOut": "Déconnexion",
-    "language": "FR",
-    "otherLanguage": "EN"
+    "signOut": "Déconnexion"
   },
   "required": "Ce champ est obligatoire.",
   "restaurant": {

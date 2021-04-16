@@ -1,9 +1,4 @@
 <template>
-  <!-- <b-form-select v-model="$i18n.locale">
-      <option v-for="(lang, i) in langs" :key="`lang-${i}`" :value="lang">
-        {{ lang }}
-      </option>
-    </b-form-select> -->
   <b-nav-item href="#" @click="setLocale()">
     {{ otherLocale }}
   </b-nav-item>
