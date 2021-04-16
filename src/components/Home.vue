@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    
     <homeForm></homeForm>
   </div>
 </template>

@@ -54,7 +54,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import SelectLocale from '@/components/shared/SelectLocale.vue'
+import SelectLocale from '@/components/Navigation/SelectLocale.vue'
 import IconButton from '@/components/shared/IconButton.vue'
 import Search from '@/components/Navigation/Search.vue'
 import SignInModal from '@/components/Navigation/SignInModal.vue'
