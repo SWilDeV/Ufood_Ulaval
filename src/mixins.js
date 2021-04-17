@@ -29,6 +29,7 @@ export default {
       })
       return formatter.format(value)
     },
+
     async getPosition() {
       try {
         const {
