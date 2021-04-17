@@ -20,3 +20,7 @@ export function getRestaurants({ count, genre, page, price, search }) {
   const query = params.length ? `?${params.join('&')}` : ''
   return get(`/unsecure/restaurants${query}`)
 }
+
+export function getOneRestaurant(id) {
+  return get(`/unsecure/restaurants/${id}`)
+}
