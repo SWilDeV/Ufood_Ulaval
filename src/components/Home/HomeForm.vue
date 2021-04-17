@@ -5,8 +5,36 @@
       v-bind:all-price-ranges="allPriceRanges"
       @filters-changed="setFilters($event)"
     />
-    <restaurant-list v-bind:all-restaurants="allRestaurants" />
-    <pager class="mb-3" v-model="page" :count="count" :total="total" />
+
+    <div v-if="mode === 'list'">
+      <div class="text-center">
+        <icon-button
+          icon="map-marked-alt"
+          text="home.map"
+          variant="primary"
+          @click="toggleMode('map')"
+          size="lg"
+          class="mb-3"
+        ></icon-button>
+      </div>
+
+      <restaurant-list v-bind:all-restaurants="allRestaurants" />
+      <pager class="mb-3" v-model="page" :count="count" :total="total" />
+    </div>
+
+    <div v-if="mode === 'map'">
+      <div class="text-center">
+        <icon-button
+          icon="th-list"
+          text="home.list"
+          variant="primary"
+          @click="toggleMode('list')"
+          size="lg"
+          class="mb-3"
+        ></icon-button>
+      </div>
+      <map-mode v-bind:all-restaurants="allRestaurants" v-bind:params="params"></map-mode>
+    </div>
   </div>
 </template>
 
@@ -15,17 +43,22 @@ import HomeHeader from './HomeHeader'
 import Pager from '@/components/shared/Pager.vue'
 import RestaurantList from './RestaurantList'
 import { getRestaurants } from '@/api/restaurants'
+import IconButton from '@/components/shared/IconButton'
+import MapMode from './MapMode'
 
 export default {
   name: 'HomeForm',
   components: {
     HomeHeader,
     Pager,
-    RestaurantList
+    RestaurantList,
+    IconButton,
+    MapMode
   },
   data() {
     return {
       allGenres: [],
+      mode: 'list',
       allPriceRanges: [],
       allRestaurants: [],
       count: 12,
@@ -75,6 +108,10 @@ export default {
     }
   },
   methods: {
+    toggleMode(mode) {
+      this.mode = mode
+    },
+
     async refresh({ genre, page, price, search }) {
       try {
         const results = await getRestaurants({ count: this.count, genre, page, price, search })

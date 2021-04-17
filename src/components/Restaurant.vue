@@ -95,8 +95,6 @@ export default {
     return {
       currentImage: 0,
       fields: ['day', 'hours'],
-      latitude: 0,
-      longitude: 0,
       restaurant: null,
       timer: null
     }
@@ -125,22 +123,6 @@ export default {
     },
     next() {
       this.currentImage = this.currentImage === this.images.length - 1 ? 0 : this.currentImage + 1
-    },
-    getCurrentPosition() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject)
-      })
-    },
-    async getPosition() {
-      try {
-        const {
-          coords: { latitude, longitude }
-        } = await this.getCurrentPosition()
-        this.latitude = latitude
-        this.longitude = longitude
-      } catch (e) {
-        console.error(e)
-      }
     }
   },
   async created() {

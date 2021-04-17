@@ -41,6 +41,8 @@
     "address": "Address: ",
     "genreDropDownDefault": "All genres",
     "genres": "Genres: ",
+    "map": "Map",
+    "list": "List",
     "priceDropDownDefault": "All prices",
     "priceRange": "Price range: ",
     "rating": "Rating: ",

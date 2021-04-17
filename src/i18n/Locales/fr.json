@@ -43,6 +43,8 @@
     "genres": "Genres: ",
     "priceDropDownDefault": "Tous les prix",
     "priceRange": "Gamme de prix: ",
+    "map": "Map",
+    "list": "Liste",
     "rating": "Note: ",
     "search": "Rechercher:",
     "welcome": "Bienvenue sur UFood!"
