@@ -75,7 +75,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { get } from '@/api'
+import { getOneRestaurant } from '@/api/restaurants.js'
 import mixins from '@/mixins'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import IconButton from '@/components/shared/IconButton.vue'
@@ -145,7 +145,7 @@ export default {
   },
   async created() {
     try {
-      this.restaurant = await get(`/unsecure/restaurants/${this.$route.params.id}`)
+      this.restaurant = await getOneRestaurant(this.$route.params.id)
       this.startRotation()
       this.getPosition()
     } catch (e) {
