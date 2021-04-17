@@ -1,5 +1,5 @@
 <template>
-  <b-nav-item href="#" @click="setLocale()">
+  <b-nav-item href="#" @click="setLocale(otherLocale)">
     {{ otherLocale }}
   </b-nav-item>
 </template>
@@ -9,12 +9,13 @@ export default {
   name: 'SelectLocale',
   computed: {
     otherLocale() {
-      return this.$i18n.availableLocales.filter(l => l !== this.$i18n.locale)[0]
+      const current = this.$i18n.locale
+      return this.$i18n.availableLocales.filter(locale => locale !== current)[0]
     }
   },
   methods: {
-    setLocale() {
-      this.$i18n.locale = this.otherLocale
+    setLocale(locale) {
+      this.$i18n.locale = locale
     }
   }
 }

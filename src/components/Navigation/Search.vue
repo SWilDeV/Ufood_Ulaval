@@ -1,6 +1,5 @@
 <template>
   <b-nav-form @submit.prevent="submit">
-    <!-- TODO: Recherche globale ref#98 -->
     <b-input-group>
       <b-form-input size="sm" v-model="search" :placeholder="$t('navigation.searchPlaceholder')" />
       <b-input-group-append>

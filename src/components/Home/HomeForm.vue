@@ -108,10 +108,6 @@ export default {
     }
   },
   methods: {
-    toggleMode(mode) {
-      this.mode = mode
-    },
-
     async refresh({ genre, page, price, search }) {
       try {
         const results = await getRestaurants({ count: this.count, genre, page, price, search })
@@ -129,6 +125,9 @@ export default {
     },
     setPage(page) {
       this.page = page
+    },
+    toggleMode(mode) {
+      this.mode = mode
     }
   },
   watch: {

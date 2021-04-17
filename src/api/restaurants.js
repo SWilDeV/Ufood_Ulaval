@@ -1,5 +1,9 @@
 import { get } from './index'
 
+export function getRestaurant(id) {
+  return get(`/unsecure/restaurants/${id}`)
+}
+
 export function getRestaurants({ count, genre, page, price, search, longitude, latitude }) {
   const params = []
   if (genre) {
@@ -26,8 +30,4 @@ export function getRestaurants({ count, genre, page, price, search, longitude, l
   }
   const query = params.length ? `?${params.join('&')}` : ''
   return get(`/unsecure/restaurants${query}`)
-}
-
-export function getOneRestaurant(id) {
-  return get(`/unsecure/restaurants/${id}`)
 }

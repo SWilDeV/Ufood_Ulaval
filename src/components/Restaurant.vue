@@ -75,7 +75,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getOneRestaurant } from '@/api/restaurants.js'
+import { getRestaurant } from '@/api/restaurants.js'
 import mixins from '@/mixins'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import IconButton from '@/components/shared/IconButton.vue'
@@ -95,6 +95,8 @@ export default {
     return {
       currentImage: 0,
       fields: ['day', 'hours'],
+      latitude: 0,
+      longitude: 0,
       restaurant: null,
       timer: null
     }
@@ -127,9 +129,11 @@ export default {
   },
   async created() {
     try {
-      this.restaurant = await getOneRestaurant(this.$route.params.id)
+      this.restaurant = await getRestaurant(this.$route.params.id)
       this.startRotation()
-      this.getPosition()
+      const { latitude, longitude } = await this.getPosition()
+      this.latitude = latitude
+      this.longitude = longitude
     } catch (e) {
       console.error(e)
     }

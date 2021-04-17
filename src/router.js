@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Favorites from '@/components/Favorites'
 import Home from '@/components/Home'
 import Member from '@/components/Member'
 import Members from '@/components/Members'
@@ -7,7 +8,6 @@ import Restaurant from '@/components/Restaurant'
 import Search from '@/components/Search'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
-import Favorites from '@/components/Favorites'
 import Visits from '@/components/Visits'
 
 Vue.use(Router)
@@ -15,6 +15,11 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/favorites',
+      name: 'Favorites',
+      component: Favorites
+    },
     {
       path: '/',
       name: 'Home',
@@ -51,11 +56,6 @@ export default new Router({
       path: '/signup',
       name: 'SignUp',
       component: SignUp
-    },
-    {
-      path: '/favorites',
-      name: 'Favorites',
-      component: Favorites
     },
     {
       path: '/visits',
