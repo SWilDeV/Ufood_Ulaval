@@ -80,18 +80,12 @@ import mixins from '@/mixins'
 import FavoriteModal from '@/components/Restaurant/FavoriteModal.vue'
 import IconButton from '@/components/shared/IconButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
-import mixins from '@/mixins'
 
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
-<<<<<<< HEAD
   name: 'Restaurant',
   mixins: [mixins],
-=======
-  mixins: [mixins],
-
->>>>>>> Bouton pour changer de mode. Début de la map.
   components: {
     FavoriteModal,
     IconButton,

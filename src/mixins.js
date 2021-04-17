@@ -21,7 +21,6 @@ export default {
       })
       return formatter.format(date)
     },
-<<<<<<< HEAD
     formatRating(value) {
       const formatter = new Intl.NumberFormat(this.$i18n.locale, {
         maximumFractionDigits: 1,
@@ -29,8 +28,7 @@ export default {
         style: 'decimal'
       })
       return formatter.format(value)
-=======
-
+    },
     async getPosition() {
       try {
         const {
@@ -41,7 +39,6 @@ export default {
       } catch (e) {
         console.error(e)
       }
->>>>>>> Bouton pour changer de mode. Début de la map.
     }
   }
 }
