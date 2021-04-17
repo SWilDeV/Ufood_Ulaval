@@ -155,10 +155,7 @@ export default {
 <style scoped>
 .orange {
   height: 100%;
-  /*background-color: #2c3531;*/
-  /* background-color: #116466; */
   background-color: #d9b08c;
-  /* background-color: #116466; */
   bottom: 0;
 }
 
