@@ -6,6 +6,7 @@ import Member from '@/components/Member'
 import Members from '@/components/Members'
 import Restaurant from '@/components/Restaurant'
 import Search from '@/components/Search'
+import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
 import Visits from '@/components/Visits'
@@ -48,12 +49,17 @@ export default new Router({
       component: Search
     },
     {
-      path: '/signout',
+      path: '/sign-in',
+      name: 'SignIn',
+      component: SignIn
+    },
+    {
+      path: '/sign-out',
       name: 'SignOut',
       component: SignOut
     },
     {
-      path: '/signup',
+      path: '/sign-up',
       name: 'SignUp',
       component: SignUp
     },

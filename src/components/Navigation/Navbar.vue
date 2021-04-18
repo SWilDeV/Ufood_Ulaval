@@ -13,7 +13,7 @@
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <Search v-if="!$route.meta.noSearch" />
-        <select-locale></select-locale>
+        <SelectLocale />
         <b-nav-item-dropdown right v-if="user">
           <template #button-content>
             <v-gravatar class="rounded-circle" :email="user.email" :size="40" />
@@ -37,16 +37,16 @@
             {{ $t('navigation.signOut') }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-text v-else>
-          <icon-button
-            class="ml-3"
-            icon="sign-in-alt"
-            text="signIn.title"
-            variant="light"
-            v-b-modal.signModal
-          />
-          <sign-in-modal id="signModal" />
-        </b-nav-text>
+        <template v-else>
+          <b-nav-item :to="{ name: 'SignIn' }">
+            <font-awesome-icon icon="sign-in-alt" />
+            {{ $t('signIn.title') }}
+          </b-nav-item>
+          <b-nav-item :to="{ name: 'SignUp' }">
+            <font-awesome-icon icon="user" />
+            {{ $t('signUp.title') }}
+          </b-nav-item>
+        </template>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -55,16 +55,12 @@
 <script>
 import { mapState } from 'vuex'
 import SelectLocale from '@/components/Navigation/SelectLocale.vue'
-import IconButton from '@/components/shared/IconButton.vue'
 import Search from '@/components/Navigation/Search.vue'
-import SignInModal from '@/components/Navigation/SignInModal.vue'
 
 export default {
   name: 'Navbar',
   components: {
-    IconButton,
     Search,
-    SignInModal,
     SelectLocale
   },
   computed: {
