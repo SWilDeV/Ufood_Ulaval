@@ -10,7 +10,7 @@
         <div class="card-img-overlay text-white d-flex flex-column justify-content-center">
           <h2 class="card-title">{{ restaurant.name }}</h2>
           <p class="card-text"></p>
-          <b-button-group class="w-100">
+          <b-button-group class="button">
             <view-button v-bind:restaurant-id="restaurant.id" />
             <template v-if="user">
               <icon-button
@@ -102,8 +102,14 @@ h2 {
   h2 {
     font-size: 24px;
   }
+  .button {
+    position: absolute;
+    bottom: 2vw;
+    left: 2vw;
+    width: 50vw;
+  }
 }
-@media (min-width: 433px) and (max-width: 576px) {
+@media (min-width: 433px) and (max-width: 595px) {
   img {
     object-fit: cover;
     width: 100%;
@@ -114,21 +120,54 @@ h2 {
     box-shadow: 5px 10px #888888;
   }
   h2 {
-    font-size: 30px;
+    font-size: 24px;
+  }
+  .button {
+    position: absolute;
+    bottom: 2vw;
+    left: 2vw;
+    width: 50vw;
   }
 }
-@media (min-width: 577px) {
+@media (min-width: 596px) and (max-width: 1023px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 30vw;
   }
   .img-top {
-    margin: 10px;
+    margin: 20px 20px 0 20px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 26px;
+  }
+  .button {
+    position: absolute;
+    bottom: 1vw;
+    left: 8vw;
+    width: 30vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 30vw;
+  }
+  .img-top {
+    margin: 20px 20px 0 20px;
     box-shadow: 5px 10px #888888;
   }
   h2 {
     font-size: 36px;
+  }
+  .button {
+    position: absolute;
+    bottom: 1vw;
+    left: 2.3vw;
+    width: 27vw;
   }
 }
 </style>
