@@ -94,11 +94,12 @@
   },
   "signIn": {
     "invalidCredentials": "L'adresse email et/ou le mot de passe est incorrect.",
-    "signUpLink": "Pas encore de compte? Clique ici pour en créer un maintenant.",
+    "signUpLink": "Pas encore de compte? Cliquez ici pour en créer un maintenant.",
     "submit": "Connexion",
     "title": "Connexion"
   },
   "signUp": {
+    "signInLink": "Déjà un compte? Cliquez ici pour te connecter.",
     "success": "Votre compte a été créé. Vous pouvez maintenant vous connecter avec vos identifiants.",
     "submit": "Inscription",
     "title": "Inscription"

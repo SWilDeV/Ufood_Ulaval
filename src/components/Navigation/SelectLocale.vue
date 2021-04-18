@@ -1,6 +1,6 @@
 <template>
   <b-nav-item href="#" @click="setLocale(otherLocale)">
-    {{ otherLocale }}
+    {{ otherLocale.toUpperCase() }}
   </b-nav-item>
 </template>
 
