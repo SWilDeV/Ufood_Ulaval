@@ -52,9 +52,18 @@ body {
   padding: 0;
 }
 
-#map {
-  width: 97.5vw;
-  height: 97.5vh;
-  margin-bottom: 1%;
+@media (max-width: 576px) {
+  #map {
+    width: 97.5vw;
+    height: 50vh;
+    margin-bottom: 1%;
+  }
+}
+@media (min-width: 577px) {
+  #map {
+    width: 97.5vw;
+    height: 97.5vh;
+    margin-bottom: 1%;
+  }
 }
 </style>
