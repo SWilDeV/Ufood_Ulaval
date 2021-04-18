@@ -65,7 +65,6 @@ export default {
 <style scoped>
 .container {
   margin-bottom: 2em;
-  box-shadow: 5px 10px #888888;
   border: 1px solid white;
 }
 
@@ -82,7 +81,6 @@ h2 {
   color: white;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 36px;
-  font-weight: 700;
   line-height: 32px;
   margin: 0 0 24px;
   padding: 0 30px;
@@ -91,11 +89,18 @@ h2 {
   text-shadow: -2px 1px 0 #000, 2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
 }
 
-@media (max-width: 432px) {
+@media (min-width: 1px) and (max-width: 432px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 80vw;
+  }
+  .img-top {
+    margin: 0;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 24px;
   }
 }
 @media (min-width: 433px) and (max-width: 576px) {
@@ -104,12 +109,26 @@ h2 {
     width: 100%;
     height: 50vw;
   }
+  .img-top {
+    margin: 10px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 30px;
+  }
 }
 @media (min-width: 577px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 30vw;
+  }
+  .img-top {
+    margin: 10px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 36px;
   }
 }
 </style>
