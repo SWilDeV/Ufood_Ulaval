@@ -16,7 +16,9 @@ const execute = async (method, url, data) => {
       body = JSON.stringify(data)
     }
   }
-  if (!url.includes('/unsecure/') || !url.endsWith('/login') || !url.endsWith('/signup')) {
+  // TODO(fpion): refactor
+  const isLogin = url.endsWith('/login')
+  if (!url.includes('/unsecure/') && !isLogin && !url.endsWith('/signup')) {
     const token = Cookies.get('token')
     if (token) {
       headers['Authorization'] = token
@@ -28,7 +30,9 @@ const execute = async (method, url, data) => {
     method
   })
   if (!response.ok) {
-    store.dispatch('showError') // TODO(fpion): handle different error types
+    if (!response.status === 401 || !isLogin) {
+      store.dispatch('showError') // TODO(fpion): handle different error types
+    }
     throw response // TODO(fpion): only if not bad email/password
   }
   const dataType = response.headers.get(contentType)
