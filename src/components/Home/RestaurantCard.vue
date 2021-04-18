@@ -8,18 +8,8 @@
           class="rounded mx-auto d-block"
         />
         <div class="card-img-overlay text-white d-flex flex-column justify-content-center">
-          <!-- <div class="card-body"> -->
           <h2 class="card-title">{{ restaurant.name }}</h2>
-          <p class="card-text">
-            <!-- <span v-t="'home.address'"></span>
-        <span>{{ restaurant.address }} <br /></span> -->
-            <!-- <span v-t="'home.priceRange'"></span>
-        <span>{{ restaurant.price_range }} <br /></span>
-        <span v-t="'home.genres'"></span>
-        <span>{{ restaurant.genres.join(', ') }} <br /></span> -->
-            <!-- <span v-t="'home.rating'"></span>
-            <span>{{ formatRating(restaurant.rating) }} <br /></span> -->
-          </p>
+          <p class="card-text"></p>
           <b-button-group class="w-100">
             <view-button v-bind:restaurant-id="restaurant.id" />
             <template v-if="user">
@@ -98,6 +88,7 @@ h2 {
   padding: 0 30px;
   text-align: center;
   text-transform: uppercase;
+  text-shadow: -2px 1px 0 #000, 2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
 }
 
 @media (max-width: 576px) {
