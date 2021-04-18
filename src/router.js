@@ -10,16 +10,18 @@ import SignIn from '@/components/SignIn'
 import SignOut from '@/components/SignOut'
 import SignUp from '@/components/SignUp'
 import Visits from '@/components/Visits'
+import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/favorites',
       name: 'Favorites',
-      component: Favorites
+      component: Favorites,
+      meta: { requiresAuth: true }
     },
     {
       path: '/',
@@ -30,13 +32,14 @@ export default new Router({
     {
       path: '/member/:id',
       name: 'Member',
-      component: Member
+      component: Member,
+      meta: { requiresAuth: true }
     },
     {
       path: '/members',
       name: 'Members',
       component: Members,
-      meta: { noSearch: true }
+      meta: { noSearch: true, requiresAuth: true }
     },
     {
       path: '/restaurant/:id',
@@ -56,7 +59,8 @@ export default new Router({
     {
       path: '/sign-out',
       name: 'SignOut',
-      component: SignOut
+      component: SignOut,
+      meta: { requiresAuth: true }
     },
     {
       path: '/sign-up',
@@ -66,7 +70,18 @@ export default new Router({
     {
       path: '/visits',
       name: 'Visits',
-      component: Visits
+      component: Visits,
+      meta: { requiresAuth: true }
     }
   ]
 })
+
+router.beforeEach((to, _, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.state.user) {
+    console.log(to)
+    return next({ name: 'SignIn', query: { redirect: to.path } })
+  }
+  next()
+})
+
+export default router

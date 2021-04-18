@@ -104,7 +104,8 @@ export default {
         try {
           const data = await logIn({ email: this.email, password: this.password })
           this.login(data)
-          this.$router.push({ name: 'Member', params: { id: this.user.id } })
+          const redirect = this.$route.query.redirect
+          this.$router.push(redirect || { name: 'Member', params: { id: this.user.id } })
         } catch (e) {
           console.error(e)
           this.error = true
