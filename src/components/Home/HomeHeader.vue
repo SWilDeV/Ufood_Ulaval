@@ -8,7 +8,7 @@
           <label for="price" v-t="'home.priceRange'"></label>
           <select id="price" class="form-control" v-model="selectedPrice">
             <option value="" v-t="'home.priceDropDownDefault'"></option>
-            <option v-for="price in allPriceRanges" :value="price" v-bind:key="price">
+            <option v-for="price in priceRanges" :value="price" v-bind:key="price">
               {{ price }}
             </option>
           </select>
@@ -18,7 +18,7 @@
           <label for="genre" v-t="'home.genres'"></label>
           <select id="genre" class="form-control" v-model="selectedGenre">
             <option value="" v-t="'home.genreDropDownDefault'"></option>
-            <option v-for="genre in allGenres" :value="genre" v-bind:key="genre">
+            <option v-for="genre in genres" :value="genre" v-bind:key="genre">
               {{ genre }}
             </option>
           </select>
@@ -51,7 +51,16 @@ export default {
   components: {
     IconButton
   },
-  props: ['allGenres', 'allPriceRanges'],
+  props: {
+    genres: {
+      type: Array,
+      required: true
+    },
+    priceRanges: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
       searchValue: '',
