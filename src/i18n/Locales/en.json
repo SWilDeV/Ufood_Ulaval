@@ -72,7 +72,7 @@
   "required": "This field is required.",
   "restaurant": {
     "favorite": "Favorite",
-    "visit": "Visit",
+    "visit": "Review",
     "phone": "Phone: ",
     "foodType": "Food types: ",
     "priceRange": "Price range: ",
@@ -80,7 +80,7 @@
     "openingHours": "Opening Hours"
   },
   "restaurantCard": {
-    "visit": "Visit"
+    "visit": "Review"
   },
   "search": {
     "moreResults": "More results",
