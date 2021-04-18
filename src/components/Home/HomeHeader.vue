@@ -104,4 +104,10 @@ h1 {
   text-align: center;
   text-transform: uppercase;
 }
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 50px;
+  }
+}
 </style>

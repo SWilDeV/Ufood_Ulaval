@@ -77,17 +77,10 @@
   "restaurant": {
     "favorite": "Favoris",
     "visit": "Avis",
-<<<<<<< HEAD
-    "phone": "Téléphone: ",
-    "foodType": "Type de plat: ",
-    "priceRange": "Prix: ",
-    "rating": "Note: ",
-=======
     "phone": "Téléphone : ",
     "foodType": "Type de plat : ",
     "priceRange": "Gamme de prix : ",
     "rating": "Note : ",
->>>>>>> 605a61a3b432546472077e6c770c9c2fec78f7ef
     "openingHours": "Heures d'ouvertures"
   },
   "restaurantCard": {
