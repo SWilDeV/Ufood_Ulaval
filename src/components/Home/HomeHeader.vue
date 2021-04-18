@@ -27,7 +27,7 @@
         <div class="col">
           <label for="search" v-t="'home.search'"></label>
           <b-input-group>
-            <b-form-input id="search" v-model="searchValue" placeholder="Search" />
+            <b-form-input id="search" v-model="searchValue" :placeholder="$t('home.placeholder')" />
             <b-input-group-append>
               <icon-button
                 icon="times"

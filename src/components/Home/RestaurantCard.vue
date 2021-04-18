@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex card container col-xs-12 col-sm-6 col-xl-4">
+  <div class="container card col-xs-12 col-sm-6 col-xl-4">
     <div class="row">
       <div class="img-top">
         <img
@@ -66,12 +66,9 @@ export default {
 .container {
   margin-bottom: 2em;
   box-shadow: 5px 10px #888888;
-  border: 3px solid white;
+  border: 1px solid white;
 }
 
-/* .row {
-  margin: 0;
-} */
 p {
   color: white;
   font-family: 'Helvetica Neue', Arial, sans-serif;
