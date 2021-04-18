@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex card container col-sm-12 col-md-6 col-xl-4">
+  <div class="container card col-xs-12 col-sm-6 col-xl-4">
     <div class="row">
       <div class="img-top">
         <img
@@ -66,7 +66,7 @@ export default {
 .container {
   margin-bottom: 2em;
   box-shadow: 5px 10px #888888;
-  border: 3px solid white;
+  border: 1px solid white;
 }
 
 p {
@@ -91,11 +91,18 @@ h2 {
   text-shadow: -2px 1px 0 #000, 2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 432px) {
   img {
     object-fit: cover;
     width: 100%;
-    height: 70vw;
+    height: 80vw;
+  }
+}
+@media (min-width: 433px) and (max-width: 576px) {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 50vw;
   }
 }
 @media (min-width: 577px) {
