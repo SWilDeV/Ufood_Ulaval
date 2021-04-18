@@ -7,48 +7,58 @@
             <h4 class="my-0 fw-normal d-inline p-3">{{ favoriteListName }}</h4>
 
             <div class="col form-inline">
-              <div class="input-group">
+              <b-input-group>
                 <b-form-select v-model="selectedRestaurant" :options="options">
                   <template #first>
                     <b-form-select-option value="" v-t="'favorites.selectRestaurant'" disabled />
                   </template>
                 </b-form-select>
-                <div class="input-group-append">
-                  <b-button
+                <template #append>
+                  <icon-button
+                    icon="star"
+                    text="buttons.add"
                     variant="success"
-                    v-t="'favorites.addToList'"
                     :disabled="!selectedRestaurant"
                     @click="onClickAddResto"
                   />
-                </div>
-              </div>
+                </template>
+              </b-input-group>
+              <b-button-group class="ml-auto">
+                <icon-button
+                  icon="edit"
+                  text="buttons.edit"
+                  variant="outline-primary"
+                  @click="edit = !edit"
+                />
+                <icon-button
+                  icon="minus"
+                  text="buttons.delete"
+                  variant="outline-danger"
+                  @click="deleteFavorite(favoriteId)"
+                />
+              </b-button-group>
             </div>
           </div>
 
           <div class="form-inline" v-show="edit">
-            <input type="text" v-model="name" placeholder="Change name" class="form-control" />
-            <button
-              class="w-10 btn btn-xs btn-outline-primary"
-              type="button"
-              v-on:click="editFavoriteListName(favoriteId)"
-            >
-              OK
-            </button>
+            <b-input-group>
+              <input
+                type="text"
+                v-model="name"
+                :placeholder="$t('favorites.changeName')"
+                class="form-control"
+              />
+              <template #append>
+                <icon-button
+                  icon="check"
+                  text="buttons.ok"
+                  variant="outline-success"
+                  :disabled="!name"
+                  @click="editFavoriteListName(favoriteId)"
+                />
+              </template>
+            </b-input-group>
           </div>
-          <button
-            class="w-10 btn btn-xs btn-outline-danger float-right"
-            type="button"
-            v-on:click="deleteFavorite(favoriteId)"
-          >
-            Delete
-          </button>
-          <button
-            class="w-10 btn btn-xs btn-outline-primary float-right"
-            type="button"
-            v-on:click="edit = !edit"
-          >
-            Edit
-          </button>
         </div>
       </div>
       <div class="card-body">
@@ -69,15 +79,20 @@
 <script>
 import { mapState } from 'vuex'
 import FavoriteItem from './FavoriteItem'
+import IconButton from '@/components/shared/IconButton.vue'
+
 export default {
   name: 'FavoriteList',
+  components: {
+    FavoriteItem,
+    IconButton
+  },
   props: {
     favoriteListName: String,
     favoriteId: String,
     favoriteRestaurants: Array,
     allRestaurants: Array
   },
-
   data() {
     return {
       edit: false,
@@ -96,9 +111,6 @@ export default {
         }))
         .sort((a, b) => (a.text >= b.text ? 1 : -1))
     }
-  },
-  components: {
-    FavoriteItem
   },
   methods: {
     async deleteFavorite(id) {

@@ -4,12 +4,18 @@
       <div class="card-header">
         <form class="form-inline" @submit.prevent="addFavoriteList">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Create new list" v-model="name" />
+            <input
+              type="text"
+              class="form-control"
+              :placeholder="$t('favorites.newList')"
+              v-model="name"
+            />
             <div class="input-group-append">
-              <button
+              <icon-button
                 type="submit"
-                class="btn btn-success"
-                v-t="'user.addList'"
+                icon="plus"
+                text="user.addList"
+                variant="success"
                 :disabled="!name"
               />
             </div>
@@ -21,9 +27,14 @@
 </template>
 
 <script>
+import IconButton from '@/components/shared/IconButton.vue'
 import { mapState } from 'vuex'
+
 export default {
   name: 'FavoriteForm',
+  components: {
+    IconButton
+  },
   data() {
     return {
       name: ''
