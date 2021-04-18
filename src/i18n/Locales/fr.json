@@ -4,55 +4,59 @@
     "cancel": "Annuler",
     "close": "Fermer",
     "create": "Créer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "ok": "OK",
     "send": "Envoyer"
   },
   "favoriteModal": {
     "createList": "Créer une nouvelle liste",
     "list": "Liste",
-    "namePlaceholder": "Entrer un nom",
-    "selectList": "Selectionner une liste",
+    "namePlaceholder": "Entrez un nom",
+    "selectList": "Sélectionnez une liste",
     "title": "Ajouter aux favoris"
   },
   "favorites": {
-    "addToList": "Ajouter",
-    "selectRestaurant": "Selectionner un restaurant",
+    "changeName": "Renommer",
+    "newList": "Créer une liste",
+    "selectRestaurant": "Sélectionnez un restaurant",
     "title": "Listes de restaurants favoris"
   },
   "fields": {
     "email": {
       "label": "Adresse email",
-      "placeholder": "Entrer votre adresse email"
+      "placeholder": "Entrez votre adresse email"
     },
     "name": {
       "label": "Nom",
-      "placeholder": "Entrer votre nom"
+      "placeholder": "Entrez votre nom"
     },
     "password": {
       "label": "Mot de passe",
-      "placeholder": "Entrer votre mot de passe"
+      "placeholder": "Entrez votre mot de passe"
     }
   },
   "followButton": {
     "follow": "Suivre",
     "unfollow": "Ne plus suivre"
   },
-  "genericError": "Une erreur imprévue est survenue, veuillez rééssayer plus tard.",
+  "genericError": "Une erreur imprévue est survenue, veuillez réessayer plus tard.",
   "home": {
-    "address": "Addresse: ",
+    "address": "Adresse : ",
     "genreDropDownDefault": "Tous les genres",
-    "genres": "Genres: ",
+    "genres": "Genres : ",
     "priceDropDownDefault": "Tous les prix",
-    "priceRange": "Prix: ",
-    "map": "Map",
+    "priceRange": "Gamme de prix : ",
+    "map": "Carte",
     "list": "Liste",
-    "rating": "Note: ",
-    "search": "Rechercher:",
-    "welcome": "Bienvenue sur UFood!"
+    "rating": "Note : ",
+    "search": "Rechercher :",
+    "welcome": "Bienvenue sur UFood !"
   },
   "member": {
-    "editProfile": "Éditer profile",
+    "editProfile": "Éditer le profil",
     "favorites": "Favoris",
-    "followerFormat": "abonnés",
+    "followerFormat": "abonné",
     "followers": "Abonnés",
     "followersFormat": "abonnés",
     "following": "Personnes suivies",
@@ -73,10 +77,17 @@
   "restaurant": {
     "favorite": "Favoris",
     "visit": "Avis",
+<<<<<<< HEAD
     "phone": "Téléphone: ",
     "foodType": "Type de plat: ",
     "priceRange": "Prix: ",
     "rating": "Note: ",
+=======
+    "phone": "Téléphone : ",
+    "foodType": "Type de plat : ",
+    "priceRange": "Gamme de prix : ",
+    "rating": "Note : ",
+>>>>>>> 605a61a3b432546472077e6c770c9c2fec78f7ef
     "openingHours": "Heures d'ouvertures"
   },
   "restaurantCard": {
@@ -90,7 +101,7 @@
   },
   "signIn": {
     "invalidCredentials": "L'adresse email et/ou le mot de passe est incorrect.",
-    "signUpLink": "Pas encore de compte? Clic ici pour en créer un maintenant.",
+    "signUpLink": "Pas encore de compte? Clique ici pour en créer un maintenant.",
     "submit": "Connexion",
     "title": "Connexion"
   },
@@ -119,7 +130,7 @@
   "visits": {
     "title": "Avis précédents",
     "date": "Date",
-    "rating": "note",
+    "rating": "Note",
     "restaurant": "Restaurant"
   },
   "weekDays": {

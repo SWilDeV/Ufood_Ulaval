@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <navbar />
+    <error-alert />
     <router-view :key="$route.fullPath" />
   </div>
 </template>
 
 <script>
+import ErrorAlert from '@/components/Navigation/ErrorAlert.vue'
 import Navbar from '@/components/Navigation/Navbar.vue'
 
 export default {
   name: 'app',
   components: {
+    ErrorAlert,
     Navbar
   }
 }

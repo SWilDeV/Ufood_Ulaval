@@ -1,9 +1,9 @@
 <template>
   <div class="row">
     <restaurant-card
-      v-for="restaurant in allRestaurants"
-      v-bind:key="restaurant.id"
-      v-bind:restaurant="restaurant"
+      v-for="restaurant in restaurants"
+      :key="restaurant.id"
+      :restaurant="restaurant"
     />
   </div>
 </template>
@@ -12,10 +12,15 @@
 import RestaurantCard from './RestaurantCard'
 
 export default {
-  name: 'restaurantList',
+  name: 'RestaurantList',
   components: {
     RestaurantCard
   },
-  props: ['allRestaurants']
+  props: {
+    restaurants: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>

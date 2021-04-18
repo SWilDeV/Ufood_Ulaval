@@ -8,6 +8,9 @@ const getExpiration = token => {
 }
 
 export default {
+  hideError({ commit }) {
+    commit('setErrorCounter', 0)
+  },
   login({ commit }, { email, id, name, token }) {
     const expires = getExpiration(token)
     Cookies.set('token', token, { expires })
@@ -16,5 +19,11 @@ export default {
   logout({ commit }) {
     Cookies.remove('token')
     commit('setUser', null)
+  },
+  showError({ commit }) {
+    commit('setErrorCounter', 10)
+  },
+  updateError({ commit }, counter) {
+    commit('setErrorCounter', counter)
   }
 }

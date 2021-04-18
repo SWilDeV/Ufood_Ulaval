@@ -4,6 +4,9 @@
     "cancel": "Cancel",
     "close": "Close",
     "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "ok": "OK",
     "send": "Send"
   },
   "favoriteModal": {
@@ -14,7 +17,8 @@
     "title": "Add to favorites"
   },
   "favorites": {
-    "addToList": "Add",
+    "changeName": "Change name",
+    "newList": "Create new list",
     "selectRestaurant": "Select a restaurant",
     "title": "Lists of favorite restaurants"
   },

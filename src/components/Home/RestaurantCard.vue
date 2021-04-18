@@ -50,14 +50,19 @@ import ViewButton from '@/components/shared/ViewButton.vue'
 import VisitModal from '@/components/shared/VisitModal.vue'
 
 export default {
-  name: 'RestaurantCard',
   mixins: [mixins],
+  name: 'RestaurantCard',
   components: {
     IconButton,
     ViewButton,
     VisitModal
   },
-  props: ['restaurant'],
+  props: {
+    restaurant: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     ...mapState(['user']),
     visitId() {

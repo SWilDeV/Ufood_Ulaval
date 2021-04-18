@@ -4,7 +4,6 @@
       <div class="card-header">
         <div>
           <h4 class="form-inline">{{ this.restaurantName }}</h4>
-
           <button
             class="btn btn-xs btn-outline-danger float-right"
             type="button"

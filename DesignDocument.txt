@@ -5,52 +5,52 @@ Pour démarrer l'application:
 _____________________________________________________________________________________________________________________________________________________________________________
 
 Navbar:
-L'icône en haut à gauche permet de revenir à l'accueil en tout temps. 
-En tout temps on peut changer la langue de l'application entre le francais et l'anglais en appuyant sur le boouton (plus de détail dans la description des fonctionnalités avancées)
--En mode déconnécté, on peut voir un bouton signIn qui permet d'afficher la modale page de connexion.
+L'icône en haut à gauche permet de revenir à l'accueil en tout temps.
+En tout temps on peut changer la langue de l'application entre le français et l'anglais en appuyant sur le bouton (plus de détail dans la description des fonctionnalités avancées)
+-En mode déconnecté, on peut voir un bouton signIn qui permet d'afficher la modale page de connexion.
 -En mode connecté, on voit l'image gravatar de l'utilisateur, ainsi qu'un menu défilant permettant de se rendre sur les autres pages de l'application :
     -Page de l'Utilisateur
     -Favorites: Page d'édition/création des listes de restaurants favoris
     -Visits: Page affichant l'ensemble des avis laissé par l'utilisateur
-    -SignOut: Bouton de deconnexion
+    -SignOut: Bouton de déconnexion
 
 Page d'accueil:
 Elle permet de visualiser la liste des restaurants, par page de 12 restaurants. Elle est disponible dès le démarrage de l'application via une requête const results = await get('/restaurants?limit=1000').
-- en mode déconnecté,on ne voit que le bouton "view" qui permet de rediriger l'utilsateur vers la page du restaurant 
-- en mode connecté, un bouton supplémentaire "visit" déclanche la modale de review (plus de détails plus bas)
+- en mode déconnecté,on ne voit que le bouton "view" qui permet de rediriger l'utilisateur vers la page du restaurant
+- en mode connecté, un bouton supplémentaire "visit" déclenche la modale de review (plus de détails plus bas)
 
 Page d'un restaurant en particulier:
-Disponible en cliquant sur le bouton ''View'' et déclenche une appel vers restaurants/id, qui renvoi l'utilisateur vers la page spécifique du restaurant. Cette page montre les renseignements généraux du restaurant, comme ses heures d'ouverture/fermeture, quelques photos et l'emplacement du restaurant sur une carte GoogleMap avec l'itinéraire depuis la position réélle de l'utilisateur.
+Disponible en cliquant sur le bouton ''View'' et déclenche une appel vers restaurants/id, qui renvoi l'utilisateur vers la page spécifique du restaurant. Cette page montre les renseignements généraux du restaurant, comme ses heures d'ouverture/fermeture, quelques photos et l'emplacement du restaurant sur une carte GoogleMap avec l'itinéraire depuis la position réelle de l'utilisateur.
 
 
-Fitres et search bar: 
-Les filtres permettent de préciser l'affichage des restaurants en fonction de leur genre ou de leur prix. La recherche permet d'afficher directement les restaurants correspondant aux lettres inscrites par l'utilsateur. À noter que la liste se met à jour à chaque nouvelle lettre tapée et permet de rapidement voir si un nom de restaurant existe. 
+Filtres et search bar:
+Les filtres permettent de préciser l'affichage des restaurants en fonction de leur genre ou de leur prix. La recherche permet d'afficher directement les restaurants correspondant aux lettres inscrites par l'utilisateur. À noter que la liste se met à jour à chaque nouvelle lettre tapée et permet de rapidement voir si un nom de restaurant existe.
 Disponible à l'accueil et déclenche une requête : /restaurants?${queryString} ou queryString contient l'information des filtres.
 
 Modale Page de connexion:
 Permet de saisir ses coordonnées et de se connecter à son compte.
-Si l'utilisateur n'a pas de compte, il peut cliquer sur un lien qui va le rediriger vers la page d'inscription 
+Si l'utilisateur n'a pas de compte, il peut cliquer sur un lien qui va le rediriger vers la page d'inscription
  options SignUp (ou Login) pour se créer un compte/se connecter avec les requêtes (/login', new URLSearchParams({ email, password }) et (/signup', new URLSearchParams({ email, name, password })
 
 Modale visits (Avis):
 Seulement accessible en mode connecté, elle permet de laisser un commentaire et une date indiquant la date de visite du restaurant.
- 
+
 
 Page Utilisateur:
-Permet d'afficher toutes les informations de l'utilisateur (gravatar, résumé des followers, following, avis). 
-Un systeme d'onglet permet aussi de voir avec plus de détail les followers, following et un résumé des restaurants favoris.
+Permet d'afficher toutes les informations de l'utilisateur (gravatar, résumé des followers, following, avis).
+Un système d'onglet permet aussi de voir avec plus de détail les followers, following et un résumé des restaurants favoris.
 Cette page n'est visible que lorsque l'utilisateur est connecté.
 
 Page Favorites:
 Permet d'afficher toutes les listes de restaurant préféré de l'utilisateur, d'en créer des nouvelles, de les modifier et de les supprimer
 
 Page Visits (Avis):
-Affiche tous les avis laissé par l'utilisateur. 
+Affiche tous les avis laissé par l'utilisateur.
 Cette page n'est visible que lorsque l'utilisateur est connecté
 
 
 Fonctionnalité avancée #1: Affichage du gravatar dans le coin supérieur droit lorsque l'utilisateur est en mode connecté
 
-Fonctionnalité avancée #2: Localisation complète de l'app en francais et en anglais. La langue par défaut est l'anglais. Possibilité de changer de langue en cliquant sur le bouton de langue dans le coin supérieur droit en tout temps. La localisation est gérée directement en Client Side est se fait instantanément.
+Fonctionnalité avancée #2: Localisation complète de l'app en français et en anglais. La langue par défaut est l'anglais. Possibilité de changer de langue en cliquant sur le bouton de langue dans le coin supérieur droit en tout temps. La localisation est gérée directement en Client Side est se fait instantanément.
 
 
