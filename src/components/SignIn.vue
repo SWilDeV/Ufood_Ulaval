@@ -2,6 +2,18 @@
   <div class="container">
     <h1 v-t="'signIn.title'" />
     <alert
+      v-if="message === 'signed-out'"
+      text="signIn.signedOut"
+      variant="success"
+      @dismissed="clearMessage"
+    />
+    <alert
+      v-if="message === 'expired'"
+      text="signIn.expired"
+      variant="warning"
+      @dismissed="clearMessage"
+    />
+    <alert
       v-if="error"
       text="signIn.invalidCredentials"
       variant="warning"
@@ -63,6 +75,7 @@ export default {
       email: '',
       error: null,
       errors: {},
+      message: null,
       password: ''
     }
   },
@@ -71,6 +84,9 @@ export default {
   },
   methods: {
     ...mapActions(['login']),
+    clearMessage() {
+      this.message = null
+    },
     async submit() {
       if (this.email === '') {
         Vue.set(this.errors, 'email', this.$i18n.t('required'))
@@ -92,6 +108,7 @@ export default {
         } catch (e) {
           console.error(e)
           this.error = true
+          this.clearMessage()
           this.password = ''
           this.$refs.password.focus()
         }
@@ -101,6 +118,10 @@ export default {
   created() {
     if (this.user) {
       this.$router.push({ name: 'Member', params: { id: this.user.id } })
+    }
+    const hash = this.$route.hash.substr(1)
+    if (hash === 'expired' || hash === 'signed-out') {
+      this.message = hash
     }
   },
   watch: {

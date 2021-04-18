@@ -12,7 +12,7 @@ export default {
   },
   created() {
     this.logout()
-    this.$router.push({ name: 'Home' })
+    this.$router.push({ hash: '#signed-out', name: 'SignIn' })
   }
 }
 </script>

@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import router from '../router'
 import store from '@/store'
 
 const applicationJson = 'application/json'
@@ -16,9 +17,9 @@ const execute = async (method, url, data) => {
       body = JSON.stringify(data)
     }
   }
-  // TODO(fpion): refactor
   const isLogin = url.endsWith('/login')
-  if (!url.includes('/unsecure/') && !isLogin && !url.endsWith('/signup')) {
+  const isPrivate = !url.includes('/unsecure/') && !isLogin && !url.endsWith('/signup')
+  if (isPrivate) {
     const token = Cookies.get('token')
     if (token) {
       headers['Authorization'] = token
@@ -30,10 +31,17 @@ const execute = async (method, url, data) => {
     method
   })
   if (!response.ok) {
-    if (!response.status === 401 || !isLogin) {
-      store.dispatch('showError') // TODO(fpion): handle different error types
+    if (response.status === 401) {
+      if (isPrivate) {
+        store.dispatch('logout')
+        router.push({ hash: '#expired', name: 'SignIn' }).catch(() => {})
+        throw response
+      } else if (isLogin) {
+        throw response
+      }
     }
-    throw response // TODO(fpion): only if not bad email/password
+    store.dispatch('showError')
+    throw response
   }
   const dataType = response.headers.get(contentType)
   if (dataType) {
