@@ -42,7 +42,7 @@
     "genreDropDownDefault": "Tous les genres",
     "genres": "Genres: ",
     "priceDropDownDefault": "Tous les prix",
-    "priceRange": "Gamme de prix: ",
+    "priceRange": "Prix: ",
     "map": "Map",
     "list": "Liste",
     "rating": "Note: ",
@@ -75,7 +75,7 @@
     "visit": "Avis",
     "phone": "Téléphone: ",
     "foodType": "Type de plat: ",
-    "priceRange": "Gamme de prix: ",
+    "priceRange": "Prix: ",
     "rating": "Note: ",
     "openingHours": "Heures d'ouvertures"
   },

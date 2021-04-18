@@ -74,12 +74,6 @@ export default {
   border: 3px solid white;
 }
 
-img{
-  object-fit: cover;
-  width: 100%;
-  height: 30vw;
-}
-
 p {
   color: white;
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -99,5 +93,20 @@ h2 {
   padding: 0 30px;
   text-align: center;
   text-transform: uppercase;
+}
+
+@media (max-width: 576px) {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 70vw;
+  }
+}
+@media (min-width: 577px) {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 30vw;
+  }
 }
 </style>
