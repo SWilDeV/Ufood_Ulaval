@@ -10,7 +10,7 @@
         <div class="card-img-overlay text-white d-flex flex-column justify-content-center">
           <h2 class="card-title">{{ restaurant.name }}</h2>
           <p class="card-text"></p>
-          <b-button-group class="w-100">
+          <b-button-group class="button">
             <view-button v-bind:restaurant-id="restaurant.id" />
             <template v-if="user">
               <icon-button
@@ -65,7 +65,6 @@ export default {
 <style scoped>
 .container {
   margin-bottom: 2em;
-  box-shadow: 5px 10px #888888;
   border: 1px solid white;
 }
 
@@ -82,7 +81,6 @@ h2 {
   color: white;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 36px;
-  font-weight: 700;
   line-height: 32px;
   margin: 0 0 24px;
   padding: 0 30px;
@@ -91,25 +89,85 @@ h2 {
   text-shadow: -2px 1px 0 #000, 2px 1px 0 #000, 2px -1px 0 #000, -2px -1px 0 #000;
 }
 
-@media (max-width: 432px) {
+@media (min-width: 1px) and (max-width: 432px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 80vw;
   }
+  .img-top {
+    margin: 0;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .button {
+    position: absolute;
+    bottom: 2vw;
+    left: 2vw;
+    width: 50vw;
+  }
 }
-@media (min-width: 433px) and (max-width: 576px) {
+@media (min-width: 433px) and (max-width: 595px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 50vw;
   }
+  .img-top {
+    margin: 10px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  .button {
+    position: absolute;
+    bottom: 2vw;
+    left: 2vw;
+    width: 50vw;
+  }
 }
-@media (min-width: 577px) {
+@media (min-width: 596px) and (max-width: 1023px) {
   img {
     object-fit: cover;
     width: 100%;
     height: 30vw;
+  }
+  .img-top {
+    margin: 20px 20px 0 20px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 26px;
+  }
+  .button {
+    position: absolute;
+    bottom: 1vw;
+    left: 8vw;
+    width: 30vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 30vw;
+  }
+  .img-top {
+    margin: 20px 20px 0 20px;
+    box-shadow: 5px 10px #888888;
+  }
+  h2 {
+    font-size: 36px;
+  }
+  .button {
+    position: absolute;
+    bottom: 1vw;
+    left: 2.3vw;
+    width: 27vw;
   }
 }
 </style>
