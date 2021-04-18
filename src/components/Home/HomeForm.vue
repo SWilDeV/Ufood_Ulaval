@@ -1,8 +1,8 @@
 <template>
   <div>
     <home-header
-      v-bind:all-genres="allGenres"
-      v-bind:all-price-ranges="allPriceRanges"
+      :genres="allGenres"
+      :price-ranges="allPriceRanges"
       @filters-changed="setFilters($event)"
     />
 
@@ -15,10 +15,10 @@
           @click="toggleMode('map')"
           size="lg"
           class="mb-3"
-        ></icon-button>
+        />
       </div>
 
-      <restaurant-list v-bind:all-restaurants="allRestaurants" />
+      <restaurant-list :restaurants="restaurants" />
       <pager class="mb-3" v-model="page" :count="count" :total="total" />
     </div>
 
@@ -31,55 +31,74 @@
           @click="toggleMode('list')"
           size="lg"
           class="mb-3"
-        ></icon-button>
+        />
       </div>
-      <map-mode v-bind:all-restaurants="allRestaurants" v-bind:params="params"></map-mode>
+      <restaurant-map :coords="coords" :restaurants="restaurants" />
     </div>
   </div>
 </template>
 
 <script>
+import mixins from '@/mixins'
 import HomeHeader from './HomeHeader'
+import IconButton from '@/components/shared/IconButton'
 import Pager from '@/components/shared/Pager.vue'
 import RestaurantList from './RestaurantList'
+import RestaurantMap from './RestaurantMap'
 import { getRestaurants } from '@/api/restaurants'
-import IconButton from '@/components/shared/IconButton'
-import MapMode from './MapMode'
 
 export default {
+  mixins: [mixins],
   name: 'HomeForm',
   components: {
     HomeHeader,
+    IconButton,
     Pager,
     RestaurantList,
-    IconButton,
-    MapMode
+    RestaurantMap
   },
   data() {
     return {
       allGenres: [],
-      mode: 'list',
       allPriceRanges: [],
-      allRestaurants: [],
+      coords: null,
       count: 12,
       genre: '',
+      mode: 'list',
       page: 1,
       price: '',
+      restaurants: [],
       search: '',
       total: 0
     }
   },
   computed: {
     params() {
-      return {
+      const params = {
         genre: this.genre,
-        page: this.page,
         price: this.price,
         search: this.search
       }
+      switch (this.mode) {
+        case 'list':
+          params.count = this.count
+          params.page = this.page
+          break
+        case 'map':
+          params.coords = this.coords
+          params.count = 20
+          break
+      }
+      return params
     }
   },
   async created() {
+    try {
+      this.coords = await this.getPosition()
+    } catch (e) {
+      console.error(e)
+    }
+
     try {
       const results = await getRestaurants({ count: 1000 })
 
@@ -108,10 +127,10 @@ export default {
     }
   },
   methods: {
-    async refresh({ genre, page, price, search }) {
+    async refresh(params) {
       try {
-        const results = await getRestaurants({ count: this.count, genre, page, price, search })
-        this.allRestaurants = results.items
+        const results = await getRestaurants(params)
+        this.restaurants = results.items
         this.total = results.total
       } catch (e) {
         console.error(e)
@@ -134,8 +153,8 @@ export default {
     params: {
       deep: true,
       immediate: true,
-      handler(value) {
-        this.refresh(value)
+      handler(params) {
+        this.refresh(params)
       }
     }
   }

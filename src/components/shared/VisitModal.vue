@@ -63,8 +63,8 @@ import IconButton from '@/components/shared/IconButton.vue'
 import { createVisit } from '@/api/visits'
 
 export default {
-  name: 'VisitModal',
   mixins: [mixins],
+  name: 'VisitModal',
   components: {
     IconButton
   },

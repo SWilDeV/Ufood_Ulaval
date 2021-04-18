@@ -14,8 +14,8 @@
 import mixins from '@/mixins'
 
 export default {
-  name: 'RestaurantItem',
   mixins: [mixins],
+  name: 'RestaurantItem',
   props: {
     id: {
       type: String,

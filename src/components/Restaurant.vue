@@ -37,7 +37,7 @@
         </div>
       </div>
       <br />
-      <div class="row">
+      <div class="row mb-3">
         <span class="col-sm-3">
           <span v-t="'restaurant.foodType'" />
           <span>{{ restaurant.genres.join(', ') }}</span>
@@ -51,7 +51,7 @@
           <span>{{ formatRating(restaurant.rating) }}/5</span>
         </span>
       </div>
-      <div class="row">
+      <div class="row mb-3">
         <div class="col-sm-12 col-lg-8">
           <iframe
             width="100%"
@@ -84,8 +84,8 @@ import VisitModal from '@/components/shared/VisitModal.vue'
 const googleApiKey = process.env.VUE_APP_GOOGLE_API_KEY
 
 export default {
-  name: 'Restaurant',
   mixins: [mixins],
+  name: 'Restaurant',
   components: {
     FavoriteModal,
     IconButton,
@@ -93,10 +93,9 @@ export default {
   },
   data() {
     return {
+      coords: null,
       currentImage: 0,
       fields: ['day', 'hours'],
-      latitude: 0,
-      longitude: 0,
       restaurant: null,
       timer: null
     }
@@ -104,10 +103,19 @@ export default {
   computed: {
     ...mapState(['user']),
     googleMapAddress() {
-      return `https://www.google.com/maps/embed/v1/directions?key=${googleApiKey}
-        &origin=${this.latitude},${this.longitude}
-        &destination=${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]}
-        &language=en `
+      const params = {
+        destination: `${this.restaurant.location.coordinates[1]},${this.restaurant.location.coordinates[0]}`,
+        key: googleApiKey,
+        language: this.$i18n.locale,
+        origin: '46.7811209,-71.2728986' // Université Laval
+      }
+      if (this.coords) {
+        params.origin = `${this.coords.latitude},${this.coords.longitude}`
+      }
+      const query = Object.entries(params)
+        .map(([key, value]) => `${key}=${value}`)
+        .join('&')
+      return `https://www.google.com/maps/embed/v1/directions?${query}`
     },
     images() {
       return this.restaurant.pictures || []
@@ -131,9 +139,7 @@ export default {
     try {
       this.restaurant = await getRestaurant(this.$route.params.id)
       this.startRotation()
-      const { latitude, longitude } = await this.getPosition()
-      this.latitude = latitude
-      this.longitude = longitude
+      this.coords = await this.getPosition()
     } catch (e) {
       console.error(e)
     }
@@ -142,11 +148,6 @@ export default {
 </script>
 
 <style scoped>
-.row {
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-
 .imageCell {
   width: auto;
   height: 300px;
